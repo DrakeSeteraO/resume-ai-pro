@@ -139,6 +139,9 @@
 }
 
 @layer base {
+  html {
+    font-size: 20px; /* Increase to 18px if you want it even larger */
+  }
   * {
     border-color: var(--color-border);
 
