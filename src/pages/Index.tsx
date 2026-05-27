@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import {
+  Coffee,
   Download,
   FileJson,
   FileSpreadsheet,
@@ -12,6 +13,15 @@ import {
   Wand2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   DropdownMenu,
@@ -119,6 +129,41 @@ export default function Index() {
       <header className="sticky top-0 z-30 border-b border-border/70 bg-background/75 backdrop-blur-md">
         <div className="flex h-14 items-center justify-between px-6">
           <div className="flex items-center gap-2.5">
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  aria-label="Buy me a coffee"
+                  className="text-amber-700 hover:text-amber-800 dark:text-amber-400"
+                >
+                  <Coffee className="h-4 w-4" />
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-md">
+                <DialogHeader>
+                  <DialogTitle className="font-serif-display text-xl">
+                    Buy me a coffee ☕
+                  </DialogTitle>
+                  <DialogDescription>
+                    Enjoying Resumeforge? It's built and maintained by one person.
+                    If it's saved you time, consider buying me a coffee — it keeps
+                    the project caffeinated and ad-free.
+                  </DialogDescription>
+                </DialogHeader>
+                <DialogFooter className="sm:justify-end">
+                  <Button asChild>
+                    <a
+                      href="https://www.buymeacoffee.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Coffee className="h-4 w-4" /> Donate
+                    </a>
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
             <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground shadow-sm">
               <Sparkles className="h-3.5 w-3.5" />
             </div>
