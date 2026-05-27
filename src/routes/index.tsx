@@ -133,16 +133,16 @@ function Index() {
       <Toaster position="top-right" />
 
       {/* Top nav */}
-      <header className="sticky top-0 z-30 border-b bg-background/80 backdrop-blur">
-        <div className="flex h-14 items-center justify-between px-5">
+      <header className="sticky top-0 z-30 border-b border-border/70 bg-background/75 backdrop-blur-md">
+        <div className="flex h-14 items-center justify-between px-6">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
-              <Sparkles className="h-4 w-4" />
+            <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground shadow-sm">
+              <Sparkles className="h-3.5 w-3.5" />
             </div>
-            <span className="text-sm font-semibold tracking-tight">
+            <span className="font-serif-display text-[17px] font-medium tracking-tight">
               Resumeforge
             </span>
-            <span className="ml-2 rounded-md border bg-muted/50 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+            <span className="ml-1 rounded-full border border-border/80 bg-background px-2 py-0.5 text-[10px] font-medium tracking-wide text-muted-foreground">
               Beta
             </span>
           </div>
