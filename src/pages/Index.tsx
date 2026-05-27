@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import {
   Download,
@@ -32,21 +31,7 @@ import {
 } from "@/lib/resume-types";
 import { generateLatex } from "@/lib/latex-generator";
 
-export const Route = createFileRoute("/")({
-  component: Index,
-  head: () => ({
-    meta: [
-      { title: "Resumeforge — AI Resume Optimizer & LaTeX Builder" },
-      {
-        name: "description",
-        content:
-          "Tailor your resume to any role with an AI optimizer that produces ATS-friendly LaTeX and compiled PDFs.",
-      },
-    ],
-  }),
-});
-
-function Index() {
+export default function Index() {
   const [data, setData] = useState<ProfileData>(sampleProfile);
   const [phase, setPhase] = useState<PipelinePhase>("idle");
   const [stepIndex, setStepIndex] = useState(0);
@@ -111,7 +96,7 @@ function Index() {
       } else {
         toast.error("Use JSON for full round-trip. CSV import coming soon.");
       }
-    } catch (e) {
+    } catch {
       toast.error("Could not parse file — check the format.");
     }
   };
@@ -120,7 +105,6 @@ function Index() {
     setPhase("running");
     for (let i = 0; i < 3; i++) {
       setStepIndex(i);
-      // simulate dual-endpoint backend latency
       await new Promise((r) => setTimeout(r, i === 2 ? 1400 : 900));
     }
     setLatex(generateLatex(data));
@@ -132,7 +116,6 @@ function Index() {
     <div className="min-h-screen bg-background text-foreground">
       <Toaster position="top-right" />
 
-      {/* Top nav */}
       <header className="sticky top-0 z-30 border-b border-border/70 bg-background/75 backdrop-blur-md">
         <div className="flex h-14 items-center justify-between px-6">
           <div className="flex items-center gap-2.5">
@@ -147,18 +130,10 @@ function Index() {
             </span>
           </div>
           <div className="flex items-center gap-1.5">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setData(sampleProfile)}
-            >
+            <Button variant="ghost" size="sm" onClick={() => setData(sampleProfile)}>
               Load sample
             </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setData(emptyProfile)}
-            >
+            <Button variant="ghost" size="sm" onClick={() => setData(emptyProfile)}>
               Clear
             </Button>
             <div className="mx-1 h-5 w-px bg-border" />
@@ -168,25 +143,17 @@ function Index() {
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               aria-label="Toggle theme"
             >
-              {theme === "dark" ? (
-                <Sun className="h-4 w-4" />
-              ) : (
-                <Moon className="h-4 w-4" />
-              )}
+              {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </Button>
           </div>
         </div>
       </header>
 
       <main className="grid h-[calc(100vh-3.5rem)] grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-        {/* LEFT: Workspace */}
         <section className="flex min-h-0 flex-col border-r">
-          {/* Data portability toolbar */}
           <div className="flex items-center justify-between gap-2 border-b bg-muted/30 px-5 py-2.5">
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <span className="font-medium text-foreground">
-                Data portability
-              </span>
+              <span className="font-medium text-foreground">Data portability</span>
               <span>· client-side, never uploaded</span>
             </div>
             <div className="flex gap-1.5">
@@ -201,11 +168,7 @@ function Index() {
                   e.target.value = "";
                 }}
               />
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => fileRef.current?.click()}
-              >
+              <Button variant="outline" size="sm" onClick={() => fileRef.current?.click()}>
                 <Upload className="h-3.5 w-3.5" /> Import
               </Button>
               <DropdownMenu>
@@ -226,7 +189,6 @@ function Index() {
             </div>
           </div>
 
-          {/* Tabs */}
           <div className="min-h-0 flex-1 overflow-y-auto">
             <Tabs defaultValue="profile" className="flex h-full flex-col">
               <div className="sticky top-0 z-10 border-b bg-background px-5 pt-4">
@@ -248,7 +210,6 @@ function Index() {
             </Tabs>
           </div>
 
-          {/* Generate action */}
           <div className="border-t bg-card/60 p-4 backdrop-blur">
             <Button
               size="lg"
@@ -269,14 +230,8 @@ function Index() {
           </div>
         </section>
 
-        {/* RIGHT: Output */}
         <section className="min-h-0 overflow-hidden bg-muted/20">
-          <OutputPanel
-            phase={phase}
-            stepIndex={stepIndex}
-            latex={latex}
-            profile={data}
-          />
+          <OutputPanel phase={phase} stepIndex={stepIndex} latex={latex} profile={data} />
         </section>
       </main>
     </div>
