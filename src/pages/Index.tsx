@@ -194,7 +194,7 @@ export default function Index() {
         </div>
       </header>
 
-      <main className="grid h-[calc(100vh-3.5rem)] grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+      <main className="flex flex-col lg:grid lg:h-[calc(100vh-3.5rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
         <section className="flex min-h-0 flex-col border-r">
           <div className="flex items-center justify-between gap-2 border-b bg-muted/30 px-5 py-2.5">
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
