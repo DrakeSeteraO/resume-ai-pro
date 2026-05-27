@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import {
+  Coffee,
   Download,
   FileJson,
   FileSpreadsheet,
@@ -12,6 +13,15 @@ import {
   Wand2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   DropdownMenu,
