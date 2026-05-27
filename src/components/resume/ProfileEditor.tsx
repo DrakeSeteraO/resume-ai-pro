@@ -77,7 +77,7 @@ export function ProfileEditor({ data, setData }: Props) {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <Label className="font-serif-display text-lg font-medium tracking-tight">
+        <Label className="font-serif-display block text-lg font-medium leading-tight tracking-tight break-words whitespace-normal">
           Tell the AI about your history
         </Label>
         <p className="text-xs text-muted-foreground">
