@@ -71,8 +71,8 @@
   --card-foreground: oklch(0.22 0.012 60);
   --popover: oklch(0.992 0.006 80);
   --popover-foreground: oklch(0.22 0.012 60);
-  /* Premium Deep Sapphire Blue */
-  --primary: oklch(0.52 0.14 250);
+  /* Refined Sapphire — richer, more saturated */
+  --primary: oklch(0.48 0.18 256);
   --primary-foreground: oklch(0.985 0.01 80);
   --secondary: oklch(0.94 0.012 75);
   --secondary-foreground: oklch(0.28 0.012 60);
