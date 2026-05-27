@@ -77,7 +77,7 @@ export function ProfileEditor({ data, setData }: Props) {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <Label className="font-serif-display block text-lg font-medium leading-tight tracking-tight break-words whitespace-normal">
+        <Label className="font-serif-display block text-base font-medium leading-snug tracking-tight break-words whitespace-normal sm:text-lg">
           Tell the AI about your history
         </Label>
         <p className="text-xs text-muted-foreground">
@@ -93,7 +93,7 @@ export function ProfileEditor({ data, setData }: Props) {
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <Field label="Full name">
           <Input
             value={data.personal.fullName}
@@ -140,7 +140,7 @@ export function ProfileEditor({ data, setData }: Props) {
             }
           />
         </Field>
-        <div className="col-span-2">
+        <div className="sm:col-span-2">
           <Field label="Website / Portfolio">
             <Input
               value={data.personal.website}
@@ -157,7 +157,7 @@ export function ProfileEditor({ data, setData }: Props) {
       </div>
 
       <Tabs defaultValue="experience" className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4">
           <TabsTrigger value="experience">Work</TabsTrigger>
           <TabsTrigger value="education">Education</TabsTrigger>
           <TabsTrigger value="projects">Projects</TabsTrigger>
@@ -176,7 +176,7 @@ export function ProfileEditor({ data, setData }: Props) {
                 }))
               }
             >
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <Field label="Role">
                   <Input
                     value={e.role}
@@ -283,7 +283,7 @@ export function ProfileEditor({ data, setData }: Props) {
                 }))
               }
             >
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <Field label="School">
                   <Input
                     value={e.school}
@@ -408,7 +408,7 @@ export function ProfileEditor({ data, setData }: Props) {
                 }))
               }
             >
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <Field label="Name">
                   <Input
                     value={p.name}
