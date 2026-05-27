@@ -58,8 +58,10 @@ export function OutputPanel({
             <Sparkles className="h-6 w-6 text-primary" />
           </div>
         </div>
-        <h3 className="text-base font-semibold">Your tailored resume appears here</h3>
-        <p className="mt-2 max-w-sm text-sm text-muted-foreground">
+        <h3 className="font-serif-display text-2xl font-medium tracking-tight">
+          Your tailored resume appears here
+        </h3>
+        <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
           Fill out your profile and target role on the left, then run the
           optimizer. The LaTeX source and a downloadable PDF will land in this
           panel.
@@ -77,7 +79,7 @@ export function OutputPanel({
               <Sparkles className="h-4 w-4 text-primary" />
             </div>
             <div>
-              <p className="text-sm font-semibold">Optimizing your resume</p>
+              <p className="font-serif-display text-base font-medium">Optimizing your resume</p>
               <p className="text-xs text-muted-foreground">
                 Dual-endpoint pipeline · {stepIndex + 1} of {STEPS.length}
               </p>
@@ -97,7 +99,7 @@ export function OutputPanel({
             <Check className="h-3.5 w-3.5 text-primary" />
           </div>
           <div>
-            <p className="text-sm font-semibold leading-none">Resume ready</p>
+            <p className="font-serif-display text-base font-medium leading-none">Resume ready</p>
             <p className="mt-0.5 text-xs text-muted-foreground">
               Tailored for {profile.target.role || "your target role"}
               {profile.target.company ? ` @ ${profile.target.company}` : ""}
