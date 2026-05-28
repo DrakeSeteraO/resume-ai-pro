@@ -82,7 +82,7 @@ export default function Index() {
     try {
       // Step 1: Update UI to show AI is processing
       setStepIndex(0); 
-      console.log(data)
+      console.log("Data before sending to AI:", data)
 
       // Step 2: Send the current state data to your Python backend
       const response = await fetch("/api/tailor", {
@@ -102,7 +102,7 @@ export default function Index() {
       const tailoredData = await response.json();
       
       // Update the React UI state so the text boxes reflect the new AI text
-      console.log(tailoredData)
+      console.log("Recieved AI data:", tailoredData)
       setData(tailoredData);
 
       // Step 4: Pass the *new* tailored data straight to your LaTeX generator
