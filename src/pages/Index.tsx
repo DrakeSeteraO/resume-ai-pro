@@ -77,7 +77,7 @@ export default function Index() {
     }
   };
 
-  const runPipeline = async () => {
+ const runPipeline = async () => {
     setPhase("running");
     
     try {
@@ -92,12 +92,20 @@ export default function Index() {
       });
 
       if (!tailorResponse.ok) {
-        const errorData = await tailorResponse.json();
-        throw new Error(errorData.detail || "Tailoring failed");
+        // Safe parsing: If the server returns HTML, this prevents the "Token T" crash
+        let errorMessage = `Server returned status: ${tailorResponse.status}`;
+        try {
+          const errorData = await tailorResponse.json();
+          errorMessage = errorData.detail || errorMessage;
+        } catch {
+          // Ignored: Server didn't return JSON
+        }
+        throw new Error(errorMessage);
       }
 
       setStepIndex(1);
       const tailoredData = await tailorResponse.json();
+      setData(tailoredData);
 
       // ------------------------------------------------
       // Phase 2: Generate the LaTeX Code
@@ -106,16 +114,22 @@ export default function Index() {
       const latexResponse = await fetch("/api/latex", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(tailoredData), // Send the newly optimized data!
+        body: JSON.stringify(tailoredData),
       });
 
       if (!latexResponse.ok) {
-        const errorData = await latexResponse.json();
-        throw new Error(errorData.detail || "LaTeX generation failed");
+        let errorMessage = `Server returned status: ${latexResponse.status}`;
+        try {
+          const errorData = await latexResponse.json();
+          errorMessage = errorData.detail || errorMessage;
+        } catch {
+          // Ignored
+        }
+        throw new Error(errorMessage);
       }
 
       const latexData = await latexResponse.json();
-      setLatex(latexData.latex); // Set the raw LaTeX string returned by the AI
+      setLatex(latexData.latex); 
       
       setPhase("done");
       toast.success("Resume optimized and LaTeX generated!");
