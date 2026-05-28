@@ -34,11 +34,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { ProfileEditor } from "@/components/resume/ProfileEditor";
 import { JobTarget } from "@/components/resume/JobTarget";
 import { OutputPanel, type PipelinePhase } from "@/components/resume/OutputPanel";
-import {
-  emptyProfile,
-  sampleProfile,
-  type ProfileData,
-} from "@/lib/resume-types";
+import { emptyProfile, sampleProfile, type ProfileData } from "@/lib/resume-types";
 import { generateLatex } from "@/lib/latex-generator";
 
 export default function Index() {
@@ -53,8 +49,7 @@ export default function Index() {
     document.documentElement.classList.toggle("dark", theme === "dark");
   }, [theme]);
 
-  const update = (updater: (d: ProfileData) => ProfileData) =>
-    setData((d) => updater(d));
+  const update = (updater: (d: ProfileData) => ProfileData) => setData((d) => updater(d));
 
   const exportJson = () => {
     const blob = new Blob([JSON.stringify(data, null, 2)], {
@@ -66,29 +61,19 @@ export default function Index() {
 
   const exportCsv = () => {
     const rows: string[][] = [["section", "field", "value"]];
-    Object.entries(data.personal).forEach(([k, v]) =>
-      rows.push(["personal", k, v]),
-    );
+    Object.entries(data.personal).forEach(([k, v]) => rows.push(["personal", k, v]));
     rows.push(["narrative", "text", data.narrative]);
     data.experience.forEach((e, i) =>
-      Object.entries(e).forEach(([k, v]) =>
-        rows.push([`experience[${i}]`, k, String(v)]),
-      ),
+      Object.entries(e).forEach(([k, v]) => rows.push([`experience[${i}]`, k, String(v)])),
     );
     data.education.forEach((e, i) =>
-      Object.entries(e).forEach(([k, v]) =>
-        rows.push([`education[${i}]`, k, String(v)]),
-      ),
+      Object.entries(e).forEach(([k, v]) => rows.push([`education[${i}]`, k, String(v)])),
     );
     data.projects.forEach((p, i) =>
-      Object.entries(p).forEach(([k, v]) =>
-        rows.push([`projects[${i}]`, k, String(v)]),
-      ),
+      Object.entries(p).forEach(([k, v]) => rows.push([`projects[${i}]`, k, String(v)])),
     );
     rows.push(["skills", "list", data.skills.join("|")]);
-    Object.entries(data.target).forEach(([k, v]) =>
-      rows.push(["target", k, v]),
-    );
+    Object.entries(data.target).forEach(([k, v]) => rows.push(["target", k, v]));
     const csv = rows
       .map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(","))
       .join("\n");
@@ -160,13 +145,11 @@ export default function Index() {
               </DialogTrigger>
               <DialogContent className="sm:max-w-md">
                 <DialogHeader>
-                  <DialogTitle className="font-serif-display text-xl">
-                    Buy me a coffee
-                  </DialogTitle>
+                  <DialogTitle className="font-serif-display text-xl">Buy me a coffee</DialogTitle>
                   <DialogDescription>
-                    Enjoying Resumeforge? It's built and maintained by one person.
-                    If it's saved you time, consider buying me a coffee — it keeps
-                    the project caffeinated and ad-free.
+                    Enjoying Resumeforge? It's built and maintained by one person. If it's saved you
+                    time, consider buying me a coffee — it keeps the project caffeinated and
+                    ad-free.
                   </DialogDescription>
                 </DialogHeader>
                 <DialogFooter className="sm:justify-end">
