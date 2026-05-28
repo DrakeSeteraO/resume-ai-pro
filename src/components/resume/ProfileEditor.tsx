@@ -157,11 +157,13 @@ export function ProfileEditor({ data, setData }: Props) {
       </div>
 
       <Tabs defaultValue="experience" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4">
+        <TabsList className="grid w-full grid-cols-3 sm:grid-cols-6">
           <TabsTrigger value="experience">Work</TabsTrigger>
           <TabsTrigger value="education">Education</TabsTrigger>
           <TabsTrigger value="projects">Projects</TabsTrigger>
           <TabsTrigger value="skills">Skills</TabsTrigger>
+          <TabsTrigger value="certificates">Certs</TabsTrigger>
+          <TabsTrigger value="publications">Pubs</TabsTrigger>
         </TabsList>
 
         <TabsContent value="experience" className="mt-4 space-y-3">
