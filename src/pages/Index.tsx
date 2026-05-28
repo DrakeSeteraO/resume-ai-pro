@@ -161,7 +161,7 @@ export default function Index() {
               <DialogContent className="sm:max-w-md">
                 <DialogHeader>
                   <DialogTitle className="font-serif-display text-xl">
-                    Buy me a coffee ☕
+                    Buy me a coffee
                   </DialogTitle>
                   <DialogDescription>
                     Enjoying Resumeforge? It's built and maintained by one person.
@@ -172,7 +172,7 @@ export default function Index() {
                 <DialogFooter className="sm:justify-end">
                   <Button asChild>
                     <a
-                      href="https://www.buymeacoffee.com/"
+                      href="https://buymeacoffee.com/DrakeSetera"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
