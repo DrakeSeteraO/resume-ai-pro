@@ -100,7 +100,7 @@ async def tailor_resume(payload: ProfilePayload):
         
     try:
         # Use Gemini 1.5 Flash for rapid text transformation cycles
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('gemini-3.1-flash-lite')
         
         # Serialize incoming payload back to a clean JSON string for the prompt
         user_data_string = json.dumps(payload.dict(), indent=2)
