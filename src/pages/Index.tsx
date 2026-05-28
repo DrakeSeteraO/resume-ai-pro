@@ -45,22 +45,6 @@ export default function Index() {
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const fileRef = useRef<HTMLInputElement>(null);
 
-  const [resumeInfo, setResumeInfo] = useState({
-    generalInfo: {
-      name: "",
-      email: "",
-      phone: "",
-      location: "",
-      websiteURL: "",
-    },
-    work: [],
-    education: [],
-    projects: [],
-    skills: [],
-    certificates: [],
-    publications: [],
-  });
-
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
   }, [theme]);
@@ -122,6 +106,8 @@ export default function Index() {
     setPhase("done");
     toast.success("Resume tailored and LaTeX generated");
   };
+
+  console.log("Current ProfileData Structure:", data);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
