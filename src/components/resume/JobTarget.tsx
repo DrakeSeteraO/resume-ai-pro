@@ -16,7 +16,7 @@ export function JobTarget({
 
   return (
     <div className="space-y-6">
-      <div className="rounded-lg border bg-card p-5 transition-colors hover:border-foreground/15">
+      <div className="rounded-lg border border-border/70 bg-secondary/40 p-5 transition-colors hover:border-foreground/15">
         <div className="mb-4 flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-md bg-accent text-accent-foreground">
             <Target className="h-4 w-4" />
@@ -62,7 +62,7 @@ export function JobTarget({
         </div>
       </div>
 
-      <div className="rounded-lg border bg-card p-5 transition-colors hover:border-foreground/15">
+      <div className="rounded-lg border border-border/70 bg-secondary/40 p-5 transition-colors hover:border-foreground/15">
         <div className="mb-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Briefcase className="h-4 w-4 text-muted-foreground" />
