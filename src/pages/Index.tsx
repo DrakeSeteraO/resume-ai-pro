@@ -45,6 +45,22 @@ export default function Index() {
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const fileRef = useRef<HTMLInputElement>(null);
 
+  const [resumeInfo, setResumeInfo] = useState({
+    generalInfo: {
+      name: "",
+      email: "",
+      phone: "",
+      location: "",
+      websiteURL: "",
+    },
+    work: [],
+    education: [],
+    projects: [],
+    skills: [],
+    certificates: [],
+    publications: [],
+  });
+
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
   }, [theme]);
