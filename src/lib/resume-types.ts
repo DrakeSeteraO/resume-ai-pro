@@ -26,6 +26,23 @@ export type Project = {
   description: string;
 };
 
+export type Certificate = {
+  id: string;
+  name: string;
+  issuer: string;
+  date: string;
+  link: string;
+};
+
+export type Publication = {
+  id: string;
+  title: string;
+  venue: string;
+  date: string;
+  link: string;
+  description: string;
+};
+
 export type ProfileData = {
   personal: {
     fullName: string;
@@ -39,6 +56,8 @@ export type ProfileData = {
   experience: Experience[];
   projects: Project[];
   skills: string[];
+  certificates: Certificate[];
+  publications: Publication[];
   target: {
     company: string;
     role: string;
@@ -59,6 +78,8 @@ export const emptyProfile: ProfileData = {
   experience: [],
   projects: [],
   skills: [],
+  certificates: [],
+  publications: [],
   target: { company: "", role: "", jobDescription: "" },
 };
 
