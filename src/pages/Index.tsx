@@ -55,30 +55,10 @@ export default function Index() {
     const blob = new Blob([JSON.stringify(data, null, 2)], {
       type: "application/json",
     });
-    triggerDownload(blob, "resume-profile.json");
+    let name = data.personal.fullName
+    name = name.replaceAll(" ", "-")
+    triggerDownload(blob, name + "-resume-profile.json");
     toast.success("Profile exported as JSON");
-  };
-
-  const exportCsv = () => {
-    const rows: string[][] = [["section", "field", "value"]];
-    Object.entries(data.personal).forEach(([k, v]) => rows.push(["personal", k, v]));
-    rows.push(["narrative", "text", data.narrative]);
-    data.experience.forEach((e, i) =>
-      Object.entries(e).forEach(([k, v]) => rows.push([`experience[${i}]`, k, String(v)])),
-    );
-    data.education.forEach((e, i) =>
-      Object.entries(e).forEach(([k, v]) => rows.push([`education[${i}]`, k, String(v)])),
-    );
-    data.projects.forEach((p, i) =>
-      Object.entries(p).forEach(([k, v]) => rows.push([`projects[${i}]`, k, String(v)])),
-    );
-    rows.push(["skills", "list", data.skills.join("|")]);
-    Object.entries(data.target).forEach(([k, v]) => rows.push(["target", k, v]));
-    const csv = rows
-      .map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(","))
-      .join("\n");
-    triggerDownload(new Blob([csv], { type: "text/csv" }), "resume-profile.csv");
-    toast.success("Profile exported as CSV");
   };
 
   const importFile = async (file: File) => {
@@ -89,7 +69,7 @@ export default function Index() {
         setData({ ...emptyProfile, ...parsed });
         toast.success("Profile imported");
       } else {
-        toast.error("Use JSON for full round-trip. CSV import coming soon.");
+        toast.error("Use JSON for full round-trip.");
       }
     } catch {
       toast.error("Could not parse file — check the format.");
@@ -190,7 +170,7 @@ export default function Index() {
               <input
                 ref={fileRef}
                 type="file"
-                accept=".json,.csv"
+                accept=".json"
                 className="hidden"
                 onChange={(e) => {
                   const f = e.target.files?.[0];
@@ -210,9 +190,6 @@ export default function Index() {
                 <DropdownMenuContent align="end" className="w-44">
                   <DropdownMenuItem onClick={exportJson}>
                     <FileJson className="h-4 w-4" /> Export as JSON
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={exportCsv}>
-                    <FileSpreadsheet className="h-4 w-4" /> Export as CSV
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
