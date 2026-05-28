@@ -39,7 +39,7 @@ function SectionCard({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-lg border bg-card p-4 transition-colors hover:border-foreground/15 [&_input]:bg-muted [&_textarea]:bg-muted">
+    <div className="rounded-lg border bg-card p-4 transition-colors hover:border-foreground/15">
       <div className="mb-3 flex items-center justify-between">
         <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
           {title}
