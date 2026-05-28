@@ -36,6 +36,7 @@ import { JobTarget } from "@/components/resume/JobTarget";
 import { OutputPanel, type PipelinePhase } from "@/components/resume/OutputPanel";
 import { emptyProfile, sampleProfile, type ProfileData } from "@/lib/resume-types";
 import { generateLatex } from "@/lib/latex-generator";
+import { SelectPortal } from "@radix-ui/react-select";
 
 export default function Index() {
   const [data, setData] = useState<ProfileData>(sampleProfile);
@@ -77,6 +78,7 @@ export default function Index() {
   };
 
   const runPipeline = async () => {
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     setPhase("running");
     
     try {
@@ -104,6 +106,7 @@ export default function Index() {
       // Update the React UI state so the text boxes reflect the new AI text
       console.log("Recieved AI data:", tailoredData)
       setData(tailoredData);
+      await delay(2000);
 
       // Step 4: Pass the *new* tailored data straight to your LaTeX generator
       setStepIndex(2);
