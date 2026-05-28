@@ -78,13 +78,45 @@ export default function Index() {
 
   const runPipeline = async () => {
     setPhase("running");
-    for (let i = 0; i < 3; i++) {
-      setStepIndex(i);
-      await new Promise((r) => setTimeout(r, i === 2 ? 1400 : 900));
+    
+    try {
+      // Step 1: Update UI to show AI is processing
+      setStepIndex(0); 
+      console.log(data)
+
+      // Step 2: Send the current state data to your Python backend
+      const response = await fetch("/api/tailor", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Server returned status: ${response.status}`);
+      }
+
+      // Step 3: Extract the optimized JSON returned by Gemini
+      setStepIndex(1);
+      const tailoredData = await response.json();
+      
+      // Update the React UI state so the text boxes reflect the new AI text
+      console.log(tailoredData)
+      setData(tailoredData);
+
+      // Step 4: Pass the *new* tailored data straight to your LaTeX generator
+      setStepIndex(2);
+      setLatex(generateLatex(tailoredData));
+      
+      setPhase("done");
+      toast.success("Resume tailored and LaTeX generated successfully!");
+      
+    } catch (error) {
+      console.error("AI Pipeline Error:", error);
+      toast.error("Failed to connect to the AI endpoint. Check the console.");
+      setPhase("idle");
     }
-    setLatex(generateLatex(data));
-    setPhase("done");
-    toast.success("Resume tailored and LaTeX generated");
   };
 
   console.log("Current ProfileData Structure:", data);
