@@ -147,3 +147,53 @@ async def tailor_resume(payload: ProfilePayload):
         raise HTTPException(status_code=502, detail="AI returned invalid or malformed JSON syntax.")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Pipeline Processing Error: {str(e)}")
+
+
+# ... (Keep everything above this exactly the same) ...
+
+@app.post("/api/latex")
+async def generate_latex(payload: ProfilePayload):
+    if not GEMINI_API_KEY:
+        raise HTTPException(status_code=500, detail="Gemini API Key missing on server.")
+        
+    try:
+        model = genai.GenerativeModel('gemini-3.1-flash-lite')
+        user_data_string = json.dumps(payload.dict(), indent=2)
+        
+        prompt = f"""
+        You are an expert LaTeX developer and technical resume designer. 
+        Convert the following JSON resume data into a complete, beautiful, and compilable LaTeX document.
+        
+        REQUIREMENTS:
+        1. Use a clean, modern, single-column professional layout suitable for software engineering.
+        2. Include standard packages: \\usepackage{{geometry}}, \\usepackage{{hyperref}}, \\usepackage{{enumitem}}, \\usepackage{{titlesec}}.
+        3. Set \\geometry{{margin=0.5in}}.
+        4. Escape any LaTeX special characters like &, %, $, #, _ found in the user's text to prevent compilation errors.
+        5. If a category (like publications or certificates) is empty or missing in the JSON, DO NOT generate a section for it.
+        
+        Return ONLY the raw LaTeX code. Do not wrap the output in markdown code blocks (` ```latex `), just output the raw document string starting with \\documentclass.
+        
+        Input JSON:
+        {user_data_string}
+        """
+        
+        response = model.generate_content(
+            prompt,
+            generation_config=genai.GenerationConfig(
+                temperature=0.1 # Keep temperature very low so it doesn't hallucinate invalid LaTeX syntax
+            )
+        )
+        
+        # Clean up any accidental markdown blocks if the AI disobeys the instruction
+        latex_text = response.text.strip()
+        if latex_text.startswith("```latex"):
+            latex_text = latex_text[8:]
+        if latex_text.startswith("```"):
+            latex_text = latex_text[3:]
+        if latex_text.endswith("```"):
+            latex_text = latex_text[:-3]
+            
+        return {"latex": latex_text.strip()}
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"LaTeX Generation Error: {str(e)}")

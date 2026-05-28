@@ -78,46 +78,51 @@ export default function Index() {
   };
 
   const runPipeline = async () => {
-    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     setPhase("running");
     
     try {
-      // Step 1: Update UI to show AI is processing
+      // ------------------------------------------------
+      // Phase 1: Tailor the Resume Content
+      // ------------------------------------------------
       setStepIndex(0); 
-      console.log("Data before sending to AI:", data)
-
-      // Step 2: Send the current state data to your Python backend
-      const response = await fetch("/api/tailor", {
+      const tailorResponse = await fetch("/api/tailor", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
-      if (!response.ok) {
-        throw new Error(`Server returned status: ${response.status}`);
+      if (!tailorResponse.ok) {
+        const errorData = await tailorResponse.json();
+        throw new Error(errorData.detail || "Tailoring failed");
       }
 
-      // Step 3: Extract the optimized JSON returned by Gemini
       setStepIndex(1);
-      const tailoredData = await response.json();
-      
-      // Update the React UI state so the text boxes reflect the new AI text
-      console.log("Recieved AI data:", tailoredData)
-      setData(tailoredData);
-      await delay(2000);
+      const tailoredData = await tailorResponse.json();
 
-      // Step 4: Pass the *new* tailored data straight to your LaTeX generator
+      // ------------------------------------------------
+      // Phase 2: Generate the LaTeX Code
+      // ------------------------------------------------
       setStepIndex(2);
-      setLatex(generateLatex(tailoredData));
+      const latexResponse = await fetch("/api/latex", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(tailoredData), // Send the newly optimized data!
+      });
+
+      if (!latexResponse.ok) {
+        const errorData = await latexResponse.json();
+        throw new Error(errorData.detail || "LaTeX generation failed");
+      }
+
+      const latexData = await latexResponse.json();
+      setLatex(latexData.latex); // Set the raw LaTeX string returned by the AI
       
       setPhase("done");
-      toast.success("Resume tailored and LaTeX generated successfully!");
+      toast.success("Resume optimized and LaTeX generated!");
       
     } catch (error) {
       console.error("AI Pipeline Error:", error);
-      toast.error("Failed to connect to the AI endpoint. Check the console.");
+      toast.error(`Pipeline Error: ${error instanceof Error ? error.message : "Check console"}`);
       setPhase("idle");
     }
   };
