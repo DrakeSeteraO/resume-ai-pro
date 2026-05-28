@@ -62,7 +62,7 @@ export function JobTarget({
         </div>
       </div>
 
-      <div className="rounded-lg border bg-card p-5">
+      <div className="rounded-lg border bg-card p-5 transition-colors hover:border-foreground/15">
         <div className="mb-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Briefcase className="h-4 w-4 text-muted-foreground" />
