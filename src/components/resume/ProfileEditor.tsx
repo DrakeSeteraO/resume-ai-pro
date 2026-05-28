@@ -39,7 +39,7 @@ function SectionCard({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-lg border bg-card p-4 transition-colors hover:border-foreground/15">
+    <div className="rounded-lg border bg-muted p-4 transition-colors hover:border-foreground/15">
       <div className="mb-3 flex items-center justify-between">
         <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
           {title}
@@ -487,7 +487,7 @@ export function ProfileEditor({ data, setData }: Props) {
         </TabsContent>
 
         <TabsContent value="skills" className="mt-4 space-y-3">
-          <div className="rounded-lg border bg-card p-4">
+          <div className="rounded-lg border bg-muted p-4">
             <div className="mb-3 flex flex-wrap gap-1.5">
               {data.skills.length === 0 && (
                 <span className="text-xs text-muted-foreground">
