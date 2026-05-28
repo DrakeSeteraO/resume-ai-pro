@@ -26,6 +26,23 @@ export type Project = {
   description: string;
 };
 
+export type Certificate = {
+  id: string;
+  name: string;
+  issuer: string;
+  date: string;
+  link: string;
+};
+
+export type Publication = {
+  id: string;
+  title: string;
+  venue: string;
+  date: string;
+  link: string;
+  description: string;
+};
+
 export type ProfileData = {
   personal: {
     fullName: string;
@@ -39,6 +56,8 @@ export type ProfileData = {
   experience: Experience[];
   projects: Project[];
   skills: string[];
+  certificates: Certificate[];
+  publications: Publication[];
   target: {
     company: string;
     role: string;
@@ -59,6 +78,8 @@ export const emptyProfile: ProfileData = {
   experience: [],
   projects: [],
   skills: [],
+  certificates: [],
+  publications: [],
   target: { company: "", role: "", jobDescription: "" },
 };
 
@@ -105,6 +126,25 @@ export const sampleProfile: ProfileData = {
     },
   ],
   skills: ["TypeScript", "Rust", "PostgreSQL", "Kubernetes", "React", "System Design"],
+  certificates: [
+    {
+      id: "c1",
+      name: "AWS Certified Solutions Architect – Professional",
+      issuer: "Amazon Web Services",
+      date: "2023",
+      link: "",
+    },
+  ],
+  publications: [
+    {
+      id: "pub1",
+      title: "Scaling Realtime Sync at Linear",
+      venue: "Linear Engineering Blog",
+      date: "2024",
+      link: "linear.app/blog",
+      description: "Deep dive into the architecture behind sub-100ms cross-device sync.",
+    },
+  ],
   target: { company: "", role: "", jobDescription: "" },
 };
 

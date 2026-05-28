@@ -129,13 +129,31 @@ export default function Index() {
       <header className="sticky top-0 z-30 border-b border-border/70 bg-background/75 backdrop-blur-md">
         <div className="flex h-14 items-center justify-between px-6">
           <div className="flex items-center gap-2.5">
+            <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground shadow-sm">
+              <Sparkles className="h-3.5 w-3.5" />
+            </div>
+            <span className="font-serif-display text-[17px] font-medium tracking-tight">
+              Resumeforge
+            </span>
+            <span className="ml-1 rounded-full border border-border/80 bg-background px-2 py-0.5 text-[10px] font-medium tracking-wide text-muted-foreground">
+              Beta
+            </span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <Button variant="ghost" size="sm" onClick={() => setData(sampleProfile)}>
+              Load sample
+            </Button>
+            <Button variant="ghost" size="sm" onClick={() => setData(emptyProfile)}>
+              Clear
+            </Button>
+            <div className="mx-1 h-5 w-px bg-border" />
             <Dialog>
               <DialogTrigger asChild>
                 <Button
                   variant="ghost"
                   size="icon"
                   aria-label="Buy me a coffee"
-                  className="text-amber-700 hover:text-amber-800 dark:text-amber-400"
+                  className="text-primary hover:text-primary/90"
                 >
                   <Coffee className="h-4 w-4" />
                 </Button>
@@ -164,24 +182,6 @@ export default function Index() {
                 </DialogFooter>
               </DialogContent>
             </Dialog>
-            <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground shadow-sm">
-              <Sparkles className="h-3.5 w-3.5" />
-            </div>
-            <span className="font-serif-display text-[17px] font-medium tracking-tight">
-              Resumeforge
-            </span>
-            <span className="ml-1 rounded-full border border-border/80 bg-background px-2 py-0.5 text-[10px] font-medium tracking-wide text-muted-foreground">
-              Beta
-            </span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <Button variant="ghost" size="sm" onClick={() => setData(sampleProfile)}>
-              Load sample
-            </Button>
-            <Button variant="ghost" size="sm" onClick={() => setData(emptyProfile)}>
-              Clear
-            </Button>
-            <div className="mx-1 h-5 w-px bg-border" />
             <Button
               variant="ghost"
               size="icon"

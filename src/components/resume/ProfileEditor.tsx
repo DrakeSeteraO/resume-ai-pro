@@ -157,11 +157,13 @@ export function ProfileEditor({ data, setData }: Props) {
       </div>
 
       <Tabs defaultValue="experience" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4">
+        <TabsList className="grid w-full grid-cols-3 sm:grid-cols-6">
           <TabsTrigger value="experience">Work</TabsTrigger>
           <TabsTrigger value="education">Education</TabsTrigger>
           <TabsTrigger value="projects">Projects</TabsTrigger>
           <TabsTrigger value="skills">Skills</TabsTrigger>
+          <TabsTrigger value="certificates">Certs</TabsTrigger>
+          <TabsTrigger value="publications">Pubs</TabsTrigger>
         </TabsList>
 
         <TabsContent value="experience" className="mt-4 space-y-3">
@@ -530,6 +532,190 @@ export function ProfileEditor({ data, setData }: Props) {
               </Button>
             </div>
           </div>
+        </TabsContent>
+
+        <TabsContent value="certificates" className="mt-4 space-y-3">
+          {data.certificates.map((c, i) => (
+            <SectionCard
+              key={c.id}
+              title={`Certificate ${i + 1}`}
+              onRemove={() =>
+                setData((d) => ({
+                  ...d,
+                  certificates: d.certificates.filter((x) => x.id !== c.id),
+                }))
+              }
+            >
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <Field label="Name">
+                  <Input
+                    value={c.name}
+                    onChange={(ev) =>
+                      setData((d) => ({
+                        ...d,
+                        certificates: d.certificates.map((x) =>
+                          x.id === c.id ? { ...x, name: ev.target.value } : x,
+                        ),
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="Issuer">
+                  <Input
+                    value={c.issuer}
+                    onChange={(ev) =>
+                      setData((d) => ({
+                        ...d,
+                        certificates: d.certificates.map((x) =>
+                          x.id === c.id ? { ...x, issuer: ev.target.value } : x,
+                        ),
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="Date">
+                  <Input
+                    value={c.date}
+                    onChange={(ev) =>
+                      setData((d) => ({
+                        ...d,
+                        certificates: d.certificates.map((x) =>
+                          x.id === c.id ? { ...x, date: ev.target.value } : x,
+                        ),
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="Credential link">
+                  <Input
+                    value={c.link}
+                    onChange={(ev) =>
+                      setData((d) => ({
+                        ...d,
+                        certificates: d.certificates.map((x) =>
+                          x.id === c.id ? { ...x, link: ev.target.value } : x,
+                        ),
+                      }))
+                    }
+                  />
+                </Field>
+              </div>
+            </SectionCard>
+          ))}
+          <Button
+            variant="outline"
+            className="w-full border-dashed"
+            onClick={() =>
+              setData((d) => ({
+                ...d,
+                certificates: [
+                  ...d.certificates,
+                  { id: uid(), name: "", issuer: "", date: "", link: "" },
+                ],
+              }))
+            }
+          >
+            <Plus className="h-4 w-4" /> Add certificate
+          </Button>
+        </TabsContent>
+
+        <TabsContent value="publications" className="mt-4 space-y-3">
+          {data.publications.map((p, i) => (
+            <SectionCard
+              key={p.id}
+              title={`Publication ${i + 1}`}
+              onRemove={() =>
+                setData((d) => ({
+                  ...d,
+                  publications: d.publications.filter((x) => x.id !== p.id),
+                }))
+              }
+            >
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <Field label="Title">
+                  <Input
+                    value={p.title}
+                    onChange={(ev) =>
+                      setData((d) => ({
+                        ...d,
+                        publications: d.publications.map((x) =>
+                          x.id === p.id ? { ...x, title: ev.target.value } : x,
+                        ),
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="Venue / Journal">
+                  <Input
+                    value={p.venue}
+                    onChange={(ev) =>
+                      setData((d) => ({
+                        ...d,
+                        publications: d.publications.map((x) =>
+                          x.id === p.id ? { ...x, venue: ev.target.value } : x,
+                        ),
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="Date">
+                  <Input
+                    value={p.date}
+                    onChange={(ev) =>
+                      setData((d) => ({
+                        ...d,
+                        publications: d.publications.map((x) =>
+                          x.id === p.id ? { ...x, date: ev.target.value } : x,
+                        ),
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="Link / DOI">
+                  <Input
+                    value={p.link}
+                    onChange={(ev) =>
+                      setData((d) => ({
+                        ...d,
+                        publications: d.publications.map((x) =>
+                          x.id === p.id ? { ...x, link: ev.target.value } : x,
+                        ),
+                      }))
+                    }
+                  />
+                </Field>
+              </div>
+              <Field label="Description">
+                <Textarea
+                  value={p.description}
+                  onChange={(ev) =>
+                    setData((d) => ({
+                      ...d,
+                      publications: d.publications.map((x) =>
+                        x.id === p.id ? { ...x, description: ev.target.value } : x,
+                      ),
+                    }))
+                  }
+                  className="min-h-20 resize-none text-sm"
+                />
+              </Field>
+            </SectionCard>
+          ))}
+          <Button
+            variant="outline"
+            className="w-full border-dashed"
+            onClick={() =>
+              setData((d) => ({
+                ...d,
+                publications: [
+                  ...d.publications,
+                  { id: uid(), title: "", venue: "", date: "", link: "", description: "" },
+                ],
+              }))
+            }
+          >
+            <Plus className="h-4 w-4" /> Add publication
+          </Button>
         </TabsContent>
       </Tabs>
     </div>
