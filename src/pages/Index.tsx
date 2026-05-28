@@ -55,8 +55,8 @@ export default function Index() {
     const blob = new Blob([JSON.stringify(data, null, 2)], {
       type: "application/json",
     });
-    let name = data.personal.fullName
-    name = name.replaceAll(" ", "-")
+    let name = data.personal.fullName;
+    name = name.replaceAll(" ", "-");
     triggerDownload(blob, name + "-resume-profile.json");
     toast.success("Profile exported as JSON");
   };
