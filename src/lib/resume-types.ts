@@ -126,6 +126,25 @@ export const sampleProfile: ProfileData = {
     },
   ],
   skills: ["TypeScript", "Rust", "PostgreSQL", "Kubernetes", "React", "System Design"],
+  certificates: [
+    {
+      id: "c1",
+      name: "AWS Certified Solutions Architect – Professional",
+      issuer: "Amazon Web Services",
+      date: "2023",
+      link: "",
+    },
+  ],
+  publications: [
+    {
+      id: "pub1",
+      title: "Scaling Realtime Sync at Linear",
+      venue: "Linear Engineering Blog",
+      date: "2024",
+      link: "linear.app/blog",
+      description: "Deep dive into the architecture behind sub-100ms cross-device sync.",
+    },
+  ],
   target: { company: "", role: "", jobDescription: "" },
 };
 
