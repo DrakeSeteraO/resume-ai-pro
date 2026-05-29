@@ -1,4 +1,4 @@
-@import "tailwindcss" source(none);
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600;700&display=swap");
 @source "../src";
 @import "tw-animate-css";
 @import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600;700&display=swap");
@@ -139,12 +139,17 @@
 }
 
 @layer base {
-  html {
-    font-size: 20px; /* Increase to 18px if you want it even larger */
+  .font-serif-display {
+    font-family: "Source Serif 4", "Iowan Old Style", "Apple Garamond", Georgia, "Times New Roman", serif;
+    font-feature-settings: "ss01";
+    letter-spacing: -0.01em;
   }
-  * {
-    border-color: var(--color-border);
 
+  .font-serif-title {
+    font-family: "DM Serif Display", "Source Serif 4", Georgia, "Times New Roman", serif;
+    font-feature-settings: "ss01";
+    letter-spacing: -0.02em;
+  }
     /* Standard syntax (Firefox) */
     scrollbar-color: var(--color-primary) var(--color-background);
     /* Changed from 'thin' to 'auto' to allow wider standard scrollbars */
