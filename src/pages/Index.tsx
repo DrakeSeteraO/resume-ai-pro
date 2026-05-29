@@ -149,14 +149,14 @@ export default function Index() {
 
       <header className="sticky top-0 z-30 border-b border-border/70 bg-background/75 backdrop-blur-md">
         <div className="flex h-14 items-center justify-between px-6">
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
-              <FileText className="h-4 w-4" />
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm">
+              <FileText className="h-5 w-5" />
             </div>
-            <span className="font-serif-title text-xl font-normal tracking-tight">
+            <span className="font-serif-title text-3xl font-semibold tracking-tight">
               Resumeforge
             </span>
-            <span className="ml-1 rounded-full border border-border/80 bg-background px-2 py-0.5 text-[10px] font-medium tracking-wide text-muted-foreground">
+            <span className="ml-1 rounded-full border border-border/80 bg-background px-2 py-0.5 text-[11px] font-medium tracking-wide text-muted-foreground">
               Beta
             </span>
           </div>
