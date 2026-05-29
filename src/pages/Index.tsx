@@ -102,15 +102,14 @@ export default function Index() {
         }
         throw new Error(errorMessage);
       }
+      const tailoredData = await tailorResponse.json();
 
       setStepIndex(1);
-      const tailoredData = await tailorResponse.json();
-      setData(tailoredData);
 
       // ------------------------------------------------
       // Phase 2: Generate the LaTeX Code
       // ------------------------------------------------
-      setStepIndex(2);
+    
       const latexResponse = await fetch("/api/latex", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -131,6 +130,8 @@ export default function Index() {
       const latexData = await latexResponse.json();
       setLatex(latexData.latex); 
       
+      setStepIndex(2);
+
       setPhase("done");
       toast.success("Resume optimized and LaTeX generated!");
       
