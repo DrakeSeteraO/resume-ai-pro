@@ -146,15 +146,15 @@
   }
 
   .font-serif-display {
-    font-family: "Source Serif 4", "Iowan Old Style", "Apple Garamond", Georgia, "Times New Roman", serif;
-    font-feature-settings: "ss01";
-    letter-spacing: -0.01em;
+    font-family: "Space Grotesk", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
   }
 
   .font-serif-title {
-    font-family: "Source Serif 4", "Iowan Old Style", "Apple Garamond", Georgia, "Times New Roman", serif;
-    font-weight: 600;
-    letter-spacing: -0.025em;
+    font-family: "Space Grotesk", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.04em;
   }
 
   html {
