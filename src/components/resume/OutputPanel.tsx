@@ -4,7 +4,6 @@ import {
   Copy,
   Download,
   FileText,
-  Sparkles,
   FileCode,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -52,10 +51,10 @@ export function OutputPanel({
   if (phase === "idle") {
     return (
       <div className="grid-bg flex h-full flex-col items-center justify-center p-12 text-center">
-        <div className="relative mb-6">
+      <div className="relative mb-6">
           <div className="absolute inset-0 -m-3 rounded-2xl bg-primary/10 blur-2xl" />
           <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl border bg-card shadow-elevated">
-            <Sparkles className="h-6 w-6 text-primary" />
+            <FileText className="h-6 w-6 text-primary" />
           </div>
         </div>
         <h3 className="font-serif-display text-2xl font-medium tracking-tight">
@@ -76,7 +75,7 @@ export function OutputPanel({
         <div className="w-full max-w-sm rounded-xl border bg-card p-6 shadow-elevated">
           <div className="mb-5 flex items-center gap-3">
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10">
-              <Sparkles className="h-4 w-4 text-primary" />
+              <FileText className="h-4 w-4 text-primary" />
             </div>
             <div>
               <p className="font-serif-display text-base font-medium">Optimizing your resume</p>
