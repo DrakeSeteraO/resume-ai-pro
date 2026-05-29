@@ -148,7 +148,7 @@ export default function Index() {
       <Toaster position="top-right" />
 
       <header className="sticky top-0 z-30 border-b border-border/70 bg-background/75 backdrop-blur-md">
-        <div className="flex h-14 items-center justify-between px-6">
+        <div className="flex h-16 items-center justify-between px-6">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm">
               <FileText className="h-5 w-5" />
@@ -213,7 +213,7 @@ export default function Index() {
         </div>
       </header>
 
-      <main className="flex flex-col lg:grid lg:h-[calc(100vh-3.5rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+      <main className="flex flex-col lg:grid lg:h-[calc(100vh-4rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
         <section className="flex min-h-0 flex-col border-r">
           <div className="flex items-center justify-between gap-2 border-b bg-muted/30 px-5 py-2.5">
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
