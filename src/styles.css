@@ -1,3 +1,4 @@
+@import "tailwindcss";
 @import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=DM+Serif+Display&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600;700&display=swap");
 @source "../src";
 @import "tw-animate-css";
@@ -149,6 +150,8 @@
     font-weight: 600;
     letter-spacing: -0.035em;
   }
+  
+  * {
     /* Standard syntax (Firefox) */
     scrollbar-color: var(--color-primary) var(--color-background);
     /* Changed from 'thin' to 'auto' to allow wider standard scrollbars */
@@ -181,12 +184,6 @@
     border-radius: 8px; 
     /* Thickened the border to give it a nice inset "floating" appearance */
     border: 3px solid var(--color-background); 
-  }
-
-  .font-serif-display {
-    font-family: "Source Serif 4", "Iowan Old Style", "Apple Garamond", Georgia, "Times New Roman", serif;
-    font-feature-settings: "ss01";
-    letter-spacing: -0.01em;
   }
 }
 
