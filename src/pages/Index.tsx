@@ -34,6 +34,11 @@ import { Toaster } from "@/components/ui/sonner";
 import { ProfileEditor } from "@/components/resume/ProfileEditor";
 import { JobTarget } from "@/components/resume/JobTarget";
 import { OutputPanel, type PipelinePhase } from "@/components/resume/OutputPanel";
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable";
 import { emptyProfile, sampleProfile, type ProfileData } from "@/lib/resume-types";
 import { generateLatex } from "@/lib/latex-generator";
 import { SelectPortal } from "@radix-ui/react-select";
@@ -226,8 +231,69 @@ export default function Index() {
         </div>
       </header>
 
-      <main className="flex flex-col lg:grid lg:h-[calc(100vh-4rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-        <section className="flex min-h-0 flex-col border-r">
+      <main className="flex flex-col lg:h-[calc(100vh-4rem)]">
+        <ResizablePanelGroup orientation="horizontal" className="hidden lg:flex">
+          <ResizablePanel defaultSize={50} minSize={25}>
+            <LeftPane
+              data={data}
+              update={update}
+              fileRef={fileRef}
+              importFile={importFile}
+              exportJson={exportJson}
+              runPipeline={runPipeline}
+              phase={phase}
+              setData={setData}
+            />
+          </ResizablePanel>
+          <ResizableHandle className="w-1.5 bg-border/60 hover:bg-primary/40 transition-colors" />
+          <ResizablePanel defaultSize={50} minSize={25}>
+            <section className="h-full min-h-0 overflow-hidden bg-muted/20">
+              <OutputPanel phase={phase} stepIndex={stepIndex} latex={latex} profile={data} />
+            </section>
+          </ResizablePanel>
+        </ResizablePanelGroup>
+
+        <div className="flex flex-col lg:hidden">
+          <LeftPane
+            data={data}
+            update={update}
+            fileRef={fileRef}
+            importFile={importFile}
+            exportJson={exportJson}
+            runPipeline={runPipeline}
+            phase={phase}
+            setData={setData}
+          />
+          <section className="min-h-[60vh] overflow-hidden bg-muted/20">
+            <OutputPanel phase={phase} stepIndex={stepIndex} latex={latex} profile={data} />
+          </section>
+        </div>
+      </main>
+    </div>
+  );
+}
+
+function LeftPane({
+  data,
+  update,
+  fileRef,
+  importFile,
+  exportJson,
+  runPipeline,
+  phase,
+  setData,
+}: {
+  data: ProfileData;
+  update: (updater: (d: ProfileData) => ProfileData) => void;
+  fileRef: React.RefObject<HTMLInputElement | null>;
+  importFile: (f: File) => void;
+  exportJson: () => void;
+  runPipeline: () => void;
+  phase: PipelinePhase;
+  setData: (d: ProfileData) => void;
+}) {
+  return (
+    <section className="flex h-full min-h-0 flex-col border-r">
           <div className="flex items-center justify-between gap-2 border-b bg-muted/30 px-5 py-2.5">
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
               <span className="font-medium text-foreground">Data portability</span>
@@ -303,12 +369,6 @@ export default function Index() {
             </p>
           </div>
         </section>
-
-        <section className="min-h-0 overflow-hidden bg-muted/20">
-          <OutputPanel phase={phase} stepIndex={stepIndex} latex={latex} profile={data} />
-        </section>
-      </main>
-    </div>
   );
 }
 

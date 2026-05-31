@@ -1,12 +1,10 @@
-import { useMemo, useRef, useState } from "react";
+import { useState } from "react";
 import {
   Check,
   Copy,
   Download,
   FileText,
   FileCode,
-  List,
-  Hash,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -111,7 +109,7 @@ export function OutputPanel({
         </div>
       </div>
 
-      <Tabs defaultValue="code" className="flex flex-1 flex-col">
+      <Tabs defaultValue="code" className="flex min-h-0 flex-1 flex-col">
         <div className="border-b px-5 pt-3">
           <TabsList className="grid w-fit grid-cols-2">
             <TabsTrigger value="code" className="gap-2">
@@ -125,7 +123,7 @@ export function OutputPanel({
 
         <TabsContent
           value="code"
-          className="m-0 flex flex-1 flex-col overflow-hidden"
+          className="m-0 flex min-h-0 flex-1 flex-col overflow-hidden"
         >
           <div className="flex items-center justify-between border-b bg-muted/40 px-4 py-2">
             <span className="font-mono text-xs text-muted-foreground">
@@ -153,7 +151,9 @@ export function OutputPanel({
               </Button>
             </div>
           </div>
-          <LatexViewer latex={latex} />
+          <pre className="min-h-0 flex-1 overflow-auto bg-card p-5 font-mono text-xs leading-relaxed">
+            <SyntaxLatex code={latex} />
+          </pre>
         </TabsContent>
 
         <TabsContent
@@ -217,91 +217,5 @@ function SyntaxLatex({ code }: { code: string }) {
         return <span key={i}>{p}</span>;
       })}
     </code>
-  );
-}
-
-type Outline = { id: string; label: string; level: number; line: number };
-
-function buildOutline(latex: string): Outline[] {
-  const lines = latex.split("\n");
-  const out: Outline[] = [];
-  const re = /\\(section|subsection|subsubsection|paragraph|begin)\*?\{([^}]*)\}/;
-  lines.forEach((ln, i) => {
-    const m = ln.match(re);
-    if (!m) return;
-    const cmd = m[1];
-    const arg = m[2];
-    let level = 1;
-    let label = arg;
-    if (cmd === "section") level = 1;
-    else if (cmd === "subsection") level = 2;
-    else if (cmd === "subsubsection") level = 3;
-    else if (cmd === "paragraph") level = 4;
-    else if (cmd === "begin") {
-      if (arg !== "document") return;
-      level = 0;
-      label = "Document";
-    }
-    out.push({ id: `tex-line-${i}`, label, level, line: i });
-  });
-  return out;
-}
-
-function LatexViewer({ latex }: { latex: string }) {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const outline = useMemo(() => buildOutline(latex), [latex]);
-  const lines = useMemo(() => latex.split("\n"), [latex]);
-
-  const jumpTo = (id: string) => {
-    const el = scrollRef.current?.querySelector(`#${CSS.escape(id)}`);
-    el?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
-  return (
-    <div className="flex min-h-0 flex-1 overflow-hidden">
-      <aside className="hidden w-56 shrink-0 flex-col border-r bg-muted/30 md:flex">
-        <div className="flex items-center gap-2 border-b px-4 py-2 text-xs font-medium text-muted-foreground">
-          <List className="h-3.5 w-3.5" /> Outline
-        </div>
-        <div className="min-h-0 flex-1 overflow-auto py-2">
-          {outline.length === 0 ? (
-            <p className="px-4 py-2 text-xs text-muted-foreground">
-              No sections detected
-            </p>
-          ) : (
-            <ul className="space-y-0.5 px-2">
-              {outline.map((o) => (
-                <li key={o.id}>
-                  <button
-                    onClick={() => jumpTo(o.id)}
-                    className="flex w-full items-start gap-1.5 rounded-md px-2 py-1 text-left text-xs text-foreground/80 transition hover:bg-primary/10 hover:text-primary"
-                    style={{ paddingLeft: `${0.5 + o.level * 0.75}rem` }}
-                  >
-                    <Hash className="mt-0.5 h-3 w-3 shrink-0 text-primary/60" />
-                    <span className="truncate">{o.label}</span>
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      </aside>
-      <div ref={scrollRef} className="min-h-0 flex-1 overflow-auto">
-        <pre className="bg-card p-5 font-mono text-xs leading-relaxed">
-          <code className="block text-foreground">
-            {lines.map((ln, i) => (
-              <div key={i} id={`tex-line-${i}`} className="flex">
-                <span className="mr-4 inline-block w-8 shrink-0 select-none text-right text-muted-foreground/60">
-                  {i + 1}
-                </span>
-                <span className="min-w-0 flex-1 whitespace-pre-wrap break-words">
-                  <SyntaxLatex code={ln || " "} />
-                </span>
-              </div>
-            ))}
-          </code>
-        </pre>
-      </div>
-    </div>
   );
 }
