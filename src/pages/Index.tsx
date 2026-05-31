@@ -292,7 +292,8 @@ export default function Index() {
       </header>
 
       <main className="flex flex-col lg:h-[calc(100vh-4rem)]">
-        <ResizablePanelGroup orientation="horizontal" className="hidden lg:flex">
+        <div className="hidden h-full lg:block">
+        <ResizablePanelGroup orientation="horizontal">
           <ResizablePanel defaultSize={50} minSize={25}>
             <LeftPane
               data={data}
@@ -319,6 +320,7 @@ export default function Index() {
             </section>
           </ResizablePanel>
         </ResizablePanelGroup>
+        </div>
 
         <div className="flex flex-col lg:hidden">
           <LeftPane
