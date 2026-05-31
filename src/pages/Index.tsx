@@ -46,6 +46,7 @@ export default function Index() {
   const [latex, setLatex] = useState("");
   const [pdfError, setPdfError] = useState<string | null>(null);
   const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -80,34 +81,33 @@ export default function Index() {
   };
 
   const compilePdfWithRetry = async (latexString: string, maxRetries = 3): Promise<Blob> => {
-  for (let attempt = 1; attempt <= maxRetries; attempt++) {
-    try {
-      // Call YOUR Vercel backend proxy route
-      const response = await fetch("/api/pdf", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ latex_string: latexString }),
-      });
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        // Call YOUR Vercel backend proxy route
+        const response = await fetch("/api/pdf", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ latex_string: latexString }),
+        });
 
-      if (!response.ok) {
-        throw new Error(`Server returned ${response.status}`);
+        if (!response.ok) {
+          throw new Error(`Server returned ${response.status}`);
+        }
+
+        // Success! Return the raw PDF binary data
+        return await response.blob();
+      } catch (error) {
+        console.warn(`PDF compilation attempt ${attempt} failed:`, error);
+
+        if (attempt === maxRetries) {
+          throw new Error("PDF compilation failed. The server might be overloaded.");
+        }
+
+        await new Promise((resolve) => setTimeout(resolve, 2000));
       }
-
-      // Success! Return the raw PDF binary data
-      return await response.blob();
-
-    } catch (error) {
-      console.warn(`PDF compilation attempt ${attempt} failed:`, error);
-      
-      if (attempt === maxRetries) {
-        throw new Error("PDF compilation failed. The server might be overloaded.");
-      }
-      
-      await new Promise((resolve) => setTimeout(resolve, 2000));
     }
-  }
-  throw new Error("Compilation failed.");
-};
+    throw new Error("Compilation failed.");
+  };
 
   const runPipeline = async () => {
     setPhase("running");
@@ -199,13 +199,14 @@ export default function Index() {
       setPdfError(null);
       try {
         const pdfBlob = await compilePdfWithRetry(finalLatexData.latex, 3);
+        // Convert the Blob into a temporary local URL
+        const localPdfUrl = URL.createObjectURL(pdfBlob);
+        setPdfUrl(localPdfUrl);
         const safeName = data.personal.fullName.replace(/\s+/g, "-") || "Optimized";
-        triggerDownload(pdfBlob, `${safeName}-Resume.pdf`);
         setPhase("done");
         toast.success("Resume optimized and LaTeX generated!");
       } catch (pdfErr) {
-        const message =
-          pdfErr instanceof Error ? pdfErr.message : "PDF compilation failed.";
+        const message = pdfErr instanceof Error ? pdfErr.message : "PDF compilation failed.";
         console.error("PDF compilation failed:", pdfErr);
         setPdfError(message);
         setPhase("done");
@@ -307,7 +308,14 @@ export default function Index() {
           <ResizableHandle className="w-1.5 bg-border/60 hover:bg-primary/40 transition-colors" />
           <ResizablePanel defaultSize={50} minSize={25}>
             <section className="h-full min-h-0 overflow-hidden bg-muted/20">
-              <OutputPanel phase={phase} stepIndex={stepIndex} latex={latex} profile={data} pdfError={pdfError} />
+              <OutputPanel
+                phase={phase}
+                stepIndex={stepIndex}
+                latex={latex}
+                profile={data}
+                pdfError={pdfError}
+                pdfUrl={pdfUrl}
+              />
             </section>
           </ResizablePanel>
         </ResizablePanelGroup>
@@ -324,7 +332,14 @@ export default function Index() {
             setData={setData}
           />
           <section className="min-h-[60vh] overflow-hidden bg-muted/20">
-            <OutputPanel phase={phase} stepIndex={stepIndex} latex={latex} profile={data} pdfError={pdfError} />
+            <OutputPanel
+              phase={phase}
+              stepIndex={stepIndex}
+              latex={latex}
+              profile={data}
+              pdfError={pdfError}
+              pdfUrl={pdfUrl}
+            />
           </section>
         </div>
       </main>

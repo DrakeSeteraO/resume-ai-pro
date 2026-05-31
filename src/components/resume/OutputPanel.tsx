@@ -1,12 +1,5 @@
 import { useState } from "react";
-import {
-  Check,
-  Copy,
-  Download,
-  FileText,
-  FileCode,
-  XCircle,
-} from "lucide-react";
+import { Check, Copy, Download, FileText, FileCode, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Stepper } from "./Stepper";
@@ -28,12 +21,14 @@ export function OutputPanel({
   latex,
   profile,
   pdfError,
+  pdfUrl, // <-- Add this new prop
 }: {
   phase: PipelinePhase;
   stepIndex: number;
   latex: string;
   profile: ProfileData;
   pdfError?: string | null;
+  pdfUrl?: string | null; // <-- Add this new prop definition
 }) {
   const [copied, setCopied] = useState(false);
 
@@ -43,6 +38,7 @@ export function OutputPanel({
     setTimeout(() => setCopied(false), 1500);
   };
 
+  // Keep your existing download helper for the .tex file
   const download = (filename: string, content: string, mime: string) => {
     const blob = new Blob([content], { type: mime });
     const url = URL.createObjectURL(blob);
@@ -53,10 +49,21 @@ export function OutputPanel({
     URL.revokeObjectURL(url);
   };
 
+  // Helper for downloading the actual PDF directly from the generated URL
+  const downloadPdf = () => {
+    if (!pdfUrl) return;
+    const safeName = profile.personal.fullName.replace(/\s+/g, "-") || "Optimized";
+    const a = document.createElement("a");
+    a.href = pdfUrl;
+    a.download = `${safeName}-Resume.pdf`;
+    a.click();
+  };
+
   if (phase === "idle") {
+    // ... keep existing idle state ...
     return (
       <div className="grid-bg flex h-full flex-col items-center justify-center p-12 text-center">
-      <div className="relative mb-6">
+        <div className="relative mb-6">
           <div className="absolute inset-0 -m-3 rounded-2xl bg-primary/10 blur-2xl" />
           <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl border bg-card shadow-elevated">
             <FileText className="h-6 w-6 text-primary" />
@@ -66,15 +73,15 @@ export function OutputPanel({
           Your tailored resume appears here
         </h3>
         <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
-          Fill out your profile and target role on the left, then run the
-          optimizer. The LaTeX source and a downloadable PDF will land in this
-          panel.
+          Fill out your profile and target role on the left, then run the optimizer. The LaTeX
+          source and a downloadable PDF will land in this panel.
         </p>
       </div>
     );
   }
 
   if (phase === "running") {
+    // ... keep existing running state ...
     return (
       <div className="flex h-full flex-col items-center justify-center p-12">
         <div className="w-full max-w-sm rounded-xl border bg-card p-6 shadow-elevated">
@@ -97,6 +104,7 @@ export function OutputPanel({
 
   return (
     <div className="flex h-full flex-col">
+      {/* ... keep existing header and LaTeX tab ... */}
       <div className="flex items-center justify-between border-b px-5 py-3">
         <div className="flex items-center gap-2">
           <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary/10">
@@ -124,14 +132,10 @@ export function OutputPanel({
           </TabsList>
         </div>
 
-        <TabsContent
-          value="code"
-          className="m-0 flex min-h-0 flex-1 flex-col overflow-hidden"
-        >
+        <TabsContent value="code" className="m-0 flex min-h-0 flex-1 flex-col overflow-hidden">
+          {/* ... existing code block ... */}
           <div className="flex items-center justify-between border-b bg-muted/40 px-4 py-2">
-            <span className="font-mono text-xs text-muted-foreground">
-              resume.tex
-            </span>
+            <span className="font-mono text-xs text-muted-foreground">resume.tex</span>
             <div className="flex gap-2">
               <Button size="sm" variant="ghost" onClick={copy} className="h-7">
                 {copied ? (
@@ -159,18 +163,17 @@ export function OutputPanel({
           </pre>
         </TabsContent>
 
+        {/* --- NEW LIVE PDF PREVIEW --- */}
         <TabsContent
           value="pdf"
-          className="m-0 flex flex-1 flex-col items-center justify-center bg-muted/40 p-8"
+          className="m-0 flex flex-1 flex-col items-center justify-center bg-muted/40 p-4 overflow-hidden"
         >
           {pdfError ? (
             <div className="w-full max-w-sm rounded-lg border border-destructive/40 bg-card p-6 shadow-elevated">
               <div className="mb-5 flex aspect-[8.5/11] w-full flex-col items-center justify-center rounded-md border border-dashed border-destructive/40 bg-destructive/5 p-6 text-center">
                 <XCircle className="mb-3 h-10 w-10 text-destructive" />
                 <p className="text-sm font-medium text-destructive">PDF compilation failed</p>
-                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                  {pdfError}
-                </p>
+                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{pdfError}</p>
               </div>
               <Button
                 variant="outline"
@@ -179,35 +182,23 @@ export function OutputPanel({
               >
                 <Download className="h-4 w-4" /> Download .tex source
               </Button>
-              <p className="mt-3 text-center text-[11px] text-muted-foreground">
-                You can still copy the LaTeX from the Raw LaTeX tab and compile it locally
-                or try regenerating.
-              </p>
             </div>
-          ) : (
-          <div className="w-full max-w-sm rounded-lg border bg-card p-6 shadow-elevated">
-            <div className="mb-5 flex aspect-[8.5/11] w-full items-center justify-center rounded-md border border-dashed bg-muted/30">
-              <div className="px-6 text-center">
-                <FileText className="mx-auto mb-2 h-8 w-8 text-muted-foreground" />
-                <p className="text-xs font-medium">
-                  {profile.personal.fullName || "Your Name"}
-                </p>
-                <p className="mt-1 text-[10px] text-muted-foreground">
-                  Single-page · ATS-friendly · LaTeX compiled
-                </p>
+          ) : pdfUrl ? (
+            <div className="flex h-full w-full flex-col gap-4">
+              {/* The iframe renders the actual PDF Blob */}
+              <iframe
+                src={`${pdfUrl}#toolbar=0&navpanes=0&scrollbar=0`}
+                className="h-full w-full flex-1 rounded-md border bg-white shadow-elevated"
+                title="Live Resume Preview"
+              />
+              <div className="flex justify-end">
+                <Button onClick={downloadPdf}>
+                  <Download className="mr-2 h-4 w-4" /> Download PDF
+                </Button>
               </div>
             </div>
-            <Button
-              className="w-full"
-              onClick={() => download("resume.tex", latex, "text/plain")}
-            >
-              <Download className="h-4 w-4" /> Download compiled PDF
-            </Button>
-            <p className="mt-3 text-center text-[11px] text-muted-foreground">
-              PDF compilation runs server-side. The .tex source is bundled in
-              the download.
-            </p>
-          </div>
+          ) : (
+            <p className="text-sm text-muted-foreground">Loading preview...</p>
           )}
         </TabsContent>
       </Tabs>
