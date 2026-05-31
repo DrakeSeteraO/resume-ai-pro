@@ -151,9 +151,11 @@ export function OutputPanel({
               </Button>
             </div>
           </div>
-          <pre className="flex-1 overflow-auto bg-card p-5 font-mono text-xs leading-relaxed">
-            <SyntaxLatex code={latex} />
-          </pre>
+          <div className="min-h-0 flex-1 overflow-auto">
+            <pre className="bg-card p-5 font-mono text-xs leading-relaxed">
+              <SyntaxLatex code={latex} />
+            </pre>
+          </div>
         </TabsContent>
 
         <TabsContent
