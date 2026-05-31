@@ -93,6 +93,10 @@ class CritiquePayload(BaseModel):
     profile: ProfilePayload
     latex_string: str
 
+class RevisePayload(BaseModel):
+    profile: ProfilePayload
+    latex_string: str
+    improvements: List[str]
 
 # ==========================================
 # 2. DEFINE THE BACKEND AI EXECUTION ROUTE
@@ -263,3 +267,74 @@ async def critique_resume(payload: CritiquePayload):
         raise HTTPException(status_code=502, detail="AI failed to return a valid JSON array for improvements.")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Critique Generation Error: {str(e)}")
+    
+
+# ==========================================
+# 4. THE REVISION ROUTE (FINAL LATEX GENERATION)
+# ==========================================
+@app.post("/api/revise")
+async def revise_latex(payload: RevisePayload):
+    if not GEMINI_API_KEY:
+        raise HTTPException(status_code=500, detail="Gemini API Key missing on server.")
+        
+    try:
+        model = genai.GenerativeModel('gemini-3.1-flash-lite')
+        
+        user_data_string = json.dumps(payload.profile.dict(), indent=2)
+        improvements_string = "\n".join([f"- {imp}" for imp in payload.improvements])
+        
+        prompt = f"""
+        You are an expert LaTeX developer and technical resume designer.
+        Your objective is to update an existing LaTeX resume by applying a specific list of improvements.
+        
+        Raw Profile Context:
+        {user_data_string}
+        
+        Current LaTeX Draft:
+        {payload.latex_string}
+        
+        REQUESTED IMPROVEMENTS TO APPLY:
+        {improvements_string}
+        
+        CRITICAL COMPILATION RULES - READ CAREFULLY:
+        1. Apply the requested improvements to the text, but DO NOT break the LaTeX structure.
+        2. ESCAPE ALL SPECIAL CHARACTERS: 
+           - Ampersands (&) MUST become \\& 
+           - Percentages (%) MUST become \\% 
+           - Hashes (#) MUST become \\# 
+           - Dollars ($) MUST become \\$
+           - Underscores (_) MUST become \\_
+        3. Output ONLY raw LaTeX. Start exactly with \\documentclass and end with \\end{{document}}.
+        
+        Return the completely updated, valid LaTeX string. Do not wrap the output in markdown code blocks.
+        """
+        
+        # Use temperature 0.1 to balance applying text changes while strictly adhering to LaTeX syntax
+        response = model.generate_content(
+            prompt,
+            generation_config=genai.GenerationConfig(
+                temperature=0.1 
+            )
+        )
+        
+        latex_text = response.text
+        
+        # MAGIC BULLET: Surgically extract only the valid LaTeX code
+        import re
+        match = re.search(r'(\\documentclass.*?\\end\{document\})', latex_text, re.DOTALL)
+        
+        if match:
+            clean_latex = match.group(1)
+        else:
+            clean_latex = latex_text.strip()
+            if clean_latex.startswith("```latex"):
+                clean_latex = clean_latex[8:]
+            elif clean_latex.startswith("```"):
+                clean_latex = clean_latex[3:]
+            if clean_latex.endswith("```"):
+                clean_latex = clean_latex[:-3]
+                
+        return {"latex": clean_latex.strip()}
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Revision Generation Error: {str(e)}")
