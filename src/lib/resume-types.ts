@@ -87,7 +87,7 @@ export const sampleProfile: ProfileData = {
   personal: {
     fullName: "Drake Setera",
     email: "dsetera24@gmail.com",
-    phone: "(123) 456 - 7890",
+    phone: "",
     location: "Holly, MI",
     website: "https://www.linkedin.com/in/drake-setera/",
   },
