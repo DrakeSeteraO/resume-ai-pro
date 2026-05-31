@@ -232,7 +232,7 @@ export default function Index() {
       </header>
 
       <main className="flex flex-col lg:h-[calc(100vh-4rem)]">
-        <ResizablePanelGroup direction="horizontal" className="hidden lg:flex">
+        <ResizablePanelGroup orientation="horizontal" className="hidden lg:flex">
           <ResizablePanel defaultSize={50} minSize={25}>
             <LeftPane
               data={data}
@@ -285,7 +285,7 @@ function LeftPane({
 }: {
   data: ProfileData;
   update: (updater: (d: ProfileData) => ProfileData) => void;
-  fileRef: React.RefObject<HTMLInputElement>;
+  fileRef: React.RefObject<HTMLInputElement | null>;
   importFile: (f: File) => void;
   exportJson: () => void;
   runPipeline: () => void;
