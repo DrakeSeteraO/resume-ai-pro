@@ -79,12 +79,13 @@ export default function Index() {
 
  const runPipeline = async () => {
     setPhase("running");
+    setStepIndex(0); 
     
     try {
       // ------------------------------------------------
       // Phase 1: Tailor the Resume Content
       // ------------------------------------------------
-      setStepIndex(0); 
+      
       const tailorResponse = await fetch("/api/tailor", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
