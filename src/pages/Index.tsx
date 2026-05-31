@@ -149,8 +149,17 @@ export default function Index() {
       // Step 4: Generate the LaTeX Code
       // ------------------------------------------------
       setStepIndex(3);
-
-      setLatex(latexData.latex);
+      const reviseResponse = await fetch("/api/revise", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          profile: tailoredData,
+          latex_string: latexData.latex,
+          improvements: critiqueData.improvements,
+        }),
+      });
+      const finalLatexData = await reviseResponse.json();
+      setLatex(finalLatexData.latex);
 
       // ------------------------------------------------
       // Step 5: Compiling downloadable PDF
