@@ -114,16 +114,6 @@ export default function Index() {
       // Step 2: Structuring initial document
       // ------------------------------------------------
       setStepIndex(1);
-
-      // ------------------------------------------------
-      // Step 3: Critiquing alignment & layout
-      // ------------------------------------------------
-      setStepIndex(2);
-
-      // ------------------------------------------------
-      // Step 4: Generate the LaTeX Code
-      // ------------------------------------------------
-      setStepIndex(3);
       const latexResponse = await fetch("/api/latex", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -142,6 +132,17 @@ export default function Index() {
       }
 
       const latexData = await latexResponse.json();
+
+      // ------------------------------------------------
+      // Step 3: Critiquing alignment & layout
+      // ------------------------------------------------
+      setStepIndex(2);
+
+      // ------------------------------------------------
+      // Step 4: Generate the LaTeX Code
+      // ------------------------------------------------
+      setStepIndex(3);
+      
       setLatex(latexData.latex);
 
       // ------------------------------------------------
