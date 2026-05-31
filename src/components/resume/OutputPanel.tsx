@@ -5,6 +5,7 @@ import {
   Download,
   FileText,
   FileCode,
+  XCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -26,11 +27,13 @@ export function OutputPanel({
   stepIndex,
   latex,
   profile,
+  pdfError,
 }: {
   phase: PipelinePhase;
   stepIndex: number;
   latex: string;
   profile: ProfileData;
+  pdfError?: string | null;
 }) {
   const [copied, setCopied] = useState(false);
 
@@ -160,6 +163,28 @@ export function OutputPanel({
           value="pdf"
           className="m-0 flex flex-1 flex-col items-center justify-center bg-muted/40 p-8"
         >
+          {pdfError ? (
+            <div className="w-full max-w-sm rounded-lg border border-destructive/40 bg-card p-6 shadow-elevated">
+              <div className="mb-5 flex aspect-[8.5/11] w-full flex-col items-center justify-center rounded-md border border-dashed border-destructive/40 bg-destructive/5 p-6 text-center">
+                <XCircle className="mb-3 h-10 w-10 text-destructive" />
+                <p className="text-sm font-medium text-destructive">PDF compilation failed</p>
+                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                  {pdfError}
+                </p>
+              </div>
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={() => download("resume.tex", latex, "text/plain")}
+              >
+                <Download className="h-4 w-4" /> Download .tex source
+              </Button>
+              <p className="mt-3 text-center text-[11px] text-muted-foreground">
+                You can still copy the LaTeX from the Raw LaTeX tab and compile it locally
+                or try regenerating.
+              </p>
+            </div>
+          ) : (
           <div className="w-full max-w-sm rounded-lg border bg-card p-6 shadow-elevated">
             <div className="mb-5 flex aspect-[8.5/11] w-full items-center justify-center rounded-md border border-dashed bg-muted/30">
               <div className="px-6 text-center">
@@ -183,6 +208,7 @@ export function OutputPanel({
               the download.
             </p>
           </div>
+          )}
         </TabsContent>
       </Tabs>
     </div>

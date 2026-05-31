@@ -44,6 +44,7 @@ export default function Index() {
   const [phase, setPhase] = useState<PipelinePhase>("idle");
   const [stepIndex, setStepIndex] = useState(0);
   const [latex, setLatex] = useState("");
+  const [pdfError, setPdfError] = useState<string | null>(null);
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const fileRef = useRef<HTMLInputElement>(null);
 
@@ -203,13 +204,21 @@ export default function Index() {
       // Step 5: Compiling downloadable PDF
       // ------------------------------------------------
       setStepIndex(4);
-      const pdfBlob = await compilePdfWithRetry(finalLatexData.latex, 3);
-      // Format a clean filename using the user's actual name
-      const safeName = data.personal.fullName.replace(/\s+/g, "-") || "Optimized";
-      triggerDownload(pdfBlob, `${safeName}-Resume.pdf`);
-
-      setPhase("done");
-      toast.success("Resume optimized and LaTeX generated!");
+      setPdfError(null);
+      try {
+        const pdfBlob = await compilePdfWithRetry(finalLatexData.latex, 3);
+        const safeName = data.personal.fullName.replace(/\s+/g, "-") || "Optimized";
+        triggerDownload(pdfBlob, `${safeName}-Resume.pdf`);
+        setPhase("done");
+        toast.success("Resume optimized and LaTeX generated!");
+      } catch (pdfErr) {
+        const message =
+          pdfErr instanceof Error ? pdfErr.message : "PDF compilation failed.";
+        console.error("PDF compilation failed:", pdfErr);
+        setPdfError(message);
+        setPhase("done");
+        toast.error(`PDF compile failed: ${message}`);
+      }
     } catch (error) {
       console.error("AI Pipeline Error:", error);
       toast.error(`Pipeline Error: ${error instanceof Error ? error.message : "Check console"}`);
@@ -306,7 +315,7 @@ export default function Index() {
           <ResizableHandle className="w-1.5 bg-border/60 hover:bg-primary/40 transition-colors" />
           <ResizablePanel defaultSize={50} minSize={25}>
             <section className="h-full min-h-0 overflow-hidden bg-muted/20">
-              <OutputPanel phase={phase} stepIndex={stepIndex} latex={latex} profile={data} />
+              <OutputPanel phase={phase} stepIndex={stepIndex} latex={latex} profile={data} pdfError={pdfError} />
             </section>
           </ResizablePanel>
         </ResizablePanelGroup>
@@ -323,7 +332,7 @@ export default function Index() {
             setData={setData}
           />
           <section className="min-h-[60vh] overflow-hidden bg-muted/20">
-            <OutputPanel phase={phase} stepIndex={stepIndex} latex={latex} profile={data} />
+            <OutputPanel phase={phase} stepIndex={stepIndex} latex={latex} profile={data} pdfError={pdfError} />
           </section>
         </div>
       </main>
