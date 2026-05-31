@@ -80,42 +80,34 @@ export default function Index() {
   };
 
   const compilePdfWithRetry = async (latexString: string, maxRetries = 3): Promise<Blob> => {
-    const url = "https://latexonline.cc/compile";
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      // Call YOUR Vercel backend proxy route
+      const response = await fetch("/api/pdf", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ latex_string: latexString }),
+      });
 
-    for (let attempt = 1; attempt <= maxRetries; attempt++) {
-      try {
-        // LaTeXOnline expects the data as a standard FormData object
-        const formData = new FormData();
-        formData.append("text", latexString);
-        formData.append("command", "pdflatex");
-
-        const response = await fetch(url, {
-          method: "POST",
-          body: formData,
-        });
-
-        if (!response.ok) {
-          throw new Error(`Server returned ${response.status}`);
-        }
-
-        // Success! Return the raw PDF binary data
-        return await response.blob();
-      } catch (error) {
-        console.warn(`PDF compilation attempt ${attempt} failed:`, error);
-
-        if (attempt === maxRetries) {
-          throw new Error(
-            "PDF server is currently overloaded. Please try generating again in a minute.",
-          );
-        }
-
-        // Wait 2000ms (2 seconds) before making the next attempt
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+      if (!response.ok) {
+        throw new Error(`Server returned ${response.status}`);
       }
-    }
 
-    throw new Error("Compilation failed.");
-  };
+      // Success! Return the raw PDF binary data
+      return await response.blob();
+
+    } catch (error) {
+      console.warn(`PDF compilation attempt ${attempt} failed:`, error);
+      
+      if (attempt === maxRetries) {
+        throw new Error("PDF compilation failed. The server might be overloaded.");
+      }
+      
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+    }
+  }
+  throw new Error("Compilation failed.");
+};
 
   const runPipeline = async () => {
     setPhase("running");
