@@ -153,11 +153,7 @@ export function OutputPanel({
               </Button>
             </div>
           </div>
-          <div className="min-h-0 flex-1 overflow-auto">
-            <pre className="bg-card p-5 font-mono text-xs leading-relaxed">
-              <SyntaxLatex code={latex} />
-            </pre>
-          </div>
+          <LatexViewer latex={latex} />
         </TabsContent>
 
         <TabsContent
