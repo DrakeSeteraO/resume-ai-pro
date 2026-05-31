@@ -89,6 +89,10 @@ class ProfilePayload(BaseModel):
     publications: List[PublicationItem] = []
     target: TargetJob
 
+class CritiquePayload(BaseModel):
+    profile: ProfilePayload
+    latex_string: str
+
 
 # ==========================================
 # 2. DEFINE THE BACKEND AI EXECUTION ROUTE
@@ -197,3 +201,65 @@ async def generate_latex(payload: ProfilePayload):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"LaTeX Generation Error: {str(e)}")
+    
+
+# ==========================================
+# 3. THE ATS AUDIT & CRITIQUE ROUTE
+# ==========================================
+@app.post("/api/critique")
+async def critique_resume(payload: CritiquePayload):
+    if not GEMINI_API_KEY:
+        raise HTTPException(status_code=500, detail="Gemini API Key missing on server.")
+        
+    try:
+        model = genai.GenerativeModel('gemini-3.1-flash-lite')
+        
+        user_data_string = json.dumps(payload.profile.dict(), indent=2)
+        target_job_string = json.dumps(payload.profile.target.dict(), indent=2)
+        
+        prompt = f"""
+        You are a ruthless but highly constructive FAANG technical recruiter and Applicant Tracking System (ATS) auditor.
+        Review the candidate's raw profile data and their generated LaTeX document against their target job.
+        
+        Target Job Details:
+        {target_job_string}
+        
+        Raw Profile Data:
+        {user_data_string}
+        
+        Current LaTeX Draft:
+        {payload.latex_string}
+        
+        YOUR OBJECTIVE:
+        Identify exactly 3 to 5 highly specific, actionable improvements to make this resume stand out more to recruiters for this specific role.
+        Look for:
+        - Missing high-value keywords from the target job description.
+        - Weak action verbs that could be stronger.
+        - Metrics that lack context.
+        - Formatting issues in the LaTeX that might hide important skills.
+        
+        Return ONLY a valid JSON array of strings containing your specific instructions. Do not wrap it in markdown code blocks.
+        Example format: 
+        [
+          "Change the bullet point in the Linear role to explicitly mention WebSockets, as requested in the job description.",
+          "Move the Kubernetes skill higher up in the LaTeX skills section for better visibility."
+        ]
+        """
+        
+        response = model.generate_content(
+            prompt,
+            generation_config=genai.GenerationConfig(
+                response_mime_type="application/json",
+                temperature=0.4 # Slightly higher temperature allows for better critical analysis
+            )
+        )
+        
+        # Parse the JSON array returned by the AI
+        improvements_list = json.loads(response.text)
+        
+        return {"improvements": improvements_list}
+
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=502, detail="AI failed to return a valid JSON array for improvements.")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Critique Generation Error: {str(e)}")
