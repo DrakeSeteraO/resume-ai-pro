@@ -40,7 +40,7 @@ import { generateLatex } from "@/lib/latex-generator";
 import { SelectPortal } from "@radix-ui/react-select";
 
 export default function Index() {
-  const [data, setData] = useState<ProfileData>(sampleProfile);
+  const [data, setData] = useState<ProfileData>(emptyProfile);
   const [phase, setPhase] = useState<PipelinePhase>("idle");
   const [stepIndex, setStepIndex] = useState(0);
   const [latex, setLatex] = useState("");

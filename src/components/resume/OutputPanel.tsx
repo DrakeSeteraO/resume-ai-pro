@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Check, Copy, Download, FileText, FileCode, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -21,16 +21,30 @@ export function OutputPanel({
   latex,
   profile,
   pdfError,
-  pdfUrl, // <-- Add this new prop
+  pdfUrl,
 }: {
   phase: PipelinePhase;
   stepIndex: number;
   latex: string;
   profile: ProfileData;
   pdfError?: string | null;
-  pdfUrl?: string | null; // <-- Add this new prop definition
+  pdfUrl?: string | null;
 }) {
   const [copied, setCopied] = useState(false);
+
+  // 1. Add state to control which tab is currently active
+  const [activeTab, setActiveTab] = useState<string>("code");
+
+  // 2. Add an effect that automatically switches the tab when the pipeline finishes
+  useEffect(() => {
+    if (phase === "done") {
+      if (pdfError) {
+        setActiveTab("code"); // Default to code if compilation failed
+      } else if (pdfUrl) {
+        setActiveTab("pdf"); // Default to PDF if it succeeded
+      }
+    }
+  }, [phase, pdfError, pdfUrl]);
 
   const copy = async () => {
     await navigator.clipboard.writeText(latex);
@@ -60,7 +74,6 @@ export function OutputPanel({
   };
 
   if (phase === "idle") {
-    // ... keep existing idle state ...
     return (
       <div className="grid-bg flex h-full flex-col items-center justify-center p-12 text-center">
         <div className="relative mb-6">
@@ -120,7 +133,7 @@ export function OutputPanel({
         </div>
       </div>
 
-      <Tabs defaultValue="code" className="flex min-h-0 flex-1 flex-col">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="flex min-h-0 flex-1 flex-col">
         <div className="border-b px-5 pt-3">
           <TabsList className="grid w-fit grid-cols-2">
             <TabsTrigger value="code" className="gap-2">
