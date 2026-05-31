@@ -232,7 +232,7 @@ export default function Index() {
               <FileText className="h-5 w-5" />
             </div>
             <span className="font-serif-title text-3xl font-semibold tracking-tight">
-              Resumeforge
+              UltraCV
             </span>
             <span className="ml-1 rounded-full border border-border/80 bg-background px-2 py-0.5 text-[11px] font-medium tracking-wide text-muted-foreground">
               Beta
@@ -261,7 +261,7 @@ export default function Index() {
                 <DialogHeader>
                   <DialogTitle className="font-serif-display text-xl">Buy me a coffee</DialogTitle>
                   <DialogDescription>
-                    Enjoying Resumeforge? It's built and maintained by one person. If it's saved you
+                    Enjoying UltraCV? It's built and maintained by one person. If it's saved you
                     time, consider buying me a coffee — it keeps the project caffeinated and
                     ad-free.
                   </DialogDescription>
