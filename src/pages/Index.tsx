@@ -78,6 +78,44 @@ export default function Index() {
     }
   };
 
+  const compilePdfWithRetry = async (latexString: string, maxRetries = 3): Promise<Blob> => {
+    const url = "https://latexonline.cc/compile";
+
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        // LaTeXOnline expects the data as a standard FormData object
+        const formData = new FormData();
+        formData.append("text", latexString);
+        formData.append("command", "pdflatex");
+
+        const response = await fetch(url, {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error(`Server returned ${response.status}`);
+        }
+
+        // Success! Return the raw PDF binary data
+        return await response.blob();
+      } catch (error) {
+        console.warn(`PDF compilation attempt ${attempt} failed:`, error);
+
+        if (attempt === maxRetries) {
+          throw new Error(
+            "PDF server is currently overloaded. Please try generating again in a minute.",
+          );
+        }
+
+        // Wait 2000ms (2 seconds) before making the next attempt
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+      }
+    }
+
+    throw new Error("Compilation failed.");
+  };
+
   const runPipeline = async () => {
     setPhase("running");
     setStepIndex(0);
@@ -165,6 +203,10 @@ export default function Index() {
       // Step 5: Compiling downloadable PDF
       // ------------------------------------------------
       setStepIndex(4);
+      const pdfBlob = await compilePdfWithRetry(finalLatexData.latex, 3);
+      // Format a clean filename using the user's actual name
+      const safeName = data.personal.fullName.replace(/\s+/g, "-") || "Optimized";
+      triggerDownload(pdfBlob, `${safeName}-Resume.pdf`);
 
       setPhase("done");
       toast.success("Resume optimized and LaTeX generated!");
