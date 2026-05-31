@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import {
   Check,
   Copy,
   Download,
   FileText,
   FileCode,
+  List,
+  Hash,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
