@@ -83,9 +83,9 @@ export default function Index() {
     
     try {
       // ------------------------------------------------
-      // Phase 1: Tailor the Resume Content
+      // Step 1: Rewriting for maximum impact
       // ------------------------------------------------
-      
+      setStepIndex(0);
       const tailorResponse = await fetch("/api/tailor", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -105,12 +105,20 @@ export default function Index() {
       }
       const tailoredData = await tailorResponse.json();
 
+      // ------------------------------------------------
+      // Step 2: Structuring initial document
+      // ------------------------------------------------
       setStepIndex(1);
 
       // ------------------------------------------------
-      // Phase 2: Generate the LaTeX Code
+      // Step 3: Critiquing alignment & layout
       // ------------------------------------------------
-    
+      setStepIndex(2);
+
+      // ------------------------------------------------
+      // Step 4: Generate the LaTeX Code
+      // ------------------------------------------------
+      setStepIndex(3);
       const latexResponse = await fetch("/api/latex", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -129,9 +137,12 @@ export default function Index() {
       }
 
       const latexData = await latexResponse.json();
-      setLatex(latexData.latex); 
-      
-      setStepIndex(2);
+      setLatex(latexData.latex);
+
+      // ------------------------------------------------
+      // Step 5: Compiling downloadable PDF
+      // ------------------------------------------------
+      setStepIndex(4);
 
       setPhase("done");
       toast.success("Resume optimized and LaTeX generated!");

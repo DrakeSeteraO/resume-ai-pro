@@ -14,9 +14,11 @@ import type { ProfileData } from "@/lib/resume-types";
 export type PipelinePhase = "idle" | "running" | "done";
 
 const STEPS = [
-  { id: "parse", label: "Parsing profile text" },
-  { id: "structure", label: "Structuring information into categories" },
-  { id: "tailor", label: "Tailoring LaTeX template to job keywords" },
+  { id: "rewrite", label: "Rewriting for maximum impact..." },
+  { id: "structure", label: "Structuring initial document..." },
+  { id: "critique", label: "Critiquing alignment & layout..." },
+  { id: "optimize", label: "Injecting final optimizations..." },
+  { id: "compile", label: "Compiling downloadable PDF..." },
 ];
 
 export function OutputPanel({
