@@ -5,6 +5,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Optional
 import google.generativeai as genai
+import requests
+from fastapi.responses import Response
 
 # Initialize FastAPI App
 app = FastAPI()
@@ -97,6 +99,9 @@ class RevisePayload(BaseModel):
     profile: ProfilePayload
     latex_string: str
     improvements: List[str]
+    
+class PdfPayload(BaseModel):
+    latex_string: str
 
 # ==========================================
 # 2. DEFINE THE BACKEND AI EXECUTION ROUTE
@@ -338,3 +343,26 @@ async def revise_latex(payload: RevisePayload):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Revision Generation Error: {str(e)}")
+    
+
+# ==========================================
+# 5. Convert LaTeX to PDF
+# ==========================================
+@app.post("/api/pdf")
+async def generate_pdf_proxy(payload: PdfPayload):
+    try:
+        # Python sends the request to LaTeXOnline, bypassing browser CORS rules
+        response = requests.post(
+            "https://latexonline.cc/compile",
+            data={"text": payload.latex_string, "command": "pdflatex"},
+            timeout=15 # Don't wait forever if their server is down
+        )
+        
+        if response.status_code == 200:
+            # Return the raw PDF bytes back to the React frontend
+            return Response(content=response.content, media_type="application/pdf")
+        else:
+            raise HTTPException(status_code=502, detail="LaTeXOnline server failed to compile the PDF.")
+            
+    except requests.exceptions.RequestException as e:
+        raise HTTPException(status_code=503, detail=f"Failed to connect to LaTeXOnline: {str(e)}")
