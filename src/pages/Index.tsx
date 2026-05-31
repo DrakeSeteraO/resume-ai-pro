@@ -34,6 +34,11 @@ import { Toaster } from "@/components/ui/sonner";
 import { ProfileEditor } from "@/components/resume/ProfileEditor";
 import { JobTarget } from "@/components/resume/JobTarget";
 import { OutputPanel, type PipelinePhase } from "@/components/resume/OutputPanel";
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable";
 import { emptyProfile, sampleProfile, type ProfileData } from "@/lib/resume-types";
 import { generateLatex } from "@/lib/latex-generator";
 import { SelectPortal } from "@radix-ui/react-select";
