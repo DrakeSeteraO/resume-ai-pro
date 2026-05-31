@@ -34,11 +34,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { ProfileEditor } from "@/components/resume/ProfileEditor";
 import { JobTarget } from "@/components/resume/JobTarget";
 import { OutputPanel, type PipelinePhase } from "@/components/resume/OutputPanel";
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-} from "@/components/ui/resizable";
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import { emptyProfile, sampleProfile, type ProfileData } from "@/lib/resume-types";
 import { generateLatex } from "@/lib/latex-generator";
 import { SelectPortal } from "@radix-ui/react-select";
@@ -82,10 +78,10 @@ export default function Index() {
     }
   };
 
- const runPipeline = async () => {
+  const runPipeline = async () => {
     setPhase("running");
-    setStepIndex(0); 
-    
+    setStepIndex(0);
+
     try {
       // ------------------------------------------------
       // Step 1: Rewriting for maximum impact
@@ -137,12 +133,23 @@ export default function Index() {
       // Step 3: Critiquing alignment & layout
       // ------------------------------------------------
       setStepIndex(2);
+      const critiqueResponse = await fetch("/api/critique", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          profile: tailoredData, // The JSON from Agent 1
+          latex_string: latexData.latex, // The String from Agent 2
+        }),
+      });
+
+      const critiqueData = await critiqueResponse.json();
+      console.log(critiqueData.improvements); // An array of your AI's suggested fixes!
 
       // ------------------------------------------------
       // Step 4: Generate the LaTeX Code
       // ------------------------------------------------
       setStepIndex(3);
-      
+
       setLatex(latexData.latex);
 
       // ------------------------------------------------
@@ -152,7 +159,6 @@ export default function Index() {
 
       setPhase("done");
       toast.success("Resume optimized and LaTeX generated!");
-      
     } catch (error) {
       console.error("AI Pipeline Error:", error);
       toast.error(`Pipeline Error: ${error instanceof Error ? error.message : "Check console"}`);
@@ -295,81 +301,81 @@ function LeftPane({
 }) {
   return (
     <section className="flex h-full min-h-0 flex-col border-r">
-          <div className="flex items-center justify-between gap-2 border-b bg-muted/30 px-5 py-2.5">
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <span className="font-medium text-foreground">Data portability</span>
-              <span>· client-side, never uploaded</span>
-            </div>
-            <div className="flex gap-1.5">
-              <input
-                ref={fileRef}
-                type="file"
-                accept=".json"
-                className="hidden"
-                onChange={(e) => {
-                  const f = e.target.files?.[0];
-                  if (f) importFile(f);
-                  e.target.value = "";
-                }}
-              />
-              <Button variant="outline" size="sm" onClick={() => fileRef.current?.click()}>
-                <Upload className="h-3.5 w-3.5" /> Import
+      <div className="flex items-center justify-between gap-2 border-b bg-muted/30 px-5 py-2.5">
+        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+          <span className="font-medium text-foreground">Data portability</span>
+          <span>· client-side, never uploaded</span>
+        </div>
+        <div className="flex gap-1.5">
+          <input
+            ref={fileRef}
+            type="file"
+            accept=".json"
+            className="hidden"
+            onChange={(e) => {
+              const f = e.target.files?.[0];
+              if (f) importFile(f);
+              e.target.value = "";
+            }}
+          />
+          <Button variant="outline" size="sm" onClick={() => fileRef.current?.click()}>
+            <Upload className="h-3.5 w-3.5" /> Import
+          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="sm">
+                <Download className="h-3.5 w-3.5" /> Export
               </Button>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline" size="sm">
-                    <Download className="h-3.5 w-3.5" /> Export
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-44">
-                  <DropdownMenuItem onClick={exportJson}>
-                    <FileJson className="h-4 w-4" /> Export as JSON
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-          </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-44">
+              <DropdownMenuItem onClick={exportJson}>
+                <FileJson className="h-4 w-4" /> Export as JSON
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+      </div>
 
-          <div className="min-h-0 flex-1 overflow-y-auto">
-            <Tabs defaultValue="profile" className="flex h-full flex-col">
-              <div className="sticky top-0 z-10 border-b bg-background px-5 pt-4">
-                <TabsList className="grid w-full max-w-sm grid-cols-2">
-                  <TabsTrigger value="profile" className="gap-2">
-                    <UserRound className="h-3.5 w-3.5" /> Profile
-                  </TabsTrigger>
-                  <TabsTrigger value="job" className="gap-2">
-                    <Target className="h-3.5 w-3.5" /> Job target
-                  </TabsTrigger>
-                </TabsList>
-              </div>
-              <TabsContent value="profile" className="m-0 px-5 py-5">
-                <ProfileEditor data={data} setData={update} />
-              </TabsContent>
-              <TabsContent value="job" className="m-0 px-5 py-5">
-                <JobTarget data={data} setData={update} />
-              </TabsContent>
-            </Tabs>
+      <div className="min-h-0 flex-1 overflow-y-auto">
+        <Tabs defaultValue="profile" className="flex h-full flex-col">
+          <div className="sticky top-0 z-10 border-b bg-background px-5 pt-4">
+            <TabsList className="grid w-full max-w-sm grid-cols-2">
+              <TabsTrigger value="profile" className="gap-2">
+                <UserRound className="h-3.5 w-3.5" /> Profile
+              </TabsTrigger>
+              <TabsTrigger value="job" className="gap-2">
+                <Target className="h-3.5 w-3.5" /> Job target
+              </TabsTrigger>
+            </TabsList>
           </div>
+          <TabsContent value="profile" className="m-0 px-5 py-5">
+            <ProfileEditor data={data} setData={update} />
+          </TabsContent>
+          <TabsContent value="job" className="m-0 px-5 py-5">
+            <JobTarget data={data} setData={update} />
+          </TabsContent>
+        </Tabs>
+      </div>
 
-          <div className="border-t bg-card/60 p-4 backdrop-blur">
-            <Button
-              size="lg"
-              className="w-full gap-2 text-sm font-semibold shadow-elevated"
-              onClick={runPipeline}
-              disabled={phase === "running"}
-            >
-              <Wand2 className="h-4 w-4" />
-              {phase === "running"
-                ? "Optimizing…"
-                : phase === "done"
-                  ? "Regenerate LaTeX resume"
-                  : "Optimize & generate LaTeX resume"}
-            </Button>
-            <p className="mt-2 text-center text-[11px] text-muted-foreground">
-              Runs a dual-endpoint pipeline: parse → structure → tailor.
-            </p>
-          </div>
-        </section>
+      <div className="border-t bg-card/60 p-4 backdrop-blur">
+        <Button
+          size="lg"
+          className="w-full gap-2 text-sm font-semibold shadow-elevated"
+          onClick={runPipeline}
+          disabled={phase === "running"}
+        >
+          <Wand2 className="h-4 w-4" />
+          {phase === "running"
+            ? "Optimizing…"
+            : phase === "done"
+              ? "Regenerate LaTeX resume"
+              : "Optimize & generate LaTeX resume"}
+        </Button>
+        <p className="mt-2 text-center text-[11px] text-muted-foreground">
+          Runs a dual-endpoint pipeline: parse → structure → tailor.
+        </p>
+      </div>
+    </section>
   );
 }
 
