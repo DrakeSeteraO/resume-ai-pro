@@ -351,18 +351,24 @@ async def revise_latex(payload: RevisePayload):
 @app.post("/api/pdf")
 async def generate_pdf_proxy(payload: PdfPayload):
     try:
-        # Python sends the request to LaTeXOnline, bypassing browser CORS rules
-        response = requests.post(
+        # We use requests.get and 'params' to force the data into the URL string 
+        # exactly how the LaTeXOnline documentation specifies.
+        response = requests.get(
             "https://latexonline.cc/compile",
-            data={"text": payload.latex_string, "command": "pdflatex"},
-            timeout=15 # Don't wait forever if their server is down
+            params={
+                "text": payload.latex_string, 
+                "command": "pdflatex"
+            },
+            timeout=30 # Increased timeout since compiling can take a few seconds
         )
         
         if response.status_code == 200:
             # Return the raw PDF bytes back to the React frontend
             return Response(content=response.content, media_type="application/pdf")
         else:
-            raise HTTPException(status_code=502, detail="LaTeXOnline server failed to compile the PDF.")
+            # If LaTeXOnline returns a 400 error, their compile log is in the response body
+            error_message = response.text if response.text else "LaTeXOnline server failed to compile the PDF."
+            raise HTTPException(status_code=502, detail=error_message)
             
     except requests.exceptions.RequestException as e:
         raise HTTPException(status_code=503, detail=f"Failed to connect to LaTeXOnline: {str(e)}")
