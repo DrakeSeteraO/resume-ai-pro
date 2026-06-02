@@ -282,14 +282,33 @@ async def critique_resume(payload: CritiquePayload):
 # ==========================================
 # 4. THE REVISION ROUTE (FINAL LATEX GENERATION)
 # ==========================================
+def validate_latex_syntax(latex_code: str) -> dict:
+    """
+    A tool to validate that the generated LaTeX code does not have missing environments.
+    Call this tool to check your code before returning the final response.
+    """
+    begin_count = latex_code.count(r'\begin{')
+    end_count = latex_code.count(r'\end{')
+    
+    if begin_count == end_count:
+        return {"status": "SUCCESS", "message": "All LaTeX environments are properly closed."}
+    else:
+        return {
+            "status": "ERROR", 
+            "message": f"Syntax Mismatch: Found {begin_count} '\\begin' tags but {end_count} '\\end' tags. Please fix the missing tags."
+        }
+
 @app.post("/api/revise")
 async def revise_latex(payload: RevisePayload):
     if not GEMINI_API_KEY:
         raise HTTPException(status_code=500, detail="Gemini API Key missing on server.")
         
     try:
-        # Use Gemini 3.1 flash lite for quick specific tasks that don't require much creativitiy
-        model = genai.GenerativeModel('gemini-3.1-flash-lite')
+        # 1. Initialize the model and pass the tool!
+        model = genai.GenerativeModel(
+            model_name='gemini-3.1-flash-lite',
+            tools=[validate_latex_syntax] # <-- Here is the magic
+        )
         
         user_data_string = json.dumps(payload.profile.dict(), indent=2)
         improvements_string = "\n".join([f"- {imp}" for imp in payload.improvements])
@@ -307,25 +326,19 @@ async def revise_latex(payload: RevisePayload):
         REQUESTED IMPROVEMENTS TO APPLY:
         {improvements_string}
         
-        CRITICAL COMPILATION RULES - READ CAREFULLY:
+        CRITICAL COMPILATION RULES:
         1. Apply the requested improvements to the text, but DO NOT break the LaTeX structure.
-        2. ESCAPE ALL SPECIAL CHARACTERS: 
-           - Ampersands (&) MUST become \\& 
-           - Percentages (%) MUST become \\% 
-           - Hashes (#) MUST become \\# 
-           - Dollars ($) MUST become \\$
-           - Underscores (_) MUST become \\_
-        3. Output ONLY raw LaTeX. Start exactly with \\documentclass and end with \\end{{document}}.
-        
-        Return the completely updated, valid LaTeX string. Do not wrap the output in markdown code blocks.
+        2. ESCAPE ALL SPECIAL CHARACTERS (&, %, #, $, _).
+        3. You MUST use the `validate_latex_syntax` tool to check your code before you finish. If it returns an error, fix your code.
+        4. Output ONLY raw LaTeX. Start exactly with \\documentclass and end with \\end{{document}}.
         """
         
-        # Use temperature 0.1 to balance applying text changes while strictly adhering to LaTeX syntax
-        response = model.generate_content(
+        # 2. Start an autonomous chat session so the agent can loop if the tool returns an error
+        chat = model.start_chat(enable_automatic_function_calling=True)
+        
+        response = chat.send_message(
             prompt,
-            generation_config=genai.GenerationConfig(
-                temperature=0.1 
-            )
+            generation_config=genai.GenerationConfig(temperature=0.1)
         )
         
         latex_text = response.text
