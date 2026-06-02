@@ -1,0 +1,155 @@
+{
+  "files_in_context": [
+    {
+      "path": "src/styles.css",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1779851983001,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "src/styles.css",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1779851983001,
+      "cline_edit_date": null,
+      "user_edit_date": 1779851987596
+    },
+    {
+      "path": "/home/oakleypaws/Generative_AI/resume-ai-pro/src/styles.css",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1779852113631,
+      "cline_edit_date": 1779852113631,
+      "user_edit_date": null
+    },
+    {
+      "path": "src/styles.css",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1779852200483,
+      "cline_edit_date": null,
+      "user_edit_date": 1779851987596
+    },
+    {
+      "path": "src/styles.css",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1779852200483,
+      "cline_edit_date": null,
+      "user_edit_date": 1779852204141
+    },
+    {
+      "path": "/home/oakleypaws/Generative_AI/resume-ai-pro/src/styles.css",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1779852207912,
+      "cline_edit_date": 1779852207912,
+      "user_edit_date": null
+    },
+    {
+      "path": "src/styles.css",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1779852200483,
+      "cline_edit_date": null,
+      "user_edit_date": 1779852349581
+    },
+    {
+      "path": "src/styles.css",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1779852406391,
+      "cline_edit_date": null,
+      "user_edit_date": 1779852349581
+    },
+    {
+      "path": "src/styles.css",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1779852406391,
+      "cline_edit_date": null,
+      "user_edit_date": 1779852410910
+    },
+    {
+      "path": "src/styles.css",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1779852406391,
+      "cline_edit_date": null,
+      "user_edit_date": 1779852412239
+    },
+    {
+      "path": "/home/oakleypaws/Generative_AI/resume-ai-pro/src/styles.css",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1779852415224,
+      "cline_edit_date": 1779852415224,
+      "user_edit_date": null
+    },
+    {
+      "path": "src/styles.css",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1779852406391,
+      "cline_edit_date": null,
+      "user_edit_date": 1779853316657
+    },
+    {
+      "path": "/home/oakleypaws/Generative_AI/resume-ai-pro/src/styles.css",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1779852415224,
+      "cline_edit_date": 1779852415224,
+      "user_edit_date": 1779853317789
+    },
+    {
+      "path": "/home/oakleypaws/Generative_AI/resume-ai-pro/src/styles.css",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1779852415224,
+      "cline_edit_date": 1779852415224,
+      "user_edit_date": 1779853517423
+    },
+    {
+      "path": "/home/oakleypaws/Generative_AI/resume-ai-pro/src/styles.css",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1779852415224,
+      "cline_edit_date": 1779852415224,
+      "user_edit_date": 1779853524903
+    },
+    {
+      "path": "src/styles.css",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1779852406391,
+      "cline_edit_date": null,
+      "user_edit_date": 1779853536206
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1779851974747,
+      "model_id": "gemini-2.5-flash",
+      "model_provider_id": "gemini",
+      "mode": "act"
+    }
+  ],
+  "environment_history": [
+    {
+      "ts": 1779851974745,
+      "os_name": "linux",
+      "os_version": "6.6.87.2-microsoft-standard-WSL2",
+      "os_arch": "x64",
+      "host_name": "Visual Studio Code",
+      "host_version": "1.121.0",
+      "cline_version": "3.85.0"
+    }
+  ]
+}"1.121.0",
+      "cline_version": "3.85.0"
+    }
+  ]
+}

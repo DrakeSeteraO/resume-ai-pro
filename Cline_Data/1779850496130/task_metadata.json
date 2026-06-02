@@ -1,0 +1,61 @@
+{
+  "files_in_context": [
+    {
+      "path": "src/styles.css",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1779850600255,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "src/styles.css",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1779850600255,
+      "cline_edit_date": null,
+      "user_edit_date": 1779851236347
+    },
+    {
+      "path": "/home/oakleypaws/Generative_AI/resume-ai-pro/src/styles.css",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1779851449945,
+      "cline_edit_date": 1779851449945,
+      "user_edit_date": null
+    },
+    {
+      "path": "src/styles.css",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1779851454655,
+      "cline_edit_date": null,
+      "user_edit_date": 1779851236347
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1779850496188,
+      "model_id": "gemini-3.1-pro-preview",
+      "model_provider_id": "gemini",
+      "mode": "act"
+    },
+    {
+      "ts": 1779850597986,
+      "model_id": "gemini-2.5-flash",
+      "model_provider_id": "gemini",
+      "mode": "act"
+    }
+  ],
+  "environment_history": [
+    {
+      "ts": 1779850496184,
+      "os_name": "linux",
+      "os_version": "6.6.87.2-microsoft-standard-WSL2",
+      "os_arch": "x64",
+      "host_name": "Visual Studio Code",
+      "host_version": "1.121.0",
+      "cline_version": "3.85.0"
+    }
+  ]
+}
