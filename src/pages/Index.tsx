@@ -136,6 +136,7 @@ export default function Index() {
         throw new Error(errorMessage);
       }
       const tailoredData = await tailorResponse.json();
+      console.log("✅ Stage 1 - Tailored Profile Data:", tailoredData);
 
       // ------------------------------------------------
       // Step 2: Structuring initial document
@@ -159,6 +160,7 @@ export default function Index() {
       }
 
       const latexData = await latexResponse.json();
+      console.log("✅ Stage 2 - Initial LaTeX Code:", latexData);
 
       // ------------------------------------------------
       // Step 3: Critiquing alignment & layout
@@ -174,7 +176,7 @@ export default function Index() {
       });
 
       const critiqueData = await critiqueResponse.json();
-      console.log(critiqueData.improvements); // An array of your AI's suggested fixes!
+     console.log("✅ Stage 3 - Critique & Improvements:", critiqueData);
 
       // ------------------------------------------------
       // Step 4: Generate the LaTeX Code
@@ -191,6 +193,7 @@ export default function Index() {
       });
       const finalLatexData = await reviseResponse.json();
       setLatex(finalLatexData.latex);
+      console.log("✅ Stage 4 - Final Revised LaTeX:", finalLatexData);
 
       // ------------------------------------------------
       // Step 5: Compiling downloadable PDF
@@ -199,6 +202,7 @@ export default function Index() {
       setPdfError(null);
       try {
         const pdfBlob = await compilePdfWithRetry(finalLatexData.latex, 3);
+        console.log(`✅ Stage 5 - PDF Compilation Successful (Size: ${pdfBlob.size} bytes)`);
         // Convert the Blob into a temporary local URL
         const localPdfUrl = URL.createObjectURL(pdfBlob);
         setPdfUrl(localPdfUrl);
@@ -208,18 +212,18 @@ export default function Index() {
       } catch (pdfErr) {
         const message = pdfErr instanceof Error ? pdfErr.message : "PDF compilation failed.";
         console.error("PDF compilation failed:", pdfErr);
+        console.error("❌ PDF compilation failed:", pdfErr);
         setPdfError(message);
         setPhase("done");
         toast.error(`PDF compile failed: ${message}`);
       }
     } catch (error) {
-      console.error("AI Pipeline Error:", error);
+      console.error("❌ AI Pipeline Error:", error);
       toast.error(`Pipeline Error: ${error instanceof Error ? error.message : "Check console"}`);
       setPhase("idle");
     }
   };
 
-  console.log("Current ProfileData Structure:", data);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
