@@ -28,14 +28,15 @@ if GEMINI_API_KEY:
     genai.configure(api_key=GEMINI_API_KEY)
 
 # ==========================================
-# 1. MATCH THE FRONTEND INCOMING PAYLOAD
+# 1. FASTAPI INCOMING SCHEMAS (With Defaults)
 # ==========================================
+# These models handle the incoming request from the frontend and prevent 422 crashes.
 class Personal(BaseModel):
     fullName: str
     email: str
     phone: str
     location: str
-    website: str
+    website: Optional[str] = ""
 
 class EducationItem(BaseModel):
     id: str
@@ -44,7 +45,7 @@ class EducationItem(BaseModel):
     field: str
     startDate: str
     endDate: str
-    details: str
+    details: Optional[str] = ""
 
 class ExperienceItem(BaseModel):
     id: str
@@ -53,13 +54,13 @@ class ExperienceItem(BaseModel):
     location: str
     startDate: str
     endDate: str
-    bullets: str # Lovable formats bullets as a newline-separated string (\n)
+    bullets: str 
 
 class ProjectItem(BaseModel):
     id: str
     name: str
     stack: str
-    link: str
+    link: Optional[str] = ""
     description: str
 
 class CertificateItem(BaseModel):
@@ -67,30 +68,30 @@ class CertificateItem(BaseModel):
     name: str
     issuer: str
     date: str
-    link: str
+    link: Optional[str] = ""
 
 class PublicationItem(BaseModel):
     id: str
     title: str
     venue: str
     date: str
-    link: str
-    description: str
+    link: Optional[str] = ""
+    description: Optional[str] = ""
 
 class TargetJob(BaseModel):
-    company: str
-    role: str
+    company: Optional[str] = ""
+    role: Optional[str] = ""
     jobDescription: str
 
 class ProfilePayload(BaseModel):
     personal: Personal
-    narrative: str
-    education: List[EducationItem]
-    experience: List[ExperienceItem]
-    projects: List[ProjectItem]
-    skills: List[str]
-    certificates: List[CertificateItem]
-    publications: List[PublicationItem]
+    narrative: Optional[str] = ""
+    education: List[EducationItem] = []
+    experience: List[ExperienceItem] = []
+    projects: List[ProjectItem] = []
+    skills: List[str] = []
+    certificates: List[CertificateItem] = []
+    publications: List[PublicationItem] = []
     target: TargetJob
 
 class CritiquePayload(BaseModel):
@@ -105,6 +106,69 @@ class RevisePayload(BaseModel):
 class PdfPayload(BaseModel):
     latex_string: str
 
+
+# ==========================================
+# 1.5 GEMINI STRICT SCHEMAS (No Defaults)
+# ==========================================
+# These models are used strictly to force Gemini to output perfect JSON.
+class GeminiPersonal(BaseModel):
+    fullName: str
+    email: str
+    phone: str
+    location: str
+    website: str
+class GeminiEducation(BaseModel):
+    id: str
+    school: str
+    degree: str
+    field: str
+    startDate: str
+    endDate: str
+    details: str
+class GeminiExperience(BaseModel):
+    id: str
+    company: str
+    role: str
+    location: str
+    startDate: str
+    endDate: str
+    bullets: str
+class GeminiProject(BaseModel):
+    id: str
+    name: str
+    stack: str
+    link: str
+    description: str
+class GeminiCertificate(BaseModel):
+    id: str
+    name: str
+    issuer: str
+    date: str
+    link: str
+class GeminiPublication(BaseModel):
+    id: str
+    title: str
+    venue: str
+    date: str
+    link: str
+    description: str
+class GeminiTarget(BaseModel):
+    company: str
+    role: str
+    jobDescription: str
+
+class StrictProfileSchema(BaseModel):
+    personal: GeminiPersonal
+    narrative: str
+    education: List[GeminiEducation]
+    experience: List[GeminiExperience]
+    projects: List[GeminiProject]
+    skills: List[str]
+    certificates: List[GeminiCertificate]
+    publications: List[GeminiPublication]
+    target: GeminiTarget
+
+
 # ==========================================
 # 2. DEFINE THE BACKEND AI EXECUTION ROUTE
 # ==========================================
@@ -114,13 +178,10 @@ async def tailor_resume(payload: ProfilePayload):
         raise HTTPException(status_code=500, detail="Gemini API Key missing on server configuration.")
         
     try:
-        # Use Gemini 3.1 flash lite for quick basic modifications
         model = genai.GenerativeModel('gemini-3.1-flash-lite')
         
-        # Serialize incoming payload back to a clean JSON string for the prompt
         user_data_string = json.dumps(payload.dict(), indent=2)
         
-        # System instructions engineered for high-impact professional metrics
         prompt = f"""
         You are an elite executive resume writer specializing in passing Applicant Tracking Systems (ATS) and catching FAANG recruiter attention.
         
@@ -132,30 +193,28 @@ async def tailor_resume(payload: ProfilePayload):
         \"\"\"{payload.target.jobDescription}\"\"\"
 
         CRITICAL REWRITING INSTRUCTIONS:
-        1. **Make all of the writing sound like a human made it. All of your modifications to the data should be expertly worded to sound amazing on a resume.
-        2. **The Narrative / Summary**: Rewrite it into a 2-3 sentence powerhouse summary emphasizing years of experience, core technical masteries, and specific value relevant to the target job description. 
-        3. **Experience Bullets**: Rewrite the 'bullets' block of each experience item. Use Google's structural X-Y-Z resume formula: "Accomplished [X] as measured by [Y], by doing [Z]". Use aggressive, dynamic action verbs (e.g., Architected, Optimized, Pioneered). Infuse hard numerical metrics wherever logically possible.
-        4. **Project Descriptions**: Rewrite the project descriptions to read like high-impact corporate shipping metrics instead of passive hobby descriptions.
-        5. **Keyword Matching**: Naturally weave in technical terms, frameworks, soft skills, and specific tools mentioned in the target job description.
-        6. **Strict Constraint**: Do not change names, dates, companies, urls, ids, or school names. Do not invent completely fake positions. Maintain the exact JSON key layout.
+        1. Make all of the writing sound like a human made it. All of your modifications to the data should be expertly worded to sound amazing on a resume.
+        2. The Narrative / Summary: Rewrite it into a 2-3 sentence powerhouse summary emphasizing years of experience, core technical masteries, and specific value relevant to the target job description. 
+        3. Experience Bullets: Rewrite the 'bullets' block of each experience item. Use Google's structural X-Y-Z resume formula: "Accomplished [X] as measured by [Y], by doing [Z]". Use aggressive, dynamic action verbs. Infuse hard numerical metrics wherever logically possible.
+        4. Project Descriptions: Rewrite the project descriptions to read like high-impact corporate shipping metrics instead of passive hobby descriptions.
+        5. Keyword Matching: Naturally weave in technical terms, frameworks, soft skills, and specific tools mentioned in the target job description.
+        6. Strict Constraint: Do not change names, dates, companies, urls, ids, or school names. Do not invent completely fake positions. Maintain the exact JSON key layout.
         
-        Return your response ONLY as a valid, parsable JSON object matching the input data structure. Do not wrap it in markdown code blocks (` ```json `), just raw JSON.
+        Return your response ONLY as a valid, parsable JSON object. Do not wrap it in markdown code blocks.
 
         Input Data to Modify:
         {user_data_string}
         """
         
-        # We enforce JSON output structure directly from Gemini
         response = model.generate_content(
             prompt,
             generation_config=genai.GenerationConfig(
                 response_mime_type="application/json",
-                response_schema=ProfilePayload,
+                response_schema=StrictProfileSchema, # <-- Magic Bullet: Forces perfect JSON without crashing FastAPI
                 temperature=0.3
             )
         )
         
-        # Parse the AI response string safely back into a native Python dict
         tailored_data = json.loads(response.text)
         return tailored_data
 
@@ -163,7 +222,6 @@ async def tailor_resume(payload: ProfilePayload):
         raise HTTPException(status_code=502, detail="AI returned invalid or malformed JSON syntax.")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Pipeline Processing Error: {str(e)}")
-
 
 # ... (Keep everything above this exactly the same) ...
 
