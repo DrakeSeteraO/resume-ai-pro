@@ -35,7 +35,7 @@ class Personal(BaseModel):
     email: str
     phone: str
     location: str
-    website: Optional[str] = ""
+    website: str
 
 class EducationItem(BaseModel):
     id: str
@@ -44,7 +44,7 @@ class EducationItem(BaseModel):
     field: str
     startDate: str
     endDate: str
-    details: Optional[str] = ""
+    details: str
 
 class ExperienceItem(BaseModel):
     id: str
@@ -59,7 +59,7 @@ class ProjectItem(BaseModel):
     id: str
     name: str
     stack: str
-    link: Optional[str] = ""
+    link: str
     description: str
 
 class CertificateItem(BaseModel):
@@ -67,15 +67,15 @@ class CertificateItem(BaseModel):
     name: str
     issuer: str
     date: str
-    link: Optional[str] = ""
+    link: str
 
 class PublicationItem(BaseModel):
     id: str
     title: str
     venue: str
     date: str
-    link: Optional[str] = ""
-    description: Optional[str] = ""
+    link: str
+    description: str
 
 class TargetJob(BaseModel):
     company: str
@@ -85,12 +85,12 @@ class TargetJob(BaseModel):
 class ProfilePayload(BaseModel):
     personal: Personal
     narrative: str
-    education: List[EducationItem] = []
-    experience: List[ExperienceItem] = []
-    projects: List[ProjectItem] = []
-    skills: List[str] = []
-    certificates: List[CertificateItem] = []
-    publications: List[PublicationItem] = []
+    education: List[EducationItem]
+    experience: List[ExperienceItem]
+    projects: List[ProjectItem]
+    skills: List[str]
+    certificates: List[CertificateItem]
+    publications: List[PublicationItem]
     target: TargetJob
 
 class CritiquePayload(BaseModel):
