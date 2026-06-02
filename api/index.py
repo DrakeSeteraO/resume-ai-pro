@@ -31,60 +31,62 @@ if GEMINI_API_KEY:
 # 1. FASTAPI INCOMING SCHEMAS (With Defaults)
 # ==========================================
 # These models handle the incoming request from the frontend and prevent 422 crashes.
+# Every single field is Optional so FastAPI never crashes on missing data.
+
 class Personal(BaseModel):
-    fullName: str
-    email: str
-    phone: str
-    location: str
+    fullName: Optional[str] = ""
+    email: Optional[str] = ""
+    phone: Optional[str] = ""
+    location: Optional[str] = ""
     website: Optional[str] = ""
 
 class EducationItem(BaseModel):
-    id: str
-    school: str
-    degree: str
-    field: str
-    startDate: str
-    endDate: str
+    id: Optional[str] = ""
+    school: Optional[str] = ""
+    degree: Optional[str] = ""
+    field: Optional[str] = ""
+    startDate: Optional[str] = ""
+    endDate: Optional[str] = ""
     details: Optional[str] = ""
 
 class ExperienceItem(BaseModel):
-    id: str
-    company: str
-    role: str
-    location: str
-    startDate: str
-    endDate: str
-    bullets: str 
+    id: Optional[str] = ""
+    company: Optional[str] = ""
+    role: Optional[str] = ""
+    location: Optional[str] = ""
+    startDate: Optional[str] = ""
+    endDate: Optional[str] = ""
+    bullets: Optional[str] = ""
 
 class ProjectItem(BaseModel):
-    id: str
-    name: str
-    stack: str
+    id: Optional[str] = ""
+    name: Optional[str] = ""
+    stack: Optional[str] = ""
     link: Optional[str] = ""
-    description: str
+    description: Optional[str] = ""
 
 class CertificateItem(BaseModel):
-    id: str
-    name: str
-    issuer: str
-    date: str
+    id: Optional[str] = ""
+    name: Optional[str] = ""
+    issuer: Optional[str] = ""
+    date: Optional[str] = ""
     link: Optional[str] = ""
 
 class PublicationItem(BaseModel):
-    id: str
-    title: str
-    venue: str
-    date: str
+    id: Optional[str] = ""
+    title: Optional[str] = ""
+    venue: Optional[str] = ""
+    date: Optional[str] = ""
     link: Optional[str] = ""
     description: Optional[str] = ""
 
 class TargetJob(BaseModel):
     company: Optional[str] = ""
     role: Optional[str] = ""
-    jobDescription: str
+    jobDescription: Optional[str] = ""
 
 class ProfilePayload(BaseModel):
-    personal: Personal
+    personal: Optional[Personal] = Personal()
     narrative: Optional[str] = ""
     education: List[EducationItem] = []
     experience: List[ExperienceItem] = []
@@ -92,7 +94,7 @@ class ProfilePayload(BaseModel):
     skills: List[str] = []
     certificates: List[CertificateItem] = []
     publications: List[PublicationItem] = []
-    target: TargetJob
+    target: Optional[TargetJob] = TargetJob()
 
 class CritiquePayload(BaseModel):
     profile: ProfilePayload
