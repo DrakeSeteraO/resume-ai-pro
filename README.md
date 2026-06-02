@@ -3,7 +3,7 @@
 **Author:** Drake Setera  
 **Institution:** Grand Valley State University  
 
-🔗 **Live Application URL:** `[https://ultra-cv.vercel.app/](https://ultra-cv.vercel.app/)`  
+🔗 **Live Application URL:** `(https://ultra-cv.vercel.app/)[https://ultra-cv.vercel.app/]`  
 *(Reviewers: Please test the live pipeline via the link above)*
 
 ---
