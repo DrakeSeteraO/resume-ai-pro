@@ -29,8 +29,8 @@ The pipeline abandons basic prompt-based string parsing in favor of true agentic
 
 ### 2. Dynamic Model Routing (Architecture, Not Temperature)
 To optimize for both computational quality and infrastructure constraints, tasks are dynamically routed to distinct models based on reasoning requirements—moving beyond mere temperature tuning:
-* **`gemini-1.5-flash`:** Routed exclusively for the Tailoring and Formatting phases. Its advanced reasoning engine is required to prevent "Template Collapse" and LLM hallucination, ensuring non-traditional experience is accurately preserved rather than overwritten by generic placeholder data.
-* **`gemini-3.1-flash-lite`:** Routed for the ATS Audit and Revision phases. Because these stages rely on high-volume string matching, critique generation, and repetitive tool execution loops, the Lite model's low-latency architecture ensures the multi-loop workflow remains highly responsive and minimizes token exhaustion.
+* **`gemini-3.5-flash`:** Routed exclusively for the ATS Auditor phase. Its advanced reasoning engine is required to prevent "Template Collapse" and LLM hallucination, ensuring non-traditional experience is accurately preserved rather than overwritten by generic placeholder data. Additionally due to its improved responses compared to Gemini 3.1 Flash Lite it is chosen to be the final revision editor.
+* **`gemini-3.1-flash-lite`:** Routed for the other 3 phases. Because these stages rely on high-volume string matching, critique generation, and repetitive tool execution loops, the Lite model's low-latency architecture ensures the multi-loop workflow remains highly responsive and minimizes token exhaustion. Additionally Gemini 3.1 Flast Lite offers a significantly more generous free tier, so it is utilized wherever possible.
 
 ### 3. Model Context Protocol (MCP) Integration
 To adhere to modern decoupled AI standards, the project features a `mcp_server.py` microservice built with the **FastMCP** framework. This isolates the validation and compilation tools from the core application logic. 
