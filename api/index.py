@@ -112,8 +112,8 @@ async def tailor_resume(payload: ProfilePayload):
         raise HTTPException(status_code=500, detail="Gemini API Key missing on server configuration.")
         
     try:
-        # Use Gemini 2.5 Flash for difficult creative thinking
-        model = genai.GenerativeModel('gemini-2.5-flash')
+        # Use Gemini 3.1 flash lite for quick basic modifications
+        model = genai.GenerativeModel('gemini-3.1-flash-lite')
         
         # Serialize incoming payload back to a clean JSON string for the prompt
         user_data_string = json.dumps(payload.dict(), indent=2)
@@ -222,8 +222,9 @@ async def critique_resume(payload: CritiquePayload):
         raise HTTPException(status_code=500, detail="Gemini API Key missing on server.")
         
     try:
-        # Use Gemini 2.5 Flash for difficult creative thinking
-        model = genai.GenerativeModel('gemini-2.5-flash')
+        # Use Gemini 3.1 Flash Lite for testing
+        # Switch to Gemini 3.5 Flash when finished
+        model = genai.GenerativeModel('gemini-3.1-flash-lite')
         
         user_data_string = json.dumps(payload.profile.dict(), indent=2)
         target_job_string = json.dumps(payload.profile.target.dict(), indent=2)
