@@ -110,68 +110,6 @@ class PdfPayload(BaseModel):
 
 
 # ==========================================
-# 1.5 GEMINI STRICT SCHEMAS (No Defaults)
-# ==========================================
-# These models are used strictly to force Gemini to output perfect JSON.
-class GeminiPersonal(BaseModel):
-    fullName: str
-    email: str
-    phone: str
-    location: str
-    website: str
-class GeminiEducation(BaseModel):
-    id: str
-    school: str
-    degree: str
-    field: str
-    startDate: str
-    endDate: str
-    details: str
-class GeminiExperience(BaseModel):
-    id: str
-    company: str
-    role: str
-    location: str
-    startDate: str
-    endDate: str
-    bullets: str
-class GeminiProject(BaseModel):
-    id: str
-    name: str
-    stack: str
-    link: str
-    description: str
-class GeminiCertificate(BaseModel):
-    id: str
-    name: str
-    issuer: str
-    date: str
-    link: str
-class GeminiPublication(BaseModel):
-    id: str
-    title: str
-    venue: str
-    date: str
-    link: str
-    description: str
-class GeminiTarget(BaseModel):
-    company: str
-    role: str
-    jobDescription: str
-
-class StrictProfileSchema(BaseModel):
-    personal: GeminiPersonal
-    narrative: str
-    education: List[GeminiEducation]
-    experience: List[GeminiExperience]
-    projects: List[GeminiProject]
-    skills: List[str]
-    certificates: List[GeminiCertificate]
-    publications: List[GeminiPublication]
-    target: GeminiTarget
-
-
-# ==========================================
 # 2. DEFINE THE BACKEND AI EXECUTION ROUTE
 # ==========================================
 @app.post("/api/tailor")
