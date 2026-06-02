@@ -53,7 +53,7 @@ Throughout development, several bleeding-edge infrastructure and SDK limitations
 In accordance with academic integrity guidelines, the following outlines the usage of Generative AI tools during the development of this project:
 
 * **Google Gemini:** Utilized as a pair-programming assistant to troubleshoot complex FastAPI/Pydantic validation errors (HTTP 422), architect the decoupled FastMCP microservice structure, and iteratively refine the strict anti-hallucination prompts and JSON mode configurations to prevent "Template Collapse."
-   * Gemini Pro logs can be found here: [chat logs]()
+   * Gemini Pro logs can be found here: [chat logs](https://gemini.google.com/share/4d6d1ecfc974)
 * **Lovable:** Utilized to bootstrap and generate the initial React frontend, UI components, and styling, allowing the primary engineering focus to remain on the complex backend AI orchestration and agentic pipelines.
    * Loveable logs can be found in the `Loveable_Logs` folder 
 * **Cline:** Utilized as an autonomous IDE assistant to help execute structural code changes, manage file routing, and streamline terminal commands during the debugging and deployment workflows.
