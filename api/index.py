@@ -112,7 +112,7 @@ async def tailor_resume(payload: ProfilePayload):
         raise HTTPException(status_code=500, detail="Gemini API Key missing on server configuration.")
         
     try:
-        # Use Gemini 1.5 Flash for rapid text transformation cycles
+        # Use Gemini 2.5 Flash for difficult creative thinking
         model = genai.GenerativeModel('gemini-2.5-flash')
         
         # Serialize incoming payload back to a clean JSON string for the prompt
@@ -170,6 +170,7 @@ async def generate_latex(payload: ProfilePayload):
         raise HTTPException(status_code=500, detail="Gemini API Key missing on server.")
         
     try:
+        # Use Gemini 3.1 flash lite for quick specific tasks that don't require much creativitiy
         model = genai.GenerativeModel('gemini-3.1-flash-lite')
         user_data_string = json.dumps(payload.dict(), indent=2)
         
@@ -221,6 +222,7 @@ async def critique_resume(payload: CritiquePayload):
         raise HTTPException(status_code=500, detail="Gemini API Key missing on server.")
         
     try:
+        # Use Gemini 2.5 Flash for difficult creative thinking
         model = genai.GenerativeModel('gemini-2.5-flash')
         
         user_data_string = json.dumps(payload.profile.dict(), indent=2)
@@ -283,6 +285,7 @@ async def revise_latex(payload: RevisePayload):
         raise HTTPException(status_code=500, detail="Gemini API Key missing on server.")
         
     try:
+        # Use Gemini 3.1 flash lite for quick specific tasks that don't require much creativitiy
         model = genai.GenerativeModel('gemini-3.1-flash-lite')
         
         user_data_string = json.dumps(payload.profile.dict(), indent=2)
