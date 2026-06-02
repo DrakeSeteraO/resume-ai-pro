@@ -150,6 +150,7 @@ async def tailor_resume(payload: ProfilePayload):
             prompt,
             generation_config=genai.GenerationConfig(
                 response_mime_type="application/json",
+                response_schema=ProfilePayload,
                 temperature=0.3
             )
         )
