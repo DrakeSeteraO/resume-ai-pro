@@ -1,11 +1,13 @@
 import os
 import json
+import io
+import tarfile
+import requests
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Optional
 import google.generativeai as genai
-import requests
 from fastapi.responses import Response
 
 # Initialize FastAPI App
@@ -355,24 +357,38 @@ async def revise_latex(payload: RevisePayload):
 @app.post("/api/pdf")
 async def generate_pdf_proxy(payload: PdfPayload):
     try:
-        # We use requests.get and 'params' to force the data into the URL string 
-        # exactly how the LaTeXOnline documentation specifies.
-        response = requests.get(
-            "https://latexonline.cc/compile",
+        # 1. Convert the raw LaTeX string into bytes
+        latex_bytes = payload.latex_string.encode('utf-8')
+        
+        # 2. Create an in-memory tarball containing a 'main.tex' file
+        tar_stream = io.BytesIO()
+        with tarfile.open(fileobj=tar_stream, mode='w') as tar:
+            tarinfo = tarfile.TarInfo(name='main.tex')
+            tarinfo.size = len(latex_bytes)
+            tar.addfile(tarinfo, io.BytesIO(latex_bytes))
+        
+        # Reset the stream position to the beginning before reading
+        tar_stream.seek(0)
+
+        # 3. Send a POST request to the '/data' endpoint with the tarball
+        response = requests.post(
+            "https://latexonline.cc/data",
             params={
-                "text": payload.latex_string, 
+                "target": "main.tex",  # Tell the compiler which file to build
                 "command": "pdflatex"
             },
-            timeout=30 # Increased timeout since compiling can take a few seconds
+            files={"file": ("resume.tar", tar_stream, "application/x-tar")},
+            timeout=30
         )
         
+        # 4. Handle the response
         if response.status_code == 200:
-            # Return the raw PDF bytes back to the React frontend
             return Response(content=response.content, media_type="application/pdf")
         else:
-            # If LaTeXOnline returns a 400 error, their compile log is in the response body
+            # If LaTeXOnline fails, it returns the compiler log in the response body.
+            # We raise a 400 instead of 502 so the frontend can properly handle the compilation error.
             error_message = response.text if response.text else "LaTeXOnline server failed to compile the PDF."
-            raise HTTPException(status_code=502, detail=error_message)
+            raise HTTPException(status_code=400, detail=error_message)
             
     except requests.exceptions.RequestException as e:
         raise HTTPException(status_code=503, detail=f"Failed to connect to LaTeXOnline: {str(e)}")
