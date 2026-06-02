@@ -126,10 +126,10 @@ async def tailor_resume(payload: ProfilePayload):
         You are an elite executive resume writer specializing in passing Applicant Tracking Systems (ATS) and catching FAANG recruiter attention.
         
         Your objective is to optimize and rewrite the provided resume JSON data to tailor it specifically for the following target position:
-        - Target Company: {payload.target.company if payload.target.company else 'Generic Tech Company'}
-        - Target Role: {payload.target.role if payload.target.role else 'Software Engineer'}
+        - Target Company: {payload.target.company if payload.target.company else 'Large Tech Company'}
+        - Target Role: {payload.target.role if payload.target.role else 'Software Developer'}
         
-        Target Job Description to extract keywords from:
+        Get keywords from the following job description to make the resume have the make possible ATS score:
         \"\"\"{payload.target.jobDescription}\"\"\"
 
         CRITICAL REWRITING INSTRUCTIONS:
@@ -183,7 +183,11 @@ async def generate_latex(payload: ProfilePayload):
         2. Include standard packages: \\usepackage{{geometry}}, \\usepackage{{hyperref}}, \\usepackage{{enumitem}}, \\usepackage{{titlesec}}.
         3. Set \\geometry{{margin=0.5in}}.
         4. Escape any LaTeX special characters like &, %, $, #, _ found in the user's text to prevent compilation errors.
-        5. If a category (like publications or certificates) is empty or missing in the JSON, DO NOT generate a section for it.
+        5. If a category (like publications or certificates) is empty or missing in the JSON, DO NOT generate a section for it. Also don't generate section's for categories that are weak and wouldn't look good on the resume.
+        6. Reorder categories on the resume, so that the most relavent and importat categories are on the top. Additionally if the applicant is still in college/university then make the top section under their name be the Education section.
+        7. Make the finished LaTeX only be a single PDF page when it is compiled. It should be as close to 1 page as possible, but don't add unnecessary information if it won't help improve the resume.
+        8. Use a font and text sizing for titles, section titles, and normal text that would be found on an expert resume that would increase the chances of the applicant getting to the next round of interviews.
+        
         
         Return ONLY the raw LaTeX code. Do not wrap the output in markdown code blocks (` ```latex `), just output the raw document string starting with \\documentclass.
         
@@ -231,6 +235,7 @@ async def critique_resume(payload: CritiquePayload):
         
         prompt = f"""
         You are a ruthless but highly constructive FAANG technical recruiter and Applicant Tracking System (ATS) auditor.
+        You are a expert at your position at {payload.profile.target.company if payload.profile.target.company else 'FAANG Tech Company'}.
         Review the candidate's raw profile data and their generated LaTeX document against their target job.
         
         Target Job Details:
@@ -249,6 +254,8 @@ async def critique_resume(payload: CritiquePayload):
         - Weak action verbs that could be stronger.
         - Metrics that lack context.
         - Formatting issues in the LaTeX that might hide important skills.
+        - Sections not being in an optimal order for recuiters.
+        - Descriptions being to short or too lengthy.
         
         Return ONLY a valid JSON array of strings containing your specific instructions. Do not wrap it in markdown code blocks.
         Example format: 
