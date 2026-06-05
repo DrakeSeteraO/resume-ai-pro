@@ -80,7 +80,7 @@ export default function Index() {
     }
   };
 
-  const compilePdfWithRetry = async (latexString: string, maxRetries = 3): Promise<Blob> => {
+  const compilePdfWithRetry = async (latexString: string, maxRetries = 5): Promise<Blob> => {
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
       try {
         // Call YOUR Vercel backend proxy route
@@ -201,7 +201,7 @@ export default function Index() {
       setStepIndex(4);
       setPdfError(null);
       try {
-        const pdfBlob = await compilePdfWithRetry(finalLatexData.latex, 3);
+        const pdfBlob = await compilePdfWithRetry(finalLatexData.latex, 5);
         console.log(`✅ Stage 5 - PDF Compilation Successful (Size: ${pdfBlob.size} bytes)`);
         // Convert the Blob into a temporary local URL
         const localPdfUrl = URL.createObjectURL(pdfBlob);
