@@ -109,6 +109,40 @@ export default function Index() {
     throw new Error("Compilation failed.");
   };
 
+
+  const fetchJsonWithRetry = async (url: string, options: RequestInit, maxRetries = 1) => {
+    let lastError: any;
+    
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+      try {
+        const response = await fetch(url, options);
+        
+        if (!response.ok) {
+          let errorMessage = `Server returned status: ${response.status}`;
+          try {
+            const errorData = await response.json();
+            errorMessage = errorData.detail || errorMessage;
+          } catch {
+            // Ignored if server doesn't return JSON
+          }
+          throw new Error(errorMessage);
+        }
+        
+        return await response.json();
+      } catch (error) {
+        lastError = error;
+        if (attempt < maxRetries) {
+          console.warn(`⚠️ Stage error on ${url}. Retrying attempt ${attempt + 1}/${maxRetries}...`);
+          // Wait 1.5 seconds before retrying to give the API breathing room
+          await new Promise(resolve => setTimeout(resolve, 1500));
+        }
+      }
+    }
+    // If we exit the loop, all retries failed. Throw the final error.
+    throw lastError;
+  };
+
+
   const runPipeline = async () => {
     setPhase("running");
     setStepIndex(0);
@@ -118,71 +152,46 @@ export default function Index() {
       // Step 1: Rewriting for maximum impact
       // ------------------------------------------------
       setStepIndex(0);
-      const tailorResponse = await fetch("/api/tailor", {
+      const tailoredData = await fetchJsonWithRetry("/api/tailor", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
-      });
-
-      if (!tailorResponse.ok) {
-        // Safe parsing: If the server returns HTML, this prevents the "Token T" crash
-        let errorMessage = `Server returned status: ${tailorResponse.status}`;
-        try {
-          const errorData = await tailorResponse.json();
-          errorMessage = errorData.detail || errorMessage;
-        } catch {
-          // Ignored: Server didn't return JSON
-        }
-        throw new Error(errorMessage);
-      }
-      const tailoredData = await tailorResponse.json();
+      }, 1); // 1 retry allowed
+      
       console.log("✅ Stage 1 - Tailored Profile Data:", tailoredData);
 
       // ------------------------------------------------
       // Step 2: Structuring initial document
       // ------------------------------------------------
       setStepIndex(1);
-      const latexResponse = await fetch("/api/latex", {
+      const latexData = await fetchJsonWithRetry("/api/latex", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(tailoredData),
-      });
-
-      if (!latexResponse.ok) {
-        let errorMessage = `Server returned status: ${latexResponse.status}`;
-        try {
-          const errorData = await latexResponse.json();
-          errorMessage = errorData.detail || errorMessage;
-        } catch {
-          // Ignored
-        }
-        throw new Error(errorMessage);
-      }
-
-      const latexData = await latexResponse.json();
+      }, 1);
+      
       console.log("✅ Stage 2 - Initial LaTeX Code:", latexData);
 
       // ------------------------------------------------
       // Step 3: Critiquing alignment & layout
       // ------------------------------------------------
       setStepIndex(2);
-      const critiqueResponse = await fetch("/api/critique", {
+      const critiqueData = await fetchJsonWithRetry("/api/critique", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          profile: tailoredData, // The JSON from Agent 1
-          latex_string: latexData.latex, // The String from Agent 2
+          profile: tailoredData,
+          latex_string: latexData.latex,
         }),
-      });
-
-      const critiqueData = await critiqueResponse.json();
-     console.log("✅ Stage 3 - Critique & Improvements:", critiqueData);
+      }, 1);
+      
+      console.log("✅ Stage 3 - Critique & Improvements:", critiqueData);
 
       // ------------------------------------------------
       // Step 4: Generate the LaTeX Code
       // ------------------------------------------------
       setStepIndex(3);
-      const reviseResponse = await fetch("/api/revise", {
+      const finalLatexData = await fetchJsonWithRetry("/api/revise", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -190,8 +199,8 @@ export default function Index() {
           latex_string: latexData.latex,
           improvements: critiqueData.improvements,
         }),
-      });
-      const finalLatexData = await reviseResponse.json();
+      }, 1);
+      
       setLatex(finalLatexData.latex);
       console.log("✅ Stage 4 - Final Revised LaTeX:", finalLatexData);
 
@@ -201,29 +210,29 @@ export default function Index() {
       setStepIndex(4);
       setPdfError(null);
       try {
-        const pdfBlob = await compilePdfWithRetry(finalLatexData.latex, 5);
+        // Kept your existing retry logic here since compilePdfWithRetry already manages blobs
+        const pdfBlob = await compilePdfWithRetry(finalLatexData.latex, 5); 
         console.log(`✅ Stage 5 - PDF Compilation Successful (Size: ${pdfBlob.size} bytes)`);
-        // Convert the Blob into a temporary local URL
+        
         const localPdfUrl = URL.createObjectURL(pdfBlob);
         setPdfUrl(localPdfUrl);
-        const safeName = data.personal.fullName.replace(/\s+/g, "-") || "Optimized";
         setPhase("done");
         toast.success("Resume optimized and LaTeX generated!");
       } catch (pdfErr) {
         const message = pdfErr instanceof Error ? pdfErr.message : "PDF compilation failed.";
-        console.error("PDF compilation failed:", pdfErr);
         console.error("❌ PDF compilation failed:", pdfErr);
         setPdfError(message);
         setPhase("done");
         toast.error(`PDF compile failed: ${message}`);
       }
+      
     } catch (error) {
+      // If any stage fails its initial attempt AND its retry, it gets caught right here
       console.error("❌ AI Pipeline Error:", error);
       toast.error(`Pipeline Error: ${error instanceof Error ? error.message : "Check console"}`);
       setPhase("idle");
     }
   };
-
 
   return (
     <div className="min-h-screen bg-background text-foreground">
