@@ -232,15 +232,6 @@ async def critique_resume(payload: CritiquePayload):
     You are a ruthless but highly constructive FAANG technical recruiter and Applicant Tracking System (ATS) auditor.
     Review the candidate's raw profile data and their generated LaTeX document against their target job.
     
-    Target Job Details:
-    {target_job_string}
-    
-    Raw Profile Data:
-    {user_data_string}
-    
-    Current LaTeX Draft:
-    {payload.latex_string}
-    
     YOUR OBJECTIVE:
     Identify exactly 3 to 5 highly specific, actionable improvements to make this resume stand out more to recruiters for this specific role.
     Look for:
@@ -255,6 +246,15 @@ async def critique_resume(payload: CritiquePayload):
       "Change the bullet point in the Linear role to explicitly mention WebSockets, as requested in the job description.",
       "Move the Kubernetes skill higher up in the LaTeX skills section for better visibility."
     ]
+    
+    Target Job Details:
+    {target_job_string}
+    
+    Raw Profile Data:
+    {user_data_string}
+    
+    Current LaTeX Draft:
+    {payload.latex_string}
     """
     
     # Define the exact fallback cascade order
