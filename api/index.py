@@ -259,9 +259,9 @@ async def critique_resume(payload: CritiquePayload):
     
     # Define the exact fallback cascade order
     models_to_try = [
-        'gemini-3.5-flash', 
-        'gemini-2.5-flash', 
-        'gemini-3.1-flash-lite'
+        'gemini-3.5-flash', # Gemini 3.5 flash is 1st priority because it is the smartest Gemini model under the free plan. This is also why it is used for the final critique AI.
+        'gemini-2.5-flash', # Gemini 2.5 flash is 2nd priority because it is slightly worse than Gemini 3.5 flash and also only has 20 daily uses for free.
+        'gemini-3.1-flash-lite' # Gemini 3.1 flash lite is used as a last resort because it has a ton of free uses"
     ]
     
     last_exception = None
