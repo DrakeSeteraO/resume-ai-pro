@@ -400,6 +400,20 @@ export function ProfileEditor({ data, setData }: Props) {
         </TabsContent>
 
         <TabsContent value="projects" className="mt-4 space-y-3">
+          <div className="rounded-lg border border-border/70 bg-secondary/40 p-4">
+            <Field label="GitHub username (optional)">
+              <Input
+                value={data.githubUsername}
+                onChange={(e) =>
+                  setData((d) => ({ ...d, githubUsername: e.target.value }))
+                }
+                placeholder="octocat"
+              />
+              <p className="mt-1.5 text-xs text-muted-foreground">
+                We'll scan your public GitHub repos to surface additional projects worth including.
+              </p>
+            </Field>
+          </div>
           {data.projects.map((p, i) => (
             <SectionCard
               key={p.id}
