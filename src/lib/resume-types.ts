@@ -264,7 +264,43 @@ export const sampleProfile: ProfileData = {
     "Firebase"
   ],
   "githubUsername": "DrakeSeteraO",
-  "awards": [],
+  "awards": [
+    {
+      "id": "a1",
+      "name": "Finalist in GR Deep Tech Pitch Competition",
+      "issuer": "Grand Rapids Deep Tech",
+      "date": "April 2026",
+      "description": "My team and I placed in the top 4 out of 50 pitches for the GR Deep Tech Pitch Competition. Our pitch focused on PulseGuard Sentinel, software that not only detects cyberbullies but also puts them in an echo chamber instead of banning them. The project was contracted through Blue Nucleus and Dr. Sara Sutton"
+    },
+    {
+      "id": "a2",
+      "name": "3rd Place in MWC3 Java Competition 2026",
+      "issuer": "Midwest Collegiate Computing Conference",
+      "date": "March 2026",
+      "description": "3rd overall in the Java Development Competition at MWC3 2026"
+    },
+    {
+      "id": "a3",
+      "name": "1st for individuals in MWC3 Database Competition 2026",
+      "issuer": "Midwest Collegiate Computing Conference",
+      "date": "March 2026",
+      "description": "1st for individuals and 3rd overall in the Database Design Competition at MWC3 2026"
+    },
+    {
+      "id": "a4",
+      "name": "2025 IOPCC Winner",
+      "issuer": "International Obfuscated Python Code Contest",
+      "date": "December 2025",
+      "description": "1 of 5 Winners for the 2025 International Obfuscated Python Code Contest."
+    },
+    {
+      "id": "a5",
+      "name": "1st for individuals in MWC3 Java Competition 2025",
+      "issuer": "Midwest Collegiate Computing Conference",
+      "date": "March 2025",
+      "description": "1st for individuals and 3rd overall in the Java Development Competition at MWC3 2025"
+    }
+  ],
   "certificates": [
     {
       "id": "c1",
