@@ -48,6 +48,13 @@ class PublicationItem(BaseModel):
     link: Optional[str] = ""
     description: Optional[str] = ""
 
+class AwardItem(BaseModel):
+    id: Optional[str] = ""
+    name: Optional[str] = ""
+    issuer: Optional[str] = ""
+    date: Optional[str] = ""
+    description: Optional[str] = ""
+
 class TargetJob(BaseModel):
     company: Optional[str] = ""
     role: Optional[str] = ""
@@ -59,9 +66,11 @@ class ProfilePayload(BaseModel):
     education: List[EducationItem] = []
     experience: List[ExperienceItem] = []
     projects: List[ProjectItem] = []
+    githubUsername: Optional[str] = ""
     skills: List[str] = []
     certificates: List[CertificateItem] = []
     publications: List[PublicationItem] = []
+    awards: List[AwardItem] = []
     target: Optional[TargetJob] = TargetJob()
 
 class CritiquePayload(BaseModel):
