@@ -43,6 +43,14 @@ export type Publication = {
   description: string;
 };
 
+export type Award = {
+  id: string;
+  name: string;
+  issuer: string;
+  date: string;
+  description: string;
+};
+
 export type ProfileData = {
   personal: {
     fullName: string;
@@ -55,9 +63,11 @@ export type ProfileData = {
   education: Education[];
   experience: Experience[];
   projects: Project[];
+  githubUsername: string;
   skills: string[];
   certificates: Certificate[];
   publications: Publication[];
+  awards: Award[];
   target: {
     company: string;
     role: string;
@@ -77,9 +87,11 @@ export const emptyProfile: ProfileData = {
   education: [],
   experience: [],
   projects: [],
+  githubUsername: "",
   skills: [],
   certificates: [],
   publications: [],
+  awards: [],
   target: { company: "", role: "", jobDescription: "" },
 };
 
@@ -251,6 +263,8 @@ export const sampleProfile: ProfileData = {
     "JavaScript",
     "Firebase"
   ],
+  "githubUsername": "DrakeSeteraO",
+  "awards": [],
   "certificates": [
     {
       "id": "c1",
