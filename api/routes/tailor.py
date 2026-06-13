@@ -1,10 +1,62 @@
 import os
 import json
+import requests
 from fastapi import APIRouter, HTTPException
 import google.generativeai as genai
 from api.schemas import ProfilePayload
 
 router = APIRouter()
+
+
+def fetch_github_profile(username: str) -> str:
+    """
+    Fetches real-time professional data and recent repositories from a user's GitHub profile.
+    Call this tool ONLY when the user provides a GitHub username. 
+    Use the returned data to automatically populate the 'projects' and 'skills' sections of their resume.
+    """
+    try:
+        # 1. Fetch the basic user profile (Bio, Name, URL)
+        user_url = f"https://api.github.com/users/{username}"
+        user_response = requests.get(user_url, timeout=10)
+        
+        # If the user doesn't exist, return a clean error to the AI
+        if user_response.status_code == 404:
+            return f"Error: The GitHub username '{username}' does not exist. Ask the user to verify."
+            
+        user_response.raise_for_status()
+        user_data = user_response.json()
+
+        # 2. Fetch their most recently pushed repositories (Limit to 5 to save tokens)
+        repos_url = f"https://api.github.com/users/{username}/repos?sort=pushed&per_page=5"
+        repos_response = requests.get(repos_url, timeout=10)
+        repos_response.raise_for_status()
+        repos_data = repos_response.json()
+
+        # 3. Strip out the massive amount of unnecessary GitHub metadata
+        projects = []
+        for repo in repos_data:
+            # Skip repositories that the user just forked from someone else
+            if not repo.get('fork'): 
+                projects.append({
+                    "name": repo.get("name"),
+                    "description": repo.get("description") or "No description provided.",
+                    "primary_language": repo.get("language") or "Unknown",
+                    "link": repo.get("html_url")
+                })
+
+        # 4. Package it into a clean JSON string for Gemini to read
+        clean_profile = {
+            "fullName": user_data.get("name") or username,
+            "bio": user_data.get("bio") or "",
+            "github_profile_link": user_data.get("html_url"),
+            "recent_projects": projects
+        }
+
+        return json.dumps(clean_profile, indent=2)
+
+    except requests.exceptions.RequestException as e:
+        return f"Network Error fetching GitHub data: {str(e)}. Proceed without GitHub data."
+
 
 @router.post("/api/tailor")
 async def tailor_resume(payload: ProfilePayload):
@@ -12,7 +64,9 @@ async def tailor_resume(payload: ProfilePayload):
         raise HTTPException(status_code=500, detail="Gemini API Key missing on server configuration.")
         
     try:
-        model = genai.GenerativeModel('gemini-3.1-flash-lite')
+        model = genai.GenerativeModel(
+            model_name='gemini-3.1-flash-lite',
+            tools=[fetch_github_profile])
         user_data_string = json.dumps(payload.dict(), indent=2)
         
         prompt = f"""
@@ -39,11 +93,14 @@ async def tailor_resume(payload: ProfilePayload):
         {user_data_string}
         """
         
-        response = model.generate_content(
+        # 2. Enable automatic function calling so the AI is in the driver's seat
+        chat = model.start_chat(enable_automatic_function_calling=True)
+        
+        response = chat.send_message(
             prompt,
             generation_config=genai.GenerationConfig(
                 response_mime_type="application/json",
-                temperature=0.3
+                temperature=0.1 
             )
         )
         
