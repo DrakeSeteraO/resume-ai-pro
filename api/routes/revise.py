@@ -30,7 +30,7 @@ async def revise_latex(payload: RevisePayload):
             tools=[validate_latex_syntax]
         )
         
-        user_data_string = json.dumps(payload.profile.dict(), indent=2)
+        user_data_string = json.dumps(payload.profile, indent=2)
         improvements_string = "\n".join([f"- {imp}" for imp in payload.improvements])
         
         prompt = f"""

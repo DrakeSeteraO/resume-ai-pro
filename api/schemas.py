@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Optional
+from typing import List, Optional, Dict, Any
 
 class Personal(BaseModel):
     fullName: Optional[str] = ""
@@ -74,11 +74,11 @@ class ProfilePayload(BaseModel):
     target: Optional[TargetJob] = TargetJob()
 
 class CritiquePayload(BaseModel):
-    profile: ProfilePayload
+    profile: Dict[str, Any]
     latex_string: str
 
 class RevisePayload(BaseModel):
-    profile: ProfilePayload
+    profile: Dict[str, Any]
     latex_string: str
     improvements: List[str]
     

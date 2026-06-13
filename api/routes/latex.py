@@ -3,17 +3,18 @@ import json
 from fastapi import APIRouter, HTTPException
 import google.generativeai as genai
 from api.schemas import ProfilePayload
+from typing import Dict, Any
 
 router = APIRouter()
 
 @router.post("/api/latex")
-async def generate_latex(payload: ProfilePayload):
+async def generate_latex(payload: Dict[str, Any]):
     if not os.environ.get("Gemini_API_Key"):
         raise HTTPException(status_code=500, detail="Gemini API Key missing on server.")
         
     try:
         model = genai.GenerativeModel('gemini-3.1-flash-lite')
-        user_data_string = json.dumps(payload.dict(), indent=2)
+        user_data_string = json.dumps(payload, indent=2)
         
         prompt = f"""
         You are an expert LaTeX developer and technical resume designer. 

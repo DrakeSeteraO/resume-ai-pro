@@ -121,7 +121,11 @@ export default function Index() {
           let errorMessage = `Server returned status: ${response.status}`;
           try {
             const errorData = await response.json();
-            errorMessage = errorData.detail || errorMessage;
+            if (Array.isArray(errorData.detail)) {
+              errorMessage = JSON.stringify(errorData.detail);
+            } else {
+              errorMessage = errorData.detail || errorMessage;
+            }
           } catch {
             // Ignored if server doesn't return JSON
           }

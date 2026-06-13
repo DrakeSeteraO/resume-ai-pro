@@ -11,7 +11,7 @@ async def critique_resume(payload: CritiquePayload):
     if not os.environ.get("Gemini_API_Key"):
         raise HTTPException(status_code=500, detail="Gemini API Key missing on server.")
         
-    user_data_string = json.dumps(payload.profile.dict(), indent=2)
+    user_data_string = json.dumps(payload.profile, indent=2)
     target_job_string = json.dumps(payload.profile.target.dict(), indent=2)
     
     prompt = f"""
