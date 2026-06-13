@@ -12,7 +12,7 @@ async def critique_resume(payload: CritiquePayload):
         raise HTTPException(status_code=500, detail="Gemini API Key missing on server.")
         
     user_data_string = json.dumps(payload.profile, indent=2)
-    target_job_string = json.dumps(payload.profile.target.dict(), indent=2)
+    target_job_string = json.dumps(payload.profile.get("target", {}), indent=2)
     
     prompt = f"""
     You are a ruthless but highly constructive FAANG technical recruiter and Applicant Tracking System (ATS) auditor.
