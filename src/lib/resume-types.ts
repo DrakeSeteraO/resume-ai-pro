@@ -263,6 +263,8 @@ export const sampleProfile: ProfileData = {
     "JavaScript",
     "Firebase"
   ],
+  "githubUsername": "DrakeSeteraO",
+  "awards": [],
   "certificates": [
     {
       "id": "c1",
