@@ -732,6 +732,92 @@ export function ProfileEditor({ data, setData }: Props) {
             <Plus className="h-4 w-4" /> Add publication
           </Button>
         </TabsContent>
+
+        <TabsContent value="awards" className="mt-4 space-y-3">
+          {data.awards.map((a, i) => (
+            <SectionCard
+              key={a.id}
+              title={`Award ${i + 1}`}
+              onRemove={() =>
+                setData((d) => ({
+                  ...d,
+                  awards: d.awards.filter((x) => x.id !== a.id),
+                }))
+              }
+            >
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <Field label="Name">
+                  <Input
+                    value={a.name}
+                    onChange={(ev) =>
+                      setData((d) => ({
+                        ...d,
+                        awards: d.awards.map((x) =>
+                          x.id === a.id ? { ...x, name: ev.target.value } : x,
+                        ),
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="Issuer">
+                  <Input
+                    value={a.issuer}
+                    onChange={(ev) =>
+                      setData((d) => ({
+                        ...d,
+                        awards: d.awards.map((x) =>
+                          x.id === a.id ? { ...x, issuer: ev.target.value } : x,
+                        ),
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="Date">
+                  <Input
+                    value={a.date}
+                    onChange={(ev) =>
+                      setData((d) => ({
+                        ...d,
+                        awards: d.awards.map((x) =>
+                          x.id === a.id ? { ...x, date: ev.target.value } : x,
+                        ),
+                      }))
+                    }
+                  />
+                </Field>
+              </div>
+              <Field label="Description">
+                <Textarea
+                  value={a.description}
+                  onChange={(ev) =>
+                    setData((d) => ({
+                      ...d,
+                      awards: d.awards.map((x) =>
+                        x.id === a.id ? { ...x, description: ev.target.value } : x,
+                      ),
+                    }))
+                  }
+                  className="min-h-20 resize-none text-sm"
+                />
+              </Field>
+            </SectionCard>
+          ))}
+          <Button
+            variant="outline"
+            className="w-full border-dashed"
+            onClick={() =>
+              setData((d) => ({
+                ...d,
+                awards: [
+                  ...d.awards,
+                  { id: uid(), name: "", issuer: "", date: "", description: "" },
+                ],
+              }))
+            }
+          >
+            <Plus className="h-4 w-4" /> Add award
+          </Button>
+        </TabsContent>
       </Tabs>
     </div>
   );
