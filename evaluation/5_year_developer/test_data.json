@@ -1,0 +1,127 @@
+{
+  "personal": {
+    "fullName": "Alex Mercer",
+    "email": "alex.mercer.dev@example.com",
+    "phone": "555-019-8372",
+    "location": "Austin, TX",
+    "website": "https://alexmercer.dev"
+  },
+  "narrative": "Results-oriented Software Engineer with 5 years of experience designing and scaling full-stack applications. Passionate about cloud architecture, optimizing database performance, and building resilient microservices. Proven track record of leading cross-functional teams to deliver enterprise-grade solutions that drive user engagement and reduce operational costs.",
+  "education": [
+    {
+      "id": "edu1",
+      "school": "University of Texas at Austin",
+      "degree": "Bachelor of Science",
+      "field": "Computer Science",
+      "startDate": "August 2017",
+      "endDate": "May 2021",
+      "details": "GPA: 3.8. Coursework: Distributed Systems, Data Structures, Algorithms, Cloud Computing. Capstone: Developed a predictive analytics dashboard for local public transit."
+    }
+  ],
+  "experience": [
+    {
+      "id": "exp1",
+      "company": "TechNova Solutions",
+      "role": "Software Engineer II",
+      "location": "Austin, TX (Hybrid)",
+      "startDate": "January 2023",
+      "endDate": "Present",
+      "bullets": "Architected and migrated a monolithic REST API to a serverless AWS microservices architecture, reducing infrastructure costs by 35%, Led a team of 3 junior developers in rebuilding the primary customer portal using React and TypeScript, improving Lighthouse performance scores from 68 to 94, Implemented automated CI/CD pipelines using GitHub Actions and Docker, reducing deployment times by 50% and cutting production rollbacks to near zero"
+    },
+    {
+      "id": "exp2",
+      "company": "DataStream Analytics",
+      "role": "Junior Full-Stack Developer",
+      "location": "Dallas, TX",
+      "startDate": "June 2021",
+      "endDate": "December 2022",
+      "bullets": "Developed and maintained responsive frontend components using Vue.js and Vuex, servicing over 50,000 monthly active users, Designed and optimized PostgreSQL database schemas to handle real-time IoT data ingestion, improving query speeds by 20%, Wrote comprehensive unit and integration tests using Jest and Cypress, achieving 85% code coverage across the primary application repository"
+    },
+    {
+      "id": "exp3",
+      "company": "DataStream Analytics",
+      "role": "Software Engineering Intern",
+      "location": "Dallas, TX",
+      "startDate": "May 2020",
+      "endDate": "August 2020",
+      "bullets": "Created an internal data visualization dashboard using Python, Flask, and Chart.js to track API usage metrics, Resolved 40+ bug tickets in the legacy PHP codebase during the summer internship program"
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj1",
+      "name": "CacheFlow - Distributed Key-Value Store",
+      "stack": "Go, gRPC, Docker, Redis",
+      "link": "https://github.com/AlexMercerDev/cacheflow",
+      "description": "Engineered a lightweight, distributed in-memory key-value store in Go utilizing the Raft consensus algorithm for fault tolerance. Benchmarked to handle 15,000+ concurrent reads/sec. Containerized with Docker for seamless local deployment."
+    },
+    {
+      "id": "proj2",
+      "name": "DevSync Collaboration Tool",
+      "stack": "React, Node.js, Socket.io, MongoDB",
+      "link": "https://github.com/AlexMercerDev/devsync",
+      "description": "Built a real-time collaborative code editor supporting multi-cursor editing and live chat. Implemented WebSocket connections for sub-50ms latency updates and utilized JWT for secure user authentication."
+    }
+  ],
+  "githubUsername": "AlexMercerDev",
+  "skills": [
+    "JavaScript/TypeScript",
+    "Python",
+    "Go",
+    "React",
+    "Node.js",
+    "AWS (EC2, Lambda, S3)",
+    "Docker",
+    "PostgreSQL",
+    "MongoDB",
+    "GraphQL",
+    "CI/CD"
+  ],
+  "awards": [
+    {
+      "id": "awd1",
+      "name": "Innovation Award - Q3 2023",
+      "issuer": "TechNova Solutions",
+      "date": "October 2023",
+      "description": "Awarded for spearheading the transition to a serverless architecture, which significantly reduced system latency during peak traffic hours."
+    },
+    {
+      "id": "awd2",
+      "name": "1st Place - FinTech Hackathon",
+      "issuer": "Texas Tech Hub",
+      "date": "February 2022",
+      "description": "Led a team of 4 to build 'SplitIt', an AI-powered receipt scanning and expense-splitting web app over a 48-hour period."
+    }
+  ],
+  "certificates": [
+    {
+      "id": "cert1",
+      "name": "AWS Certified Developer - Associate",
+      "issuer": "Amazon Web Services",
+      "date": "March 2023",
+      "link": "https://aws.amazon.com/verification/fake-link-123"
+    },
+    {
+      "id": "cert2",
+      "name": "Certified Kubernetes Administrator (CKA)",
+      "issuer": "Cloud Native Computing Foundation",
+      "date": "November 2024",
+      "link": "https://cncf.io/verification/fake-link-456"
+    }
+  ],
+  "publications": [
+    {
+      "id": "pub1",
+      "title": "Scaling Node.js Microservices Under Heavy Load",
+      "venue": "Medium - Better Programming",
+      "date": "August 2024",
+      "link": "https://medium.com/@alexmercerdev/scaling-node",
+      "description": "A comprehensive technical breakdown of strategies for scaling Node.js applications, focusing on clustering, reverse proxies, and caching layers."
+    }
+  ],
+  "target": {
+    "company": "Stripe",
+    "role": "Senior Backend Engineer",
+    "jobDescription": "We are looking for a Senior Backend Engineer to join our Core Payments team. You will design, build, and maintain APIs, services, and systems that process billions of dollars securely and reliably. Requirements: 5+ years of experience shipping high-quality backend code. Deep understanding of distributed systems, relational databases (PostgreSQL preferred), and API design. Experience with Go, Ruby, or Java is a plus. You should be comfortable leading projects from architectural design through deployment and mentoring junior engineers."
+  }
+}
