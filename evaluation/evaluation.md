@@ -20,11 +20,11 @@ To rigorously evaluate the UltraCV pipeline, success is measured against both qu
 To ensure the pipeline handles real-world unpredictability, it was tested against 5 highly distinct user profiles. 
 
 * **Profile 1: My Info (Real world example)**
-  * *Inputs:* All fields filled out except publications
-  * *Target:* IT Intern Position at Meijer
-* **Profile 2: The Career Transitioner (Non-Traditional)**
-  * *Inputs:* Heavy customer service background, bootcamp certificate, no formal tech experience.
-  * *Target:* Entry-level Frontend role.
+  * *Inputs:* All fields filled out except publications.
+  * *Target:* IT Intern Position at Meijer.
+* **Profile 2: Empty Slate (Anti-Hallucination Test)**
+  * *Inputs:* User only inputs general info about themself and GitHub Username.
+  * *Target:* IT Help Desk.
 * **Profile 3: The Edge Case (Sparse Data)**
   * *Inputs:* Only a name, a GitHub username (`DrakeSeteraO`), and a single sentence summary. No written experience.
   * *Target:* Full-Stack role. *(Tests the MCP tool's ability to carry the payload).*
@@ -39,10 +39,10 @@ To ensure the pipeline handles real-world unpredictability, it was tested agains
 
 ## 3. Evaluation Results
 
-| Test Case | Tool Execution | Valid LaTeX Generation | PDF Compiled? | Keyword Match | ATS score | Overall Result | Notes |
-| :--- | :---: | :---: | :---: | :---: | :---: |:---: | :--- |
-| 1. My Info | ✅ | ✅ | ✅ | High | 73 % | **PASS** | Flawless execution. |
-| 2. Career Transitioner| N/A | ✅ | Med | **PASS** | AI successfully mapped customer service soft-skills to agile methodologies. |
+| Test Case | Tool Execution | Valid LaTeX Generation | PDF Compiled? | Keyword Match | ATS score | AI Hallucination | Overall Result | Notes |
+| :--- | :---: | :---: | :---: | :---: | :---: |:---: |:---: | :--- |
+| 1. My Info | ✅ | ✅ | ✅ | High | 73 % | None | **PASS** | Flawless execution. |
+| 2. Empty Slate | ✅ | ✅ | ✅ | High | 56 % | A lot | **Fail** | Though resume looked good, AI created fake job experience and 2 of the 3 projects were fake. This was likely due to try and compensate for no information given. |
 | 3. Sparse Data (GitHub)| ✅ | ✅ | High | **PASS** | MCP tool successfully fetched repos; AI built out the missing project sections autonomously. |
 | 4. Format Breaker | N/A | ❌ (Initial) | High | **FAIL ➔ PASS** | *See Failure Analysis below.* |
 | 5. Token Stress Test | ✅ | ✅ | High | **PASS** | Successfully condensed 3 pages of raw data into a single-column 1-page LaTeX layout. |
