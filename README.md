@@ -69,6 +69,16 @@ In accordance with academic integrity guidelines, the following outlines the usa
 
 ---
 
+## 🧪 System Evaluation & Iteration
+
+To ensure the pipeline handles real-world unpredictability, the system was rigorously evaluated against 5 highly distinct user profiles (ranging from an empty slate to a 20-year executive). Success was measured quantitatively (compilation success, rate limit avoidance) and qualitatively (ATS scoring, hallucination prevention).
+
+**Detailed Testing & Iteration Logs:**
+Because the evaluation and prompt engineering processes were extensive, the detailed methodologies, test results, and failure analyses have been documented in their own dedicated files. Reviewers are highly encouraged to read these to understand the architectural evolution of the project:
+
+* 📊 [System Evaluation Framework](./evaluation/evaluation.md): Contains the complete testing methodology, ATS scoring results, and documentation of resolved system failures. The raw JSON inputs, generated LaTeX, and final PDF outputs for all 5 test cases can be found inside the [`/evaluation`](./evaluation/) directory.
+* 🛠️ [Build Log & Prompt Evolution](./BUILD_LOG.md): Documents the iterative prompt engineering process, showing exactly how the agent instructions evolved from Version 1 to Production to eliminate "Template Collapse" and LaTeX compiler crashes.
+
 ## 🚀 Future Work (What I Would Fix With More Time)
 * **Asynchronous Queueing:** Currently, the system relies on artificial frontend timeouts (breathers) to manage rate limits. With more time, I would implement a robust backend queue (like Celery/Redis) to handle concurrent users without risking API quota exhaustion.
 * **Direct PDF Generation:** Instead of relying on third-party proxies like TeX Live, I would containerize a local `pdflatex` environment within a Dockerized backend to eliminate network latency and third-party downtime entirely.
