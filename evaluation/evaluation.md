@@ -42,7 +42,7 @@ To ensure the pipeline handles real-world unpredictability, it was tested agains
 | Test Case | Tool Execution | Valid LaTeX Generation | PDF Compiled? | Keyword Match | ATS score | AI Hallucination | Overall Result | Notes |
 | :--- | :---: | :---: | :---: | :---: | :---: |:---: |:---: | :--- |
 | 1. My Info | ✅ | ✅ | ✅ | High | 73 % | None | **PASS** | Flawless execution. |
-| 2. Empty Slate | ✅ | ✅ | ✅ | High | 56 % | A lot | **Fail** | Though resume looked good, AI created fake job experience and 2 of the 3 projects were fake. This was likely due to try and compensate for no information given. |
+| 2. Empty Slate | ✅ | ✅ | ✅ | High | 56 % | A lot | **Fail** | Though resume looked good, AI created fake job experience and 2 of the 3 projects were fake. |
 | 3. Sparse Data (GitHub)| ✅ | ✅ | High | **PASS** | MCP tool successfully fetched repos; AI built out the missing project sections autonomously. |
 | 4. Format Breaker | N/A | ❌ (Initial) | High | **FAIL ➔ PASS** | *See Failure Analysis below.* |
 | 5. Token Stress Test | ✅ | ✅ | High | **PASS** | Successfully condensed 3 pages of raw data into a single-column 1-page LaTeX layout. |
