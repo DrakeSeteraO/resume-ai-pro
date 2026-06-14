@@ -43,8 +43,8 @@ To ensure the pipeline handles real-world unpredictability, it was tested agains
 | :--- | :---: | :---: | :---: | :---: | :---: |:---: |:---: | :--- |
 | 1. My Info | ✅ | ✅ | ✅ | High | 73 % | None | **PASS** | Flawless execution. |
 | 2. Empty Slate | ✅ | ✅ | ✅ | High | 56 % | A lot | **Fail** | Though resume looked good, AI created fake job experience and 2 of the 3 projects were fake. |
-| 3. 5 Year Developer | ✅ | ✅ | ✅ | High | 71 % | **PASS** | Flawless execution. |
-| 4. Format Breaker | N/A | ❌ (Initial) | High | **FAIL ➔ PASS** | *See Failure Analysis below.* |
+| 3. 5 Year Developer | ✅ | ✅ | ✅ | High | 71 % | None | **PASS** | Flawless execution. |
+| 4. Tech VP | ✅ | ✅ | ✅ | High | 74 % | None | **PASS** | Flawless execution. |
 | 5. Token Stress Test | ✅ | ✅ | High | **PASS** | Successfully condensed 3 pages of raw data into a single-column 1-page LaTeX layout. |
 
 ---
