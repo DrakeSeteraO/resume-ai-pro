@@ -42,7 +42,16 @@ To optimize for both computational quality and infrastructure constraints, tasks
 To adhere to modern decoupled AI standards, the project features a `mcp_server.py` microservice built with the **FastMCP** framework. This isolates the validation and compilation tools from the core application logic. 
 * *Production Architecture Note:* While the local architecture is designed for an MCP microservice topology via `stdio` transport, the tools are embedded natively within the FastAPI handlers for the live Vercel deployment. This intentional topology shift bypasses Vercel's ephemeral serverless lifecycle constraints (which terminate persistent background processes) while maximizing frontend responsiveness and UX.
 
----
+### 🔍 Example of a Complete Interaction (Traced Execution)
+To demonstrate the agentic pipeline in action, here is a trace of a standard execution (Reference: `Profile 3: 5 Year Developer` in the evaluation logs):
+
+1. **User Request:** The frontend submits a JSON payload containing the user's career history, target job description (Senior Backend Engineer at Stripe), and GitHub username (`AlexMercerDev`).
+2. **Autonomous Tool Call (Agent 1):** The Tailor agent receives the payload, recognizes the GitHub username, and autonomously suspends text generation to invoke the `fetch_github_profile` MCP tool.
+3. **Data Synthesis (Agent 1):** The Python backend executes the tool, querying the GitHub API. The agent reads the returned repository data, synthesizes it with the original JSON, and outputs an ATS-optimized JSON profile.
+4. **Formatting (Agent 2):** The Formatter translates the JSON into a raw LaTeX string.
+5. **Critique Generation (Agent 3):** The ATS Auditor cross-references the LaTeX against the Stripe job description and outputs a JSON array of critique instructions (e.g., *"Inject keywords: distributed systems, Go, fault tolerance"*).
+6. **Self-Correcting Revision (Agent 4):** The Reviser incorporates the critique into the LaTeX string. Before returning the final string, the agent autonomously invokes the `validate_latex_syntax` tool. The tool detects an unescaped `%` symbol. The agent reads this error, rewrites the string to `\%`, and successfully completes the execution loop.
+7. **Final Output:** The backend API compiles the validated LaTeX string via TeX Live and returns a downloadable PDF to the user.
 
 ## 🛠️ Infrastructure & Execution Solutions
 
