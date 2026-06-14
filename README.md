@@ -13,6 +13,10 @@ UltraCV is an advanced, multi-agent generative AI pipeline designed to parse uns
 
 This project demonstrates advanced prompt engineering, deterministic JSON structured outputs, autonomous function calling, and dynamic model routing using the Google Gemini SDK.
 
+### Target Audience & Problem Statement
+**The Problem:** Modern job seekers struggle to manually tailor their resumes to pass strict Applicant Tracking Systems (ATS) for every application, while maintaining complex LaTeX formatting constraints.  
+**The User:** This application is built specifically for software engineers, tech professionals, and students who need highly tailored, metrics-driven, and perfectly formatted technical resumes at scale.
+
 ---
 
 ## 🏗️ System Architecture & Rubric Alignment
@@ -64,3 +68,7 @@ In accordance with academic integrity guidelines, the following outlines the usa
    * Due to Cline not having a clean way to export files in WSL I had to export all of its data, so the Cline messages can be found somewhere in the `Cline_Data` folder
 
 ---
+
+## 🚀 Future Work (What I Would Fix With More Time)
+* **Asynchronous Queueing:** Currently, the system relies on artificial frontend timeouts (breathers) to manage rate limits. With more time, I would implement a robust backend queue (like Celery/Redis) to handle concurrent users without risking API quota exhaustion.
+* **Direct PDF Generation:** Instead of relying on third-party proxies like TeX Live, I would containerize a local `pdflatex` environment within a Dockerized backend to eliminate network latency and third-party downtime entirely.
