@@ -76,7 +76,7 @@ To ensure the pipeline handles real-world unpredictability, the system was rigor
 **Detailed Testing & Iteration Logs:**
 Because the evaluation and prompt engineering processes were extensive, the detailed methodologies, test results, and failure analyses have been documented in their own dedicated files. Reviewers are highly encouraged to read these to understand the architectural evolution of the project:
 
-* 📊 [System Evaluation Framework](./evaluation/evaluation.md): Contains the complete testing methodology, ATS scoring results, and documentation of resolved system failures. The raw JSON inputs, generated LaTeX, and final PDF outputs for all 5 test cases can be found inside the [`/evaluation`](./evaluation/) directory.
+* 📊 [System Evaluation Framework](./evaluation/README.md): Contains the complete testing methodology, ATS scoring results, and documentation of resolved system failures. The raw JSON inputs, generated LaTeX, and final PDF outputs for all 5 test cases can be found inside the [`/evaluation`](./evaluation/) directory.
 * 🛠️ [Build Log & Prompt Evolution](./BUILD_LOG.md): Documents the iterative prompt engineering process, showing exactly how the agent instructions evolved from Version 1 to Production to eliminate "Template Collapse" and LaTeX compiler crashes.
 
 ## 🚀 Future Work (What I Would Fix With More Time)
