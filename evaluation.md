@@ -5,12 +5,14 @@ To rigorously evaluate the UltraCV pipeline, success is measured against both qu
 
 **Quantitative Metrics (System Stability):**
 * **Tool Execution:** The AI successfully recognizes the trigger (e.g., a GitHub username) and executes the `fetch_github_profile` MCP tool without hallucinating a response first.
-* **Compilation Success:** The final LaTeX string compiles into a PDF via TeX Live (or the LaTeXOnline fallback) on the first attempt with a 0% crash rate (meaning all special characters were properly escaped).
+* **LaTeX Generation Success:** The AI models generate a valid LaTeX string that can be converted to a PDF through a LaTeX compiler without any error messages.
+* **Compilation Success:** A PDF is returened to the users containing their resume. The final LaTeX string compiles into a PDF via the backend API that uses TeX Live (or the LaTeXOnline fallback) on the first attempt with a 0% crash rate.
 * **Latency & Quota:** The pipeline resolves within the 60-second serverless timeout and successfully avoids 429 Rate Limit errors through model load-balancing.
 
 **Qualitative Metrics (Agentic Reasoning):**
 * **Keyword Integration:** The Reviser agent successfully injects at least 3-5 high-value keywords from the target job description into the final resume.
-* **Format Preservation:** The Tailor agent maintains the strict JSON schema without hallucinating fake companies, altering historical dates, or experiencing "Template Collapse."
+* **ATS Accuracy:** The 
+* **Format Preservation:** The outputted resume/LaTeX contains no fake companies, altered historical dates, or false information about the user.
 
 ---
 
