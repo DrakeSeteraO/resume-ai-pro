@@ -28,9 +28,9 @@ To ensure the pipeline handles real-world unpredictability, it was tested agains
 * **Profile 3: 5 Year Developer (Mid Experience Test)**
   * *Inputs:* 5 Years worth of experience, as well as, some awards and certificates.
   * *Target:* Senior Backend Engineer at Stripe.
-* **Profile 4: The Format Breaker (Special Characters)**
-  * *Inputs:* Heavy use of `&`, `%`, `$`, and `#` in the raw text.
-  * *Target:* Data Analyst role. *(Tests the LaTeX linting and escaping constraints).*
+* **Profile 4: Tech VP (High Experience Test)**
+  * *Inputs:* A Tech VP with 20 years of experience.
+  * *Target:* CTO at Vanguard
 * **Profile 5: The Over-Achiever (Token Stress Test)**
   * *Inputs:* 10+ years of experience, 8 projects, 5 publications, massive text blocks.
   * *Target:* Staff Engineer role. *(Tests the 1-page summarization constraint and token limits).*
