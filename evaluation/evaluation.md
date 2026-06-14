@@ -19,15 +19,15 @@ To rigorously evaluate the UltraCV pipeline, success is measured against both qu
 ## 2. Test Methodology & Profiles
 To ensure the pipeline handles real-world unpredictability, it was tested against 5 highly distinct user profiles. 
 
-* **Profile 1: My Info (Real world example)**
+* **Profile 1: My Info (Real World Example)**
   * *Inputs:* All fields filled out except publications.
   * *Target:* IT Intern Position at Meijer.
 * **Profile 2: Empty Slate (Anti-Hallucination Test)**
   * *Inputs:* User only inputs general info about themself and GitHub Username.
   * *Target:* IT Help Desk.
-* **Profile 3: The Edge Case (Sparse Data)**
-  * *Inputs:* Only a name, a GitHub username (`DrakeSeteraO`), and a single sentence summary. No written experience.
-  * *Target:* Full-Stack role. *(Tests the MCP tool's ability to carry the payload).*
+* **Profile 3: 5 Year Developer (Mid Experience Test)**
+  * *Inputs:* 5 Years worth of experience, as well as, some awards and certificates.
+  * *Target:* Senior Backend Engineer at Stripe.
 * **Profile 4: The Format Breaker (Special Characters)**
   * *Inputs:* Heavy use of `&`, `%`, `$`, and `#` in the raw text.
   * *Target:* Data Analyst role. *(Tests the LaTeX linting and escaping constraints).*
@@ -43,7 +43,7 @@ To ensure the pipeline handles real-world unpredictability, it was tested agains
 | :--- | :---: | :---: | :---: | :---: | :---: |:---: |:---: | :--- |
 | 1. My Info | ✅ | ✅ | ✅ | High | 73 % | None | **PASS** | Flawless execution. |
 | 2. Empty Slate | ✅ | ✅ | ✅ | High | 56 % | A lot | **Fail** | Though resume looked good, AI created fake job experience and 2 of the 3 projects were fake. |
-| 3. Sparse Data (GitHub)| ✅ | ✅ | High | **PASS** | MCP tool successfully fetched repos; AI built out the missing project sections autonomously. |
+| 3. 5 Year Developer | ✅ | ✅ | ✅ | High | 71 % | **PASS** | Flawless execution. |
 | 4. Format Breaker | N/A | ❌ (Initial) | High | **FAIL ➔ PASS** | *See Failure Analysis below.* |
 | 5. Token Stress Test | ✅ | ✅ | High | **PASS** | Successfully condensed 3 pages of raw data into a single-column 1-page LaTeX layout. |
 
