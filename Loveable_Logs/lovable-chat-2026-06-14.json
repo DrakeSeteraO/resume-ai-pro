@@ -1,0 +1,1375 @@
+{
+  "exportedAt": "2026-06-14T20:00:58.362Z",
+  "url": "https://lovable.dev/projects/b47a1040-916c-49be-9f52-37dd392cf3fd",
+  "messageCount": 171,
+  "messages": [
+    {
+      "contentHtml": "<p>Change the background color to role 1, education 1, project 1, skills, certificate 1, publication 1,  Target role &amp; company, and Job description boxes so that they aren't so much of an eyesore and go better with the websites color scheme.</p>",
+      "contentText": "Change the background color to role 1, education 1, project 1, skills, certificate 1, publication 1,  Target role & company, and Job description boxes so that they aren't so much of an eyesore and go better with the websites color scheme.",
+      "id": "main:agent#0#optimistic_userMessage:2c68c3b6",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#0#optimistic_userMessage:2c68c3b6_2",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Change the font on the website to make it feel more official, like a large tech company.</p>",
+      "contentText": "Change the font on the website to make it feel more official, like a large tech company.",
+      "id": "main:agent#0#optimistic_userMessage:56453df7",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#0#optimistic_userMessage:56453df7_2",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Fix it, so that when the websites width shrinks the resume output box is under the user input box. Right now when it shrinks it creates the one under the other under the normal boxes instead of making the normal boxes dissapear.</p>",
+      "contentText": "Fix it, so that when the websites width shrinks the resume output box is under the user input box. Right now when it shrinks it creates the one under the other under the normal boxes instead of making the normal boxes dissapear.",
+      "id": "main:agent#0#optimistic_userMessage:602648e4",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#0#optimistic_userMessage:602648e4_2",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Make it where if the last step to generate the PDF fails it still goes to the end screen like normal showing the latex, but when the user goes to the pdf download page there is an error (and maybe an X) and it says the error message\"</p>",
+      "contentText": "Make it where if the last step to generate the PDF fails it still goes to the end screen like normal showing the latex, but when the user goes to the pdf download page there is an error (and maybe an X) and it says the error message\"",
+      "id": "main:agent#0#optimistic_userMessage:8d98ccee",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#0#optimistic_userMessage:8d98ccee_2",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Use the current version on GitHub and it where the user can scroll up and down through the outputputted latex code. Additionally for the headers on the side make it where if the user's mouse hovers over the edge between the headers and the LateX code they can adjust the width of the boxes.</p>",
+      "contentText": "Use the current version on GitHub and it where the user can scroll up and down through the outputputted latex code. Additionally for the headers on the side make it where if the user's mouse hovers over the edge between the headers and the LateX code they can adjust the width of the boxes.",
+      "id": "main:agent#0#optimistic_userMessage:ad886b8d",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#0#optimistic_userMessage:ad886b8d_2",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Add a section to the profile where users can put in any awards they have won. Also, in the project section, when it is selected, offer a spot for the user to put in their GitHub username. This feature is important because in the backend, there is going to be code to search a user's github for extra projects.</p>",
+      "contentText": "Add a section to the profile where users can put in any awards they have won. Also, in the project section, when it is selected, offer a spot for the user to put in their GitHub username. This feature is important because in the backend, there is going to be code to search a user's github for extra projects.",
+      "id": "main:agent#0#optimistic_userMessage:b4e86dff",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#0#optimistic_userMessage:b4e86dff_2",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Make the title larger and use a font similar to Claude's title. Also, change the website icon to be a paper/doc/resume icon instead of the star icons.</p>",
+      "contentText": "Make the title larger and use a font similar to Claude's title. Also, change the website icon to be a paper/doc/resume icon instead of the star icons.",
+      "id": "main:agent#0#optimistic_userMessage:ca82ac1a",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#0#optimistic_userMessage:ca82ac1a_2",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Also, change the background to the full name, email, phone, location, website, target company name, target job title, job description, user input text boxes, so that they aren't the same as the background, but also go well with the theme.</p>",
+      "contentText": "Also, change the background to the full name, email, phone, location, website, target company name, target job title, job description, user input text boxes, so that they aren't the same as the background, but also go well with the theme.",
+      "id": "main:agent#0#optimistic_userMessage:d8ddc802",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#0#optimistic_userMessage:d8ddc802_2",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Take the current code from the github and fix the black lines around the boxes.</p>",
+      "contentText": "Take the current code from the github and fix the black lines around the boxes.",
+      "id": "main:agent#0#optimistic_userMessage:fe53fbb5",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#0#optimistic_userMessage:fe53fbb5_2",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Create a highly professional, premium B2B SaaS-style AI Resume Optimizer and Builder web application. The design should look like a modern, polished product made by a top-tier tech company (clean typography, generous whitespace, subtle borders, a sophisticated neutral color palette with a sharp accent color like emerald or indigo, and dark/light mode support).</p>\n<p>The application must be a Single Pag ...</p>",
+      "contentText": "Create a highly professional, premium B2B SaaS-style AI Resume Optimizer and Builder web application. The design should look like a modern, polished product made by a top-tier tech company (clean typography, generous whitespace, subtle borders, a sophisticated neutral color palette with a sharp accent color like emerald or indigo, and dark/light mode support).\nThe application must be a Single Pag ...",
+      "id": "main:agent#00000000000001#usr:MQTDM4E2",
+      "role": "ai",
+      "timestampText": "Show more",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>App built. The SPA includes the dual-panel workspace, AI narrative + tabbed editor, JSON/CSV portability, job target panel, animated 3-step pipeline, syntax-highlighted LaTeX output, PDF download stub, emerald accent, and light/dark toggle.</p>",
+      "contentText": "App built. The SPA includes the dual-panel workspace, AI narrative + tabbed editor, JSON/CSV portability, job target panel, animated 3-step pipeline, syntax-highlighted LaTeX output, PDF download stub, emerald accent, and light/dark toggle.",
+      "id": "main:agent#00000000000002#ast:5AAB7L5T",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Also, change the background to the full name, email, phone, location, website, target company name, target job title, job description, user input text boxes, so that they aren't the same as the background, but also go well with the theme.</p>",
+      "contentText": "Also, change the background to the full name, email, phone, location, website, target company name, target job title, job description, user input text boxes, so that they aren't the same as the background, but also go well with the theme.",
+      "id": "main:agent#00000000000031#usr:AB62KXXC",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#00000000000031#usr:AB62KXXC_2",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Change the background color to role 1, education 1, project 1, skills, certificate 1, publication 1,  Target role &amp; company, and Job description boxes so that they aren't so much of an eyesore and go better with the websites color scheme.</p>",
+      "contentText": "Change the background color to role 1, education 1, project 1, skills, certificate 1, publication 1,  Target role & company, and Job description boxes so that they aren't so much of an eyesore and go better with the websites color scheme.",
+      "id": "main:agent#00000000000032#usr:5HNJLBTY",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#00000000000032#usr:5HNJLBTY_2",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Take the current code from the github and fix the black lines around the boxes.</p>",
+      "contentText": "Take the current code from the github and fix the black lines around the boxes.",
+      "id": "main:agent#00000000000036#usr:I2THNVVB",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#00000000000036#usr:I2THNVVB_2",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Use the current version on GitHub and it where the user can scroll up and down through the outputputted latex code. Additionally for the headers on the side make it where if the user's mouse hovers over the edge between the headers and the LateX code they can adjust the width of the boxes.</p>",
+      "contentText": "Use the current version on GitHub and it where the user can scroll up and down through the outputputted latex code. Additionally for the headers on the side make it where if the user's mouse hovers over the edge between the headers and the LateX code they can adjust the width of the boxes.",
+      "id": "main:agent#00000000000040#usr:SPABOR3Y",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#00000000000040#usr:SPABOR3Y_2",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Make it where if the last step to generate the PDF fails it still goes to the end screen like normal showing the latex, but when the user goes to the pdf download page there is an error (and maybe an X) and it says the error message\"</p>",
+      "contentText": "Make it where if the last step to generate the PDF fails it still goes to the end screen like normal showing the latex, but when the user goes to the pdf download page there is an error (and maybe an X) and it says the error message\"",
+      "id": "main:agent#00000000000047#usr:D7TC753G",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#00000000000047#usr:D7TC753G_2",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Fix it, so that when the websites width shrinks the resume output box is under the user input box. Right now when it shrinks it creates the one under the other under the normal boxes instead of making the normal boxes dissapear.</p>",
+      "contentText": "Fix it, so that when the websites width shrinks the resume output box is under the user input box. Right now when it shrinks it creates the one under the other under the normal boxes instead of making the normal boxes dissapear.",
+      "id": "main:agent#00000000000056#usr:PTV44DV3",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#00000000000056#usr:PTV44DV3_2",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Add a section to the profile where users can put in any awards they have won. Also, in the project section, when it is selected, offer a spot for the user to put in their GitHub username. This feature is important because in the backend, there is going to be code to search a user's github for extra projects.</p>",
+      "contentText": "Add a section to the profile where users can put in any awards they have won. Also, in the project section, when it is selected, offer a spot for the user to put in their GitHub username. This feature is important because in the backend, there is going to be code to search a user's github for extra projects.",
+      "id": "main:agent#00000000000100#usr:GNDBFFHM",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#00000000000100#usr:GNDBFFHM_2",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Keep the components functionality and placement he same, but make the website's aesthetic look like a large tech website. Kind of like the Claude website.</p>",
+      "contentText": "Keep the components functionality and placement he same, but make the website's aesthetic look like a large tech website. Kind of like the Claude website.",
+      "id": "main:agent#00000000008547#usr:ESJD5P4E",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Restyled to a Claude-like warm paper aesthetic: cream background, clay/terracotta accent, and Source Serif 4 display headings while keeping every component and layout identical.</p>",
+      "contentText": "Restyled to a Claude-like warm paper aesthetic: cream background, clay/terracotta accent, and Source Serif 4 display headings while keeping every component and layout identical.",
+      "id": "main:agent#00000000008548#ast:RGIFYGV3",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubMade API key for project and stored it in .envDetailsPreview",
+      "id": "main:agent#00000000010195#gcm:CACPJ5QD",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubMade scrollbar backround match light dark theme utilizing ClineDetailsPreview",
+      "id": "main:agent#00000000010196#gcm:NBNCXX44",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubMade the color blue instead of red and made the scroll bars widerDetailsPreview",
+      "id": "main:agent#00000000010197#gcm:ZEH7MTO6",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubMade font size larger so it is more readableDetailsPreview",
+      "id": "main:agent#00000000010198#gcm:DONFALEF",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAdded my buy me a coffee pageDetailsPreview",
+      "id": "main:agent#00000000010199#gcm:4P77QU4V",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubCleaned up formattingDetailsPreview",
+      "id": "main:agent#00000000010200#gcm:ES5UYFG6",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAdded resumeInfo objectDetailsPreview",
+      "id": "main:agent#00000000010201#gcm:MO5WSHIC",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAdd .python-version back so uv can finally downgrade to 3.12DetailsPreview",
+      "id": "main:agent#00000000010212#gcm:F4QFQWUZ",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubUnpin python dependencies to allow modern pre-built binaries and remove version overridesDetailsPreview",
+      "id": "main:agent#00000000010213#gcm:QODFFNPJ",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubswitch AI to gemini 3.1 flash liteDetailsPreview",
+      "id": "main:agent#00000000010214#gcm:YKTAORA5",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubConnect frontend to backend tailor AIDetailsPreview",
+      "id": "main:agent#00000000010215#gcm:DCBIJHEH",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubFixed .env errorDetailsPreview",
+      "id": "main:agent#00000000010216#gcm:YI5TCSUW",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAdded more testsDetailsPreview",
+      "id": "main:agent#00000000010217#gcm:37MDK6H4",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubModified Tailor AI promptDetailsPreview",
+      "id": "main:agent#00000000010218#gcm:IAQGBRCJ",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAdded delay to debugDetailsPreview",
+      "id": "main:agent#00000000010219#gcm:ZSOKTOUR",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAdded LaTeX formatter AIDetailsPreview",
+      "id": "main:agent#00000000010220#gcm:RZTEIM3S",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubfixed routing to backendDetailsPreview",
+      "id": "main:agent#00000000010221#gcm:DGOWRVUU",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Make the text boxes inside of \"Role 1\", \"Education 1\", etc. a different color than the background of the box.  Make sure the new color goes good with the theme. Also, make the background of \"Target role &amp; company\" and \"job description\" match the background of the  \"Role 1\", \"Education 1\", etc. boxes.</p>",
+      "contentText": "Make the text boxes inside of \"Role 1\", \"Education 1\", etc. a different color than the background of the box.  Make sure the new color goes good with the theme. Also, make the background of \"Target role & company\" and \"job description\" match the background of the  \"Role 1\", \"Education 1\", etc. boxes.",
+      "id": "main:agent#00000000010222#usr:KX2ZYGBM",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p><span>Done. The text boxes inside \"Role 1\", \"Education 1\", and the other section cards now use a subtle </span><span class=\"bg-secondary mx-px mb-1 inline-block rounded-md px-1.5 py-0.5 font-mono text-xs leading-normal\">bg-muted</span><span> background that contrasts cleanly with the card's </span><span class=\"bg-secondary mx-px mb-1 inline-block rounded-md px-1.5 py-0.5 font-mono text-xs leading-normal\">bg-card</span><span> surface. Both the \"Target role &amp; company\" and \"Job description\" containers in JobTarget now share the same hover-border treatment as the profile section cards, so their visual styling matches exactly.</span></p>",
+      "contentText": "Done. The text boxes inside \"Role 1\", \"Education 1\", and the other section cards now use a subtle bg-muted background that contrasts cleanly with the card's bg-card surface. Both the \"Target role & company\" and \"Job description\" containers in JobTarget now share the same hover-border treatment as the profile section cards, so their visual styling matches exactly.",
+      "id": "main:agent#00000000010223#ast:NDB3TPEG",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Also, change the background to the full name, email, phone, location, website, target company name, target job title, job description, user input text boxes, so that they aren't the same as the background, but also go well with the theme.</p>",
+      "contentText": "Also, change the background to the full name, email, phone, location, website, target company name, target job title, job description, user input text boxes, so that they aren't the same as the background, but also go well with the theme.",
+      "id": "main:agent#00000000017267#usr:RPBVBLAS",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#00000000017268#ast:4HJV47L3",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Change the background color to role 1, education 1, project 1, skills, certificate 1, publication 1,  Target role &amp; company, and Job description boxes so that they aren't so much of an eyesore and go better with the websites color scheme.</p>",
+      "contentText": "Change the background color to role 1, education 1, project 1, skills, certificate 1, publication 1,  Target role & company, and Job description boxes so that they aren't so much of an eyesore and go better with the websites color scheme.",
+      "id": "main:agent#00000000017927#usr:NNWWJNB2",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#00000000017928#ast:SNA5FZGS",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Make the title larger and use a font similar to Claude's title. Also, change the website icon to be a paper/doc/resume icon instead of the star icons.</p>",
+      "contentText": "Make the title larger and use a font similar to Claude's title. Also, change the website icon to be a paper/doc/resume icon instead of the star icons.",
+      "id": "main:agent#00000000018282#usr:OOJI2QSS",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#00000000018282#usr:OOJI2QSS_2",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#00000000018283#ast:PZTLRXD7",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Change the font on the website to make it feel more official, like a large tech company.</p>",
+      "contentText": "Change the font on the website to make it feel more official, like a large tech company.",
+      "id": "main:agent#00000000020174#usr:G3XEGX77",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#00000000020174#usr:G3XEGX77_2",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#00000000020175#ast:AEALTVTP",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubFixed tailwind not renderingDetailsPreview",
+      "id": "main:agent#00000000020504#gcm:E3S5HJDG",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Take the current code from the github and fix the black lines around the boxes.</p>",
+      "contentText": "Take the current code from the github and fix the black lines around the boxes.",
+      "id": "main:agent#00000000020505#usr:NI3QDVBD",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#00000000020506#ast:DV26DB64",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubFixed stage tracker for generating resumeDetailsPreview",
+      "id": "main:agent#00000000020692#gcm:ZTJ4DPRU",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubMade it where the stage change happens before the try blockDetailsPreview",
+      "id": "main:agent#00000000020693#gcm:DF7B6MYS",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubFixed merge conflictDetailsPreview",
+      "id": "main:agent#00000000020694#gcm:MT3OPEKO",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Use the current version on GitHub and it where the user can scroll up and down through the outputputted latex code. Additionally for the headers on the side make it where if the user's mouse hovers over the edge between the headers and the LateX code they can adjust the width of the boxes.</p>",
+      "contentText": "Use the current version on GitHub and it where the user can scroll up and down through the outputputted latex code. Additionally for the headers on the side make it where if the user's mouse hovers over the edge between the headers and the LateX code they can adjust the width of the boxes.",
+      "id": "main:agent#00000000020695#usr:XWXILECD",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#00000000020696#ast:WQUGRLQ3",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubMoved LaTeX step to the right spotDetailsPreview",
+      "id": "main:agent#00000000022215#gcm:S255OIC7",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAdded new backend python APIDetailsPreview",
+      "id": "main:agent#00000000022216#gcm:U6VJYAYZ",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAdded frontend call to critique AI backendDetailsPreview",
+      "id": "main:agent#00000000022217#gcm:CBPXYVED",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAdded backend API to implement the new feadback to the resumeDetailsPreview",
+      "id": "main:agent#00000000022218#gcm:AMFNHAA6",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAdded call to final LaTeX generation AI APIDetailsPreview",
+      "id": "main:agent#00000000022219#gcm:PY2W6BWP",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAdded API call to LaTeX to PDF converterDetailsPreview",
+      "id": "main:agent#00000000022220#gcm:WGI4XU6E",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Make it where if the last step to generate the PDF fails it still goes to the end screen like normal showing the latex, but when the user goes to the pdf download page there is an error (and maybe an X) and it says the error message\"</p>",
+      "contentText": "Make it where if the last step to generate the PDF fails it still goes to the end screen like normal showing the latex, but when the user goes to the pdf download page there is an error (and maybe an X) and it says the error message\"",
+      "id": "main:agent#00000000022221#usr:5JGW5BWE",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#00000000022222#ast:PTUA3JST",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubModified backend to add LaTeX to PDF capabilityDetailsPreview",
+      "id": "main:agent#00000000023098#gcm:GCVMKUWX",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubModified frontend to call backend LaTeX to PDF APIDetailsPreview",
+      "id": "main:agent#00000000023099#gcm:6SEX6VIM",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubmodified python backend to try and fix LaTeX to PDF problemDetailsPreview",
+      "id": "main:agent#00000000023100#gcm:4Q7HW7S7",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAttempting to add a preview of the resume PDF after making the resumeDetailsPreview",
+      "id": "main:agent#00000000023101#gcm:MQPHJZ7K",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubMade the default not show example and show finished PDF by defaultDetailsPreview",
+      "id": "main:agent#00000000023102#gcm:CZRXUQR3",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubMade the example info, my infoDetailsPreview",
+      "id": "main:agent#00000000023103#gcm:M4NWLKQE",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubRemoved example phone numberDetailsPreview",
+      "id": "main:agent#00000000023104#gcm:N2TNM5CT",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubRebranded to UltraCVDetailsPreview",
+      "id": "main:agent#00000000023105#gcm:XZ6PURFR",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Fix it, so that when the websites width shrinks the resume output box is under the user input box. Right now when it shrinks it creates the one under the other under the normal boxes instead of making the normal boxes dissapear.</p>",
+      "contentText": "Fix it, so that when the websites width shrinks the resume output box is under the user input box. Right now when it shrinks it creates the one under the other under the normal boxes instead of making the normal boxes dissapear.",
+      "id": "main:agent#00000000023106#usr:N2GDBRZX",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#00000000023107#ast:WMXGY2DN",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubUpdated website name in the tabDetailsPreview",
+      "id": "main:agent#00000000023527#gcm:2DCJHMP2",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubCreated README.md using Gemini for helpDetailsPreview",
+      "id": "main:agent#00000000023528#gcm:ZH3ZH57Y",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubSelected models based on individual strengthsDetailsPreview",
+      "id": "main:agent#00000000023529#gcm:6JVUWLZO",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubMerge branch 'main' of https://github.com/DrakeSeteraO/resume-ai-proDetailsPreview",
+      "id": "main:agent#00000000023530#gcm:C56ABLMX",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAdded comments explaining AI model choiceDetailsPreview",
+      "id": "main:agent#00000000023531#gcm:ZARN22DL",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubSwitched to Gemini 3.1 flash lite for testing because of high free tierDetailsPreview",
+      "id": "main:agent#00000000023532#gcm:DWW3ILWT",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubSwitched to using LaTeXOnline's data API which allows for more LaTeX to be compiledDetailsPreview",
+      "id": "main:agent#00000000023533#gcm:J3W6CB3A",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAdded a tool for the final revise LaTeX AI to use to check if the LaTeX it generated is validDetailsPreview",
+      "id": "main:agent#00000000023534#gcm:WYV7XQZ5",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAdded MCP functionality and rationale why Vercel Serverless functions are used instead of MCP in productionDetailsPreview",
+      "id": "main:agent#00000000023535#gcm:GGXOAH5Z",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubincreased runtime for Vercel Serverless functionsDetailsPreview",
+      "id": "main:agent#00000000023536#gcm:2BJ56AG6",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAdded a schema AI 1 is forced to return to fix errors when parsing its outputDetailsPreview",
+      "id": "main:agent#00000000023537#gcm:76F5VIZW",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubRemoved default and optional values in pydantic schema so that Gemini SDK can understand the schemaDetailsPreview",
+      "id": "main:agent#00000000023538#gcm:J22IZYCP",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubTo fix frontend error with schema's I made 1 schema set for frontend and 1 for the Gemini SDKDetailsPreview",
+      "id": "main:agent#00000000023539#gcm:X53DGALY",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAdded a catch for all fields recieved from front endDetailsPreview",
+      "id": "main:agent#00000000023540#gcm:5MMXHKYS",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAdded better error tracking to help with debuggingDetailsPreview",
+      "id": "main:agent#00000000023541#gcm:ENXRO6MX",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubApparently more strict does not mean better '_'DetailsPreview",
+      "id": "main:agent#00000000023542#gcm:QAWRPQFD",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubRemoved gemini scrict schema's because they were ineffectiveDetailsPreview",
+      "id": "main:agent#00000000023543#gcm:CN2PAR5Q",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubUpdate README.mdDetailsPreview",
+      "id": "main:agent#00000000023544#gcm:UME6JKFT",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubupdated live application URLDetailsPreview",
+      "id": "main:agent#00000000023545#gcm:TNEWAVGT",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubUpdate README.mdDetailsPreview",
+      "id": "main:agent#00000000023546#gcm:WAVR2GKC",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubUpdate README.mdDetailsPreview",
+      "id": "main:agent#00000000023547#gcm:QH3YQG6H",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubUpdate README.mdDetailsPreview",
+      "id": "main:agent#00000000023548#gcm:DXHUF5HM",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubImproved specifics in READMEDetailsPreview",
+      "id": "main:agent#00000000023549#gcm:LY5OYF7A",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAdded AI section to READMEDetailsPreview",
+      "id": "main:agent#00000000023550#gcm:BTHME7XZ",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAdded Loveable logs folderDetailsPreview",
+      "id": "main:agent#00000000023551#gcm:LZFIJHOE",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAdd files via uploadDetailsPreview",
+      "id": "main:agent#00000000023552#gcm:JUOZA5YJ",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAdd AI referencesDetailsPreview",
+      "id": "main:agent#00000000023553#gcm:Z5PESR66",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubUpdate README.mdDetailsPreview",
+      "id": "main:agent#00000000023554#gcm:HVR7CVBK",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAdd files via uploadDetailsPreview",
+      "id": "main:agent#00000000023555#gcm:SFBIXS5X",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubUpdated Gemini Chat Logs LinkDetailsPreview",
+      "id": "main:agent#00000000023556#gcm:OYF4AW7Q",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubUpdate README.mdDetailsPreview",
+      "id": "main:agent#00000000023557#gcm:JCFEDYVA",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubUpdate README.mdDetailsPreview",
+      "id": "main:agent#00000000023558#gcm:G5ZA4O7Z",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubRemoved useless blank.txtDetailsPreview",
+      "id": "main:agent#00000000023559#gcm:VTKC7SOI",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubImproved AI's prompts to make a better ResumeDetailsPreview",
+      "id": "main:agent#00000000023560#gcm:M6KLVB5R",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubIncreased pdf compilation retries to 5DetailsPreview",
+      "id": "main:agent#00000000023561#gcm:2OFW4Q3J",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAdded an auto retry for all the stages of the AI'sDetailsPreview",
+      "id": "main:agent#00000000023562#gcm:FLIIQQOX",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubFixed example profile to work with more strict schemaDetailsPreview",
+      "id": "main:agent#00000000023563#gcm:4A2BRYI5",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubDue to 20 free uses a day of Gemini 3.5 flash, I changed it to cascade through the models until 1 worksDetailsPreview",
+      "id": "main:agent#00000000023564#gcm:6YG34K6F",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubMoved instructions before user information on AI 3, so it is less likely to fall for a prompt injectionDetailsPreview",
+      "id": "main:agent#00000000023565#gcm:PXNTXFT5",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAdded model decision explanation for AI 3 (Resume Critique)DetailsPreview",
+      "id": "main:agent#00000000023566#gcm:K2VLEW2J",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubUpdate README.mdDetailsPreview",
+      "id": "main:agent#00000000023567#gcm:3PEPPZU3",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceMoved backend API's to a more structured file structureDetailsPreview",
+      "id": "main:agent#00000000023568#gcm:OAUWED7V",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceAdded function to check a user's github to look trough their repositoriesDetailsPreview",
+      "id": "main:agent#00000000023569#gcm:2OFMRFAP",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "<p>Add a section to the profile where users can put in any awards they have won. Also, in the project section, when it is selected, offer a spot for the user to put in their GitHub username. This feature is important because in the backend, there is going to be code to search a user's github for extra projects.</p>",
+      "contentText": "Add a section to the profile where users can put in any awards they have won. Also, in the project section, when it is selected, offer a spot for the user to put in their GitHub username. This feature is important because in the backend, there is going to be code to search a user's github for extra projects.",
+      "id": "main:agent#00000000023570#usr:QSRTGXXS",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "[Thinking]\n\nThinking",
+      "id": "main:agent#00000000023571#ast:WYKKC7HD",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubRemoved strict schema enforcing and improved error message readability in consoleDetailsPreview",
+      "id": "main:agent#00000000024859#gcm:IDJM7ELR",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubDue to AI calling more AI's rate limit is reached quickly, to try and fix this the first AI now uses a completly different model with a fallback one if it failsDetailsPreview",
+      "id": "main:agent#00000000024860#gcm:33AGD56Z",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubAttempted to fix dictionary error in Critique AIDetailsPreview",
+      "id": "main:agent#00000000024861#gcm:GIIBD54C",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubDue to latexOnline sometimes having to much traffic or being down, I switched to a fallback approach where the API tries Tex Live to convert the LaTeX if that fails it tries the LatexOnline serverDetailsPreview",
+      "id": "main:agent#00000000024862#gcm:7GULUIIE",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubCreate evaluation.mdDetailsPreview",
+      "id": "main:agent#00000000024863#gcm:FV6VJMEC",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubUpdated sample profile with awardsDetailsPreview",
+      "id": "main:agent#00000000024864#gcm:VQFYIMSQ",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubMerge branch 'main' of https://github.com/DrakeSeteraO/resume-ai-proDetailsPreview",
+      "id": "main:agent#00000000024865#gcm:KXMNYYTE",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0
+    },
+    {
+      "id": "main:agent#00000000024866#gcm:XQ2XS4SM",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceUpdate evaluation.mdDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024867#gcm:DAL7XSBJ",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceAdded phone number to default profileDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024868#gcm:DXKQZBOJ",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceModified evaluation.mdDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024869#gcm:SKOCGCG5",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceAdd files via uploadDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024870#gcm:NYX4JA7R",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceAdd files via uploadDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024871#gcm:WHVXEJJS",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceUpdated 1st test evaluationDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024872#gcm:4CNKVBL2",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceMerge branch 'main' of https://github.com/DrakeSeteraO/resume-ai-proDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024873#gcm:SOOC6BRW",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceCompleted Empty slate testDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024874#gcm:ESKI2QSC",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceDecreased wording for empty slateDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024875#gcm:ESAGJ2QS",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceAdded 5 Year Developer ResultsDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024876#gcm:P2SPPZMA",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceAdd files via uploadDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024877#gcm:ILQXIJAT",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceAdd files via uploadDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024878#gcm:D6HGBTKE",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceTech VP info addedDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024879#gcm:DERYWBFR",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceMerge branch 'main' of https://github.com/DrakeSeteraO/resume-ai-proDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024880#gcm:RIZLHXHQ",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceMerge branch 'main' of https://github.com/DrakeSeteraO/resume-ai-proDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024881#gcm:LQJWXY43",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceAdded Tech VP resultsDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024882#gcm:MB2YIITK",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceAdd folder standardizationDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024883#gcm:25OHQTOU",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceAdd files via uploadDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024884#gcm:DVTLJIEE",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceFinished evaluation.md write upDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024885#gcm:HZDZKIP2",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceRename evaluation.md to README.mdDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024886#gcm:CQM2MR6V",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceUpdated explanation of Agent 1DetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024887#gcm:ESRDJW6K",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceAdd files via uploadDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024888#gcm:WBENSUFS",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceUpdate README.mdDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024889#gcm:BURGIQRH",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceAdded evaluation reference to READMEDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024890#gcm:MTCUM7WE",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceFix evaluation routeDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024891#gcm:42FVVQQ5",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceGemini made minor tweaks to evaluationDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000024892#gcm:QTHPQMQC",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from external sourceUpdate README.mdDetailsPreview"
+    },
+    {
+      "id": "main:agent#00000000010202#gcm:XD2PLBPX",
+      "role": "ai",
+      "timestampText": "",
+      "topPx": 0,
+      "contentHtml": "",
+      "contentText": "Pushed from GitHubremoved my object and added console.log to view dataDetailsPreview"
+    }
+  ]
+}
