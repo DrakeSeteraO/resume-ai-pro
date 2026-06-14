@@ -31,8 +31,8 @@ To ensure the pipeline handles real-world unpredictability, it was tested agains
 * **Profile 4: Tech VP (High Experience Test)**
   * *Inputs:* A Tech VP with 20 years of experience.
   * *Target:* CTO at Vanguard
-* **Profile 5: The Over-Achiever (Token Stress Test)**
-  * *Inputs:* 10+ years of experience, 8 projects, 5 publications, massive text blocks.
+* **Profile 5: Edge Case (AI Parser Test)**
+  * *Inputs:* Heavy use of `&`, `%`, `$`, and `#` in the raw text.
   * *Target:* Staff Engineer role. *(Tests the 1-page summarization constraint and token limits).*
 
 ---
@@ -45,7 +45,7 @@ To ensure the pipeline handles real-world unpredictability, it was tested agains
 | 2. Empty Slate | ✅ | ✅ | ✅ | High | 56 % | A lot | **Fail** | Though resume looked good, AI created fake job experience and 2 of the 3 projects were fake. |
 | 3. 5 Year Developer | ✅ | ✅ | ✅ | High | 71 % | None | **PASS** | Flawless execution. |
 | 4. Tech VP | ✅ | ✅ | ✅ | High | 74 % | None | **PASS** | Flawless execution. |
-| 5. Token Stress Test | ✅ | ✅ | High | **PASS** | Successfully condensed 3 pages of raw data into a single-column 1-page LaTeX layout. |
+| 5. Edge Case | ✅ | ✅ | High | **PASS** | Successfully condensed 3 pages of raw data into a single-column 1-page LaTeX layout. |
 
 ---
 
