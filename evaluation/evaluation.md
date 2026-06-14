@@ -33,7 +33,7 @@ To ensure the pipeline handles real-world unpredictability, it was tested agains
   * *Target:* CTO at Vanguard
 * **Profile 5: Edge Case (AI Parser Test)**
   * *Inputs:* Heavy use of `&`, `%`, `$`, and `#` in the raw text.
-  * *Target:* Staff Engineer role. *(Tests the 1-page summarization constraint and token limits).*
+  * *Target:* Director of Engineering Role.
 
 ---
 
@@ -42,23 +42,33 @@ To ensure the pipeline handles real-world unpredictability, it was tested agains
 | Test Case | Tool Execution | Valid LaTeX Generation | PDF Compiled? | Keyword Match | ATS score | AI Hallucination | Overall Result | Notes |
 | :--- | :---: | :---: | :---: | :---: | :---: |:---: |:---: | :--- |
 | 1. My Info | ✅ | ✅ | ✅ | High | 73 % | None | **PASS** | Flawless execution. |
-| 2. Empty Slate | ✅ | ✅ | ✅ | High | 56 % | A lot | **Fail** | Though resume looked good, AI created fake job experience and 2 of the 3 projects were fake. |
+| 2. Empty Slate | ✅ | ✅ | ✅ | High | 56 % | A lot | **Fail** | Reference: 4. Current Failures, Failure #1. |
 | 3. 5 Year Developer | ✅ | ✅ | ✅ | High | 71 % | None | **PASS** | Flawless execution. |
 | 4. Tech VP | ✅ | ✅ | ✅ | High | 74 % | None | **PASS** | Flawless execution. |
-| 5. Edge Case | ✅ | ✅ | High | **PASS** | Successfully condensed 3 pages of raw data into a single-column 1-page LaTeX layout. |
+| 5. Edge Case | ✅ | ❌ | ❌ | N/A | N/A | N/A | **Fail** | Reference: 4. Current Failures, Failure # 2. |
 
 ---
 
-## 4. Failure Analysis & System Iteration
-*Documenting where the system broke and how the architecture was hardened to fix it.*
+## 4. Current Failures
+*Documenting where the system broke.*
+
+### Failure 1: AI Hallucinating Fake Information
+* **What Broke:** During profile 2 testing the AI generated fake data in attempt to make a good resume. The AI created a fake previous job, two of the three projects were fake, and the user's summary was worded as if tey already worked at the target company. 
+
+### Failure 2: The 429 Rate Limit Exhaustion
+* **What Broke:** Because the pipeline runs 4 sequential models and an internal self-correction loop, the AI could exaust the total free Gemini API calls. During profile 5 testing the AI would keep reevaluating its LaTeX code because it was invalid. Every time the AI would try again it would call itself again, which quickly drained the free 15 API calls a minute I get under the free plan. 
+
+
+## 5. Previous Failure Analysis & System Iteration
+*Documenting where the system broke previously and how the architecture was hardened to fix it.*
 
 ### Failure 1: The "Unescaped Character" LaTeX Crash
-* **What Broke:** During Profile 4 testing, the user input included "C#" and "100% test coverage." The AI failed to escape the `%` symbol, causing the TeX Live compiler to treat the rest of the document as a comment and crash.
+* **What Broke:** In an older version if the user input included "C#" and "100% test coverage." The AI failed to escape the `%` symbol, causing the TeX Live compiler to treat the rest of the document as a comment and crash.
 * **The Fix:** The prompt for Agent 4 (The Reviser) was updated with a strict, capitalized constraint to escape all LaTeX characters. Additionally, the `validate_latex_syntax` Python tool was implemented, allowing the AI to catch its own unclosed environments and autonomously rewrite the code before sending it to the compiler.
 
 ### Failure 2: The 429 Rate Limit Exhaustion
-* **What Broke:** Because the pipeline runs 4 sequential models and an internal self-correction loop, rapid testing quickly exhausted the 15 Requests Per Minute (RPM) free-tier limit for `gemini-3.1-flash-lite`, crashing the backend.
-* **The Fix:** Implemented a **Dynamic Model Routing Strategy**. The architecture was load-balanced by assigning Agent 1 and 2 to `gemini-1.5-flash`, Agent 3 to `gemini-3.5-flash`, and Agent 4 to `gemini-2.5-flash`. By isolating the agents across different quota buckets, the system's capacity was massively multiplied without requiring paid infrastructure.
+* **What Broke:** In an older version the system would run out of free API calls very Quickly. Resulting in getting 429 errors if the system was ran again in the same minute or more than 20 times in a day.
+* **The Fix:** Implemented a **Dynamic Model Routing Strategy**. The architecture was load-balanced by assigning Agent 1 to `gemini-2.5-flash-lite` and falls back on `gemini-3.1-flash-lite`, Agent 2 and 4 use `gemini-3.1-flash-lite`, and Agent 3 needing to have the best model used the waterfall of `gemini-3.5-flash` then `gemini-2.5-flash` and finally falls back to `gemini-3.1-flash-lite`. By isolating the agents across different quota buckets, the system's capacity was massively multiplied without requiring paid infrastructure. Additionally the output appeared to have improved due to selecting AI's tailored to each job.
 
 ### Failure 3: Third-Party Compiler Timeouts (503 Errors)
 * **What Broke:** The initial implementation relied entirely on `latexonline.cc`. During peak hours, this public proxy frequently returned 503 Service Unavailable errors, breaking the final stage of the application.
