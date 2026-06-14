@@ -1,0 +1,150 @@
+{
+  "personal": {
+    "fullName": "Sarah Jenkins",
+    "email": "sarah.jenkins.exec@example.com",
+    "phone": "206-555-0198",
+    "location": "Seattle, WA",
+    "website": "https://linkedin.com/in/sarahjenkinsexec"
+  },
+  "narrative": "Visionary technology executive with 20 years of experience scaling global engineering organizations, driving enterprise-wide digital transformations, and architecting resilient cloud infrastructure. Proven expertise in growing engineering teams from 50 to 400+ across international offices, managing $50M+ P&L budgets, and leading M&A technical integrations. Passionate about aligning technology strategy with business objectives to accelerate ARR growth and foster a culture of engineering excellence.",
+  "education": [
+    {
+      "id": "edu1",
+      "school": "University of Washington",
+      "degree": "Executive MBA",
+      "field": "Technology Management",
+      "startDate": "September 2016",
+      "endDate": "June 2018",
+      "details": "Completed while serving as Director of Engineering. Focus on organizational design, corporate finance, and strategic M&A integration."
+    },
+    {
+      "id": "edu2",
+      "school": "Georgia Institute of Technology",
+      "degree": "Bachelor of Science",
+      "field": "Computer Science",
+      "startDate": "August 2000",
+      "endDate": "May 2004",
+      "details": "Graduated Magna Cum Laude. Specialization in Systems Architecture and Distributed Computing."
+    }
+  ],
+  "experience": [
+    {
+      "id": "exp1",
+      "company": "Nexus Enterprise Solutions",
+      "role": "Vice President of Engineering",
+      "location": "Seattle, WA",
+      "startDate": "March 2019",
+      "endDate": "Present",
+      "bullets": "Scaled the global engineering organization from 85 to 320+ personnel across 4 international development centers, reducing delivery cycle times by 40%, Managed an annual departmental budget of $55M, successfully reducing cloud infrastructure spend by 22% ($4.1M) through aggressive AWS optimization and architectural refactoring, Spearheaded the technical due diligence and system integration for three major corporate acquisitions, seamlessly onboarding 1.2M new users with zero unscheduled downtime, Championed a shift to a microservices architecture, decommissioning a 10-year-old monolith and increasing system reliability to 99.99%"
+    },
+    {
+      "id": "exp2",
+      "company": "CloudNetics Systems",
+      "role": "Director of Cloud Infrastructure",
+      "location": "San Francisco, CA",
+      "startDate": "July 2014",
+      "endDate": "February 2019",
+      "bullets": "Directed a team of 45 DevOps and SRE professionals to build and maintain a multi-region hybrid cloud platform serving Fortune 500 clients, Drove the adoption of Kubernetes and containerization across the enterprise, reducing environment provisioning time from 3 weeks to 45 minutes, Partnered directly with the C-suite to define the 3-year technology roadmap, directly contributing to a successful $120M Series D funding round"
+    },
+    {
+      "id": "exp3",
+      "company": "FinServe Analytics",
+      "role": "Principal Software Architect",
+      "location": "Chicago, IL",
+      "startDate": "January 2009",
+      "endDate": "June 2014",
+      "bullets": "Architected the core high-frequency trading data ingestion pipeline in C++ and Java, capable of processing 2M+ transactions per second with sub-millisecond latency, Mentored a cohort of 15 senior engineers and established the company's first internal Architecture Review Board (ARB) to standardize design patterns across all product lines"
+    },
+    {
+      "id": "exp4",
+      "company": "StartUp Dynamics",
+      "role": "Senior Software Engineer",
+      "location": "Chicago, IL",
+      "startDate": "June 2004",
+      "endDate": "December 2008",
+      "bullets": "Developed full-stack web applications using Java Spring and early JavaScript frameworks, Lead developer for the proprietary billing module that processed $10M in ARR"
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj1",
+      "name": "Enterprise LLM Adoption Initiative",
+      "stack": "OpenAI Enterprise, Python, AWS SageMaker, React",
+      "link": "",
+      "description": "Executive sponsor for a company-wide AI initiative. Directed the R&D team to securely deploy internal LLM tooling for the customer success department, resulting in a 35% reduction in average ticket resolution time and saving $2M in projected headcount costs."
+    },
+    {
+      "id": "proj2",
+      "name": "Project Phoenix - Monolith Decommissioning",
+      "stack": "Go, AWS EKS, Kafka, PostgreSQL",
+      "link": "",
+      "description": "Led the strategic initiative to break down a 12-year-old legacy PHP monolith into 40+ independent Go microservices. Orchestrated cross-functional alignment between Product, Sales, and Engineering to ensure zero disruption to enterprise clients during the 18-month migration."
+    }
+  ],
+  "githubUsername": "sjenkins_exec",
+  "skills": [
+    "Strategic Planning & Execution",
+    "Organizational Design & Scaling",
+    "Cloud Architecture (AWS/GCP)",
+    "P&L & Budget Management",
+    "M&A Technical Integration",
+    "Agile/SAFe Transformations",
+    "Microservices & Distributed Systems",
+    "Executive Communication"
+  ],
+  "certificates": [
+    {
+      "id": "cert1",
+      "name": "AWS Certified Solutions Architect - Professional",
+      "issuer": "Amazon Web Services",
+      "date": "August 2020",
+      "link": ""
+    },
+    {
+      "id": "cert2",
+      "name": "Certified Scrum Professional (CSP)",
+      "issuer": "Scrum Alliance",
+      "date": "May 2015",
+      "link": ""
+    }
+  ],
+  "publications": [
+    {
+      "id": "pub1",
+      "title": "Bridging the Gap: How Engineering Leaders Can Speak the Language of the Boardroom",
+      "venue": "Forbes Technology Council",
+      "date": "February 2023",
+      "link": "https://forbes.com/fake-link-exec-leadership",
+      "description": "An op-ed discussing strategies for technical leaders to translate complex engineering initiatives into ROI and business outcomes for stakeholders."
+    },
+    {
+      "id": "pub2",
+      "title": "Keynote: Architecting for Hyper-Growth",
+      "venue": "AWS re:Invent 2021",
+      "date": "November 2021",
+      "link": "",
+      "description": "Delivered a 45-minute keynote presentation on the cultural and technical challenges of scaling cloud infrastructure during rapid company acquisitions."
+    }
+  ],
+  "awards": [
+    {
+      "id": "awd1",
+      "name": "Top 50 Women in Tech Leadership",
+      "issuer": "Pacific Northwest Technology Council",
+      "date": "November 2022",
+      "description": "Recognized for outstanding leadership in engineering and advocacy for diversity in STEM."
+    },
+    {
+      "id": "awd2",
+      "name": "CTO of the Year - Enterprise Nominee",
+      "issuer": "GeekWire Awards",
+      "date": "April 2021",
+      "description": "Nominated for leading Nexus Enterprise Solutions through a massive period of hyper-growth and technical scaling."
+    }
+  ],
+  "target": {
+    "company": "Vanguard Tech Innovations",
+    "role": "Chief Technology Officer (CTO)",
+    "jobDescription": "Vanguard Tech Innovations is seeking a Chief Technology Officer to lead our global technology strategy. The ideal candidate will have 15+ years of software engineering experience with at least 7 years in a VP or C-level leadership role. You will oversee an engineering organization of 500+, direct our enterprise cloud strategy, and partner with the CEO to evaluate technical targets for future acquisitions. We need a leader who is highly commercial, deeply technical, and capable of driving operational excellence across diverse, distributed teams. Experience managing budgets exceeding $30M and successfully executing legacy modernization initiatives is required."
+  }
+}
