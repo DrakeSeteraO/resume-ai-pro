@@ -1,0 +1,100 @@
+{
+  "personal": {
+    "fullName": "Casey O'Connor",
+    "email": "casey.oconnor.quant@example.com",
+    "phone": "212-555-0199",
+    "location": "New York, NY",
+    "website": "https://github.com/casey_quant_dev"
+  },
+  "narrative": "FinTech Engineering Lead & Quantitative Analyst with a proven track record of managing $50M+ algorithmic trading portfolios. Expert in C# & C++ backend development, High-Frequency Trading (HFT) systems, & M&A technical integrations. Consistently delivered 99.9% uptime across Tier 1 banking infrastructure while reducing cloud compute costs by over 45% ($1.2M annually).",
+  "education": [
+    {
+      "id": "edu1",
+      "school": "Texas A&M University",
+      "degree": "Master of Science",
+      "field": "Financial Engineering & Mathematics",
+      "startDate": "August 2013",
+      "endDate": "May 2015",
+      "details": "Graduated in the Top 5% of the class. Thesis: 'Predictive Modeling of $ & € Currency Fluctuations using C# Neural Networks'. Funded by a $10,000 R&D grant."
+    }
+  ],
+  "experience": [
+    {
+      "id": "exp1",
+      "company": "Smith & Weber Capital",
+      "role": "Lead Software Engineer - Trading Infrastructure",
+      "location": "New York, NY",
+      "startDate": "January 2020",
+      "endDate": "Present",
+      "bullets": "Managed a $15M R&D budget to completely overhaul the legacy trading engine, resulting in a 300% increase in order throughput, Led the M&A technical integration when Smith & Weber acquired TradeTech, successfully migrating 100% of user data with 0% data loss, Wrote the primary options pricing engine in C# & F#, directly contributing to a $4.5M increase in Q3 P&L, Resolved highly critical production bug #4892, preventing a potential $500,000 regulatory fine from the SEC"
+    },
+    {
+      "id": "exp2",
+      "company": "Johnson & Partners Analytics",
+      "role": "Quantitative Developer",
+      "location": "Boston, MA",
+      "startDate": "June 2015",
+      "endDate": "December 2019",
+      "bullets": "Developed risk assessment algorithms in C# & Python, achieving 98.5% accuracy in backtesting environments, Automated 80% of the daily compliance reporting using complex SQL & regex queries, saving the QA team 20+ hours per week, Optimized the AWS billing architecture, driving cloud storage costs down by 35% (saving the department ~$120k/year)"
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj1",
+      "name": "Project Alpha & Omega - HFT Bot",
+      "stack": "C#, .NET Core, Redis, C++",
+      "link": "https://github.com/casey_quant_dev/alpha-omega",
+      "description": "An open-source high-frequency trading bot that leverages statistical arbitrage. It currently boasts a 12% YoY return in simulated environments. Features 100% test coverage and executes trades in <5ms."
+    },
+    {
+      "id": "proj2",
+      "name": "ExpenseTracker Pro (SaaS)",
+      "stack": "React, Node.js, PostgreSQL",
+      "link": "https://expensetracker.example.com",
+      "description": "A personal finance tool helping users manage P&L, track 401(k) & IRA growth, and calculate tax brackets. Scaled to 10,000+ monthly active users, generating $2,000/MRR."
+    }
+  ],
+  "githubUsername": "casey_quant_dev",
+  "skills": [
+    "C# & .NET Framework",
+    "C++ & Low-Level Optimization",
+    "P&L Management",
+    "M&A Integrations",
+    "R&D Strategy",
+    "A/B Testing & Analytics",
+    "Quantitative Finance ($/€/£)"
+  ],
+  "awards": [
+    {
+      "id": "awd1",
+      "name": "1st Place - FinTech & Blockchain Hackathon",
+      "issuer": "Tech & Finance Hub NYC",
+      "date": "October 2021",
+      "description": "Won the $5,000 grand prize for building a decentralized escrow smart contract using Solidity & React."
+    }
+  ],
+  "certificates": [
+    {
+      "id": "cert1",
+      "name": "Bloomberg Market Concepts (BMC) & Analytics",
+      "issuer": "Bloomberg L.P.",
+      "date": "March 2018",
+      "link": "https://bloomberg.com/certificate/fake-id-1234"
+    }
+  ],
+  "publications": [
+    {
+      "id": "pub1",
+      "title": "Optimizing C# Garbage Collection in High-Stress & Low-Latency Environments",
+      "venue": "Journal of Financial Technology & Computing",
+      "date": "July 2022",
+      "link": "https://jftc.org/articles/csharp-optimization",
+      "description": "Published a 15-page peer-reviewed article detailing how to achieve <1% GC pauses in C# trading applications."
+    }
+  ],
+  "target": {
+    "company": "Citadel & Co.",
+    "role": "Director of Engineering",
+    "jobDescription": "We are seeking a Director of Engineering to manage our primary equities trading platform. You will oversee an R&D budget of $20M+ and lead a team of 40+ engineers using C#, C++, & Java. The ideal candidate will have deep expertise in M&A tech integrations, a strong understanding of P&L management, and a track record of building systems with 99.99% uptime. You must be comfortable working in a fast-paced environment where a 1% decrease in latency can result in millions of dollars in captured revenue."
+  }
+}
