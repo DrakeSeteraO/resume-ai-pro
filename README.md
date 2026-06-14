@@ -21,7 +21,9 @@ This application satisfies all advanced grading criteria through the following a
 
 ### 1. Multi-Agent Workflow & Autonomous Tool Execution
 The pipeline abandons basic prompt-based string parsing in favor of true agentic tool invocation. It utilizes a sequential, four-stage workflow:
-* **Agent 1 (The Tailor):** Ingests raw JSON profile data and a target job description. It rewrites bullet points using Google's X-Y-Z formula and injects ATS keywords while strictly preserving factual history via JSON mode.
+* **Agent 1 (The Tailor & Data Fetcher):** Ingests raw JSON profile data and a target job description. 
+    * **Live MCP Tool Execution (Grounding):** Before generating any text, the model evaluates the input data. If it detects a GitHub username, the model autonomously decides to halt text generation and invoke the `fetch_github_profile` Python tool. This tool queries the live public GitHub API, pulling in the user's latest repositories and languages. 
+    * **Agentic Synthesis:** The model reads the live API result, synthesizes it with the existing profile, and then resumes its task. It rewrites bullet points using Google's X-Y-Z formula and naturally weaves in ATS keywords, returning a strictly formatted JSON object without hallucinating fake experience.
 * **Agent 2 (The Formatter):** Transcribes the optimized JSON object into raw, single-column LaTeX code, properly escaping special characters.
 * **Agent 3 (The ATS Auditor):** Cross-references the generated LaTeX against the target job description to identify missing high-value metrics, generating an array of specific critique instructions.
 * **Agent 4 (The Reviser):** Ingests the initial LaTeX and the critique array to autonomously rewrite the document. 
