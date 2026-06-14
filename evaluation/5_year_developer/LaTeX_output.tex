@@ -1,0 +1,79 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[margin=0.5in]{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+
+\pagestyle{empty}
+\setlist[itemize]{noitemsep, topsep=0pt, leftmargin=1.5em}
+
+\titleformat{\section}{\large\bfseries\uppercase}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{8pt}{4pt}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE \textbf{Alex Mercer}} \\
+    Austin, TX $|$ 555-019-8372 $|$ \href{mailto:alex.mercer.dev@example.com}{alex.mercer.dev@example.com} \\
+    \href{https://alexmercer.dev}{alexmercer.dev} $|$ \href{https://github.com/AlexMercerDev}{github.com/AlexMercerDev}
+\end{center}
+
+\section{Professional Summary}
+High-impact Software Engineer with 5 years of experience architecting resilient distributed systems and high-throughput backend services. Proven expertise in scaling mission-critical infrastructure, optimizing PostgreSQL performance, and leading cross-functional teams to deliver secure, enterprise-grade solutions. Adept at leveraging Go, cloud-native technologies, and IaC to drive operational efficiency and reliability at scale.
+
+\section{Experience}
+\textbf{TechNova Solutions} \hfill Austin, TX \\
+\textit{Software Engineer II} \hfill January 2023 -- Present
+\begin{itemize}
+    \item Architected and migrated a legacy monolithic REST API to a serverless AWS microservices architecture, reducing infrastructure costs by \$150k annually (35\% reduction) while supporting 5,000+ requests per second.
+    \item Spearheaded the modernization of the primary customer portal using React and TypeScript, elevating Lighthouse performance scores from 68 to 94 through strategic code-splitting and asset optimization.
+    \item Accelerated deployment velocity by 50\% and achieved near-zero production rollbacks by implementing robust CI/CD pipelines with GitHub Actions, Docker, and Terraform for Infrastructure-as-Code.
+    \item Integrated Prometheus and Grafana for real-time observability, reducing mean-time-to-resolution (MTTR) for production incidents by 40\%.
+\end{itemize}
+
+\textbf{DataStream Analytics} \hfill Dallas, TX \\
+\textit{Junior Full-Stack Developer} \hfill June 2021 -- December 2022
+\begin{itemize}
+    \item Optimized frontend performance for 50,000+ monthly active users by refactoring core components using Vue.js and Vuex state management.
+    \item Optimized PostgreSQL database schemas for high-volume IoT data ingestion (processing 50GB+/day), resulting in a 20\% improvement in complex query execution speeds.
+    \item Architected a comprehensive testing suite with Jest and Cypress, achieving 85\% branch coverage and ensuring system reliability across the primary repository.
+\end{itemize}
+
+\textbf{DataStream Analytics} \hfill Dallas, TX \\
+\textit{Software Engineering Intern} \hfill May 2020 -- August 2020
+\begin{itemize}
+    \item Engineered an internal data visualization dashboard using Python, Flask, and Chart.js to provide real-time visibility into API usage metrics.
+    \item Resolved 40+ critical bug tickets within a legacy PHP codebase, significantly improving system stability and reducing technical debt.
+\end{itemize}
+
+\section{Technical Skills}
+\textbf{Languages \& Frameworks:} Go, JavaScript/TypeScript, Python, React, Node.js \\
+\textbf{Infrastructure \& Tools:} AWS (Lambda, EC2, S3), Docker, Kubernetes, Terraform, PostgreSQL, Prometheus, Grafana, CI/CD \\
+\textbf{Core Competencies:} Distributed Systems, System Architecture, Performance Optimization, IaC
+
+\section{Projects}
+\textbf{CacheFlow - Distributed Key-Value Store} $|$ \textit{Go, gRPC, Docker, Redis} \\
+Engineered a high-performance, distributed in-memory key-value store in Go, implementing the Raft consensus algorithm to ensure fault tolerance and data consistency. Benchmarked to sustain 15,000+ concurrent reads/sec.
+
+\textbf{DevSync Collaboration Tool} $|$ \textit{React, Node.js, Socket.io, MongoDB} \\
+Developed a real-time collaborative code editor featuring multi-cursor synchronization and live chat. Optimized WebSocket communication to maintain sub-50ms latency.
+
+\section{Publications}
+\textbf{Scaling Node.js Microservices Under Heavy Load} $|$ \textit{Medium - Better Programming} \\
+Authored a technical deep-dive on scaling strategies for Node.js, covering clustering, reverse proxy configurations, and multi-layer caching architectures.
+
+\section{Education}
+\textbf{University of Texas at Austin} \hfill Austin, TX \\
+\textit{Bachelor of Science in Computer Science} \hfill August 2017 -- May 2021 \\
+GPA: 3.8. Focused on Distributed Systems and Cloud Computing.
+
+\section{Certifications \& Awards}
+\textbf{AWS Certified Developer - Associate} (2023); \textbf{Certified Kubernetes Administrator (CKA)} (2024) \\
+\textbf{Innovation Award - Q3 2023} (TechNova Solutions); \textbf{1st Place - FinTech Hackathon} (Texas Tech Hub, 2022)
+
+\end{document}
