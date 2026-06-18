@@ -13,6 +13,10 @@ UltraCV is an advanced, multi-agent generative AI pipeline designed to parse uns
 
 This project demonstrates advanced prompt engineering, deterministic JSON structured outputs, autonomous function calling, and dynamic model routing using the Google Gemini SDK.
 
+### Target Audience & Problem Statement
+**The Problem:** Modern job seekers struggle to manually tailor their resumes to pass strict Applicant Tracking Systems (ATS) for every application, while maintaining complex LaTeX formatting constraints.  
+**The User:** This application is built specifically for software engineers, tech professionals, and students who need highly tailored, metrics-driven, and perfectly formatted technical resumes at scale.
+
 ---
 
 ## 🏗️ System Architecture & Rubric Alignment
@@ -21,7 +25,9 @@ This application satisfies all advanced grading criteria through the following a
 
 ### 1. Multi-Agent Workflow & Autonomous Tool Execution
 The pipeline abandons basic prompt-based string parsing in favor of true agentic tool invocation. It utilizes a sequential, four-stage workflow:
-* **Agent 1 (The Tailor):** Ingests raw JSON profile data and a target job description. It rewrites bullet points using Google's X-Y-Z formula and injects ATS keywords while strictly preserving factual history via JSON mode.
+* **Agent 1 (The Tailor & Data Fetcher):** Ingests raw JSON profile data and a target job description. 
+    * **Live MCP Tool Execution (Grounding):** Before generating any text, the model evaluates the input data. If it detects a GitHub username, the model autonomously decides to halt text generation and invoke the `fetch_github_profile` Python tool. This tool queries the live public GitHub API, pulling in the user's latest repositories and languages. 
+    * **Agentic Synthesis:** The model reads the live API result, synthesizes it with the existing profile, and then resumes its task. It rewrites bullet points using Google's X-Y-Z formula and naturally weaves in ATS keywords, returning a strictly formatted JSON object without hallucinating fake experience.
 * **Agent 2 (The Formatter):** Transcribes the optimized JSON object into raw, single-column LaTeX code, properly escaping special characters.
 * **Agent 3 (The ATS Auditor):** Cross-references the generated LaTeX against the target job description to identify missing high-value metrics, generating an array of specific critique instructions.
 * **Agent 4 (The Reviser):** Ingests the initial LaTeX and the critique array to autonomously rewrite the document. 
@@ -36,7 +42,16 @@ To optimize for both computational quality and infrastructure constraints, tasks
 To adhere to modern decoupled AI standards, the project features a `mcp_server.py` microservice built with the **FastMCP** framework. This isolates the validation and compilation tools from the core application logic. 
 * *Production Architecture Note:* While the local architecture is designed for an MCP microservice topology via `stdio` transport, the tools are embedded natively within the FastAPI handlers for the live Vercel deployment. This intentional topology shift bypasses Vercel's ephemeral serverless lifecycle constraints (which terminate persistent background processes) while maximizing frontend responsiveness and UX.
 
----
+### 🔍 Example of a Complete Interaction (Traced Execution)
+To demonstrate the agentic pipeline in action, here is a trace of a standard execution (Reference: `Profile 3: 5 Year Developer` in the evaluation logs):
+
+1. **User Request:** The frontend submits a JSON payload containing the user's career history, target job description (Senior Backend Engineer at Stripe), and GitHub username (`AlexMercerDev`).
+2. **Autonomous Tool Call (Agent 1):** The Tailor agent receives the payload, recognizes the GitHub username, and autonomously suspends text generation to invoke the `fetch_github_profile` MCP tool.
+3. **Data Synthesis (Agent 1):** The Python backend executes the tool, querying the GitHub API. The agent reads the returned repository data, synthesizes it with the original JSON, and outputs an ATS-optimized JSON profile.
+4. **Formatting (Agent 2):** The Formatter translates the JSON into a raw LaTeX string.
+5. **Critique Generation (Agent 3):** The ATS Auditor cross-references the LaTeX against the Stripe job description and outputs a JSON array of critique instructions (e.g., *"Inject keywords: distributed systems, Go, fault tolerance"*).
+6. **Self-Correcting Revision (Agent 4):** The Reviser incorporates the critique into the LaTeX string. Before returning the final string, the agent autonomously invokes the `validate_latex_syntax` tool. The tool detects an unescaped `%` symbol. The agent reads this error, rewrites the string to `\%`, and successfully completes the execution loop.
+7. **Final Output:** The backend API compiles the validated LaTeX string via TeX Live and returns a downloadable PDF to the user.
 
 ## 🛠️ Infrastructure & Execution Solutions
 
@@ -53,7 +68,7 @@ Throughout development, several bleeding-edge infrastructure and SDK limitations
 In accordance with academic integrity guidelines, the following outlines the usage of Generative AI tools during the development of this project:
 
 * **Google Gemini:** Utilized as a pair-programming assistant to troubleshoot complex FastAPI/Pydantic validation errors (HTTP 422), architect the decoupled FastMCP microservice structure, and iteratively refine the strict anti-hallucination prompts and JSON mode configurations to prevent "Template Collapse." Also helped with outlining the README file. 
-   * Gemini Pro logs can be found here: [chat logs](https://gemini.google.com/share/d4eb85d0a2d2)
+   * Gemini Pro logs can be found here: [chat logs](https://gemini.google.com/share/44b7966da293)
 
 * **Lovable:** Utilized to bootstrap and generate the initial React frontend, UI components, and styling, allowing the primary engineering focus to remain on the complex backend AI orchestration and agentic pipelines.
    * Loveable logs can be found in the `Loveable_Logs` folder
@@ -62,3 +77,17 @@ In accordance with academic integrity guidelines, the following outlines the usa
    * Due to Cline not having a clean way to export files in WSL I had to export all of its data, so the Cline messages can be found somewhere in the `Cline_Data` folder
 
 ---
+
+## 🧪 System Evaluation & Iteration
+
+To ensure the pipeline handles real-world unpredictability, the system was rigorously evaluated against 5 highly distinct user profiles (ranging from an empty slate to a 20-year executive). Success was measured quantitatively (compilation success, rate limit avoidance) and qualitatively (ATS scoring, hallucination prevention).
+
+**Detailed Testing & Iteration Logs:**
+Because the evaluation and prompt engineering processes were extensive, the detailed methodologies, test results, and failure analyses have been documented in their own dedicated files. Reviewers are highly encouraged to read these to understand the architectural evolution of the project:
+
+* 📊 [System Evaluation Framework](./evaluation/README.md): Contains the complete testing methodology, ATS scoring results, and documentation of resolved system failures. The raw JSON inputs, generated LaTeX, and final PDF outputs for all 5 test cases can be found inside the [`/evaluation`](./evaluation/) directory.
+* 🛠️ [Build Log & Prompt Evolution](./BUILD_LOG.md): Documents the iterative prompt engineering process, showing exactly how the agent instructions evolved from Version 1 to Production to eliminate "Template Collapse" and LaTeX compiler crashes.
+
+## 🚀 Future Work (What I Would Fix With More Time)
+* **Asynchronous Queueing:** Currently, the system relies on artificial frontend timeouts (breathers) to manage rate limits. With more time, I would implement a robust backend queue (like Celery/Redis) to handle concurrent users without risking API quota exhaustion.
+* **Direct PDF Generation:** Instead of relying on third-party proxies like TeX Live, I would containerize a local `pdflatex` environment within a Dockerized backend to eliminate network latency and third-party downtime entirely.
