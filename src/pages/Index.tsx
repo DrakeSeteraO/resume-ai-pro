@@ -83,7 +83,6 @@ export default function Index() {
   const compilePdfWithRetry = async (latexString: string, maxRetries = 5): Promise<Blob> => {
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
       try {
-        // Call YOUR Vercel backend proxy route
         const response = await fetch("/api/pdf", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -94,15 +93,12 @@ export default function Index() {
           throw new Error(`Server returned ${response.status}`);
         }
 
-        // Success! Return the raw PDF binary data
         return await response.blob();
       } catch (error) {
         console.warn(`PDF compilation attempt ${attempt} failed:`, error);
-
         if (attempt === maxRetries) {
           throw new Error("PDF compilation failed. The server might be overloaded.");
         }
-
         await new Promise((resolve) => setTimeout(resolve, 2000));
       }
     }
@@ -112,11 +108,9 @@ export default function Index() {
 
   const fetchJsonWithRetry = async (url: string, options: RequestInit, maxRetries = 1) => {
     let lastError: any;
-    
     for (let attempt = 0; attempt <= maxRetries; attempt++) {
       try {
         const response = await fetch(url, options);
-        
         if (!response.ok) {
           let errorMessage = `Server returned status: ${response.status}`;
           try {
@@ -131,18 +125,15 @@ export default function Index() {
           }
           throw new Error(errorMessage);
         }
-        
         return await response.json();
       } catch (error) {
         lastError = error;
         if (attempt < maxRetries) {
           console.warn(`⚠️ Stage error on ${url}. Retrying attempt ${attempt + 1}/${maxRetries}...`);
-          // Wait 1.5 seconds before retrying to give the API breathing room
           await new Promise(resolve => setTimeout(resolve, 1500));
         }
       }
     }
-    // If we exit the loop, all retries failed. Throw the final error.
     throw lastError;
   };
 
@@ -153,19 +144,18 @@ export default function Index() {
 
     try {
       // ------------------------------------------------
-      // Step 1: Rewriting for maximum impact
+      // Step 1: Tailor Data
       // ------------------------------------------------
       setStepIndex(0);
       const tailoredData = await fetchJsonWithRetry("/api/tailor", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
-      }, 1); // 1 retry allowed
-      
+      }, 1);
       console.log("✅ Stage 1 - Tailored Profile Data:", tailoredData);
 
       // ------------------------------------------------
-      // Step 2: Structuring initial document
+      // Step 2: Initial LaTeX Structure
       // ------------------------------------------------
       setStepIndex(1);
       const latexData = await fetchJsonWithRetry("/api/latex", {
@@ -173,40 +163,73 @@ export default function Index() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(tailoredData),
       }, 1);
-      
       console.log("✅ Stage 2 - Initial LaTeX Code:", latexData);
 
       // ------------------------------------------------
-      // Step 3: Critiquing alignment & layout
+      // Step 3 & 4: THE AUTONOMOUS AGENTIC LOOP
       // ------------------------------------------------
-      setStepIndex(2);
-      const critiqueData = await fetchJsonWithRetry("/api/critique", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          profile: tailoredData,
-          latex_string: latexData.latex,
-        }),
-      }, 1);
-      
-      console.log("✅ Stage 3 - Critique & Improvements:", critiqueData);
+      let isApproved = false;
+      let routingLoopCount = 0;
+      const MAX_ROUTING_LOOPS = 2; // Prevent 429 quota exhaustion
+      let currentLatex = latexData.latex;
+      let finalLatex = currentLatex;
 
-      // ------------------------------------------------
-      // Step 4: Generate the LaTeX Code
-      // ------------------------------------------------
-      setStepIndex(3);
-      const finalLatexData = await fetchJsonWithRetry("/api/revise", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          profile: tailoredData,
-          latex_string: latexData.latex,
-          improvements: critiqueData.improvements,
-        }),
-      }, 1);
-      
-      setLatex(finalLatexData.latex);
-      console.log("✅ Stage 4 - Final Revised LaTeX:", finalLatexData);
+      while (!isApproved && routingLoopCount < MAX_ROUTING_LOOPS) {
+        routingLoopCount++;
+        
+        // Agent 3: The Auditor checks the draft
+        setStepIndex(2);
+        const critiqueData = await fetchJsonWithRetry("/api/critique", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            profile: tailoredData,
+            latex_string: currentLatex,
+          }),
+        }, 1);
+        console.log(`✅ Stage 3 (Loop ${routingLoopCount}) - Critique Decision: ${critiqueData.decision}`);
+
+        // THE AGENTIC DECISION POINT
+        // The AI explicitly decides if the pipeline loops back or proceeds!
+        if (critiqueData.decision === "REJECT" && routingLoopCount < MAX_ROUTING_LOOPS) {
+          toast("ATS Auditor rejected the draft! Routing back for heavy revisions...", { icon: '🔄' });
+          
+          setStepIndex(3);
+          const revisionData = await fetchJsonWithRetry("/api/revise", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              profile: tailoredData,
+              latex_string: currentLatex,
+              improvements: critiqueData.improvements,
+            }),
+          }, 1);
+          
+          currentLatex = revisionData.latex; 
+          // The loop continues back to the top of the while block! (Agent 3 audits again)
+
+        } else {
+          // Agent Approved! 
+          isApproved = true;
+          
+          // Run one final polish to apply the "APPROVED" minor tweaks
+          setStepIndex(3);
+          const finalRevisionData = await fetchJsonWithRetry("/api/revise", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              profile: tailoredData,
+              latex_string: currentLatex,
+              improvements: critiqueData.improvements,
+            }),
+          }, 1);
+          
+          finalLatex = finalRevisionData.latex;
+        }
+      }
+
+      setLatex(finalLatex);
+      console.log("✅ Stage 4 - Final Validated LaTeX Ready");
 
       // ------------------------------------------------
       // Step 5: Compiling downloadable PDF
@@ -214,8 +237,7 @@ export default function Index() {
       setStepIndex(4);
       setPdfError(null);
       try {
-        // Kept your existing retry logic here since compilePdfWithRetry already manages blobs
-        const pdfBlob = await compilePdfWithRetry(finalLatexData.latex, 5); 
+        const pdfBlob = await compilePdfWithRetry(finalLatex, 5); 
         console.log(`✅ Stage 5 - PDF Compilation Successful (Size: ${pdfBlob.size} bytes)`);
         
         const localPdfUrl = URL.createObjectURL(pdfBlob);
@@ -231,7 +253,6 @@ export default function Index() {
       }
       
     } catch (error) {
-      // If any stage fails its initial attempt AND its retry, it gets caught right here
       console.error("❌ AI Pipeline Error:", error);
       toast.error(`Pipeline Error: ${error instanceof Error ? error.message : "Check console"}`);
       setPhase("idle");

@@ -19,14 +19,10 @@ async def critique_resume(payload: CritiquePayload):
     Review the candidate's raw profile data and their generated LaTeX document against their target job.
     
     YOUR OBJECTIVE:
-    Identify exactly 3 to 5 highly specific, actionable improvements to make this resume stand out more to recruiters for this specific role.
-    Look for:
-    - Missing high-value keywords from the target job description.
-    - Weak action verbs that could be stronger.
-    - Metrics that lack context.
-    - Formatting issues in the LaTeX that might hide important skills.
-    
-    Return ONLY a valid JSON array of strings containing your specific instructions. Do not wrap it in markdown code blocks.
+    1. Identify exactly 3 to 5 highly specific, actionable improvements to make this resume stand out more to recruiters for this specific role. Look for missing keywords, weak action verbs, contextless metrics, or formatting issues.
+    2. Make an autonomous routing decision:
+       - If the resume is missing major keywords or needs significant structural changes, set the 'decision' to "REJECT".
+       - If the resume is strong and only needs minor LaTeX/formatting revisions, set the 'decision' to "APPROVE".
     
     Target Job Details:
     {target_job_string}
@@ -37,6 +33,22 @@ async def critique_resume(payload: CritiquePayload):
     Current LaTeX Draft:
     {payload.latex_string}
     """
+    
+    # Define the strict schema to force the agent's decision
+    decision_schema = {
+        "type": "object",
+        "properties": {
+            "decision": {
+                "type": "string",
+                "enum": ["APPROVE", "REJECT"] # The model MUST choose one of these
+            },
+            "improvements": {
+                "type": "array",
+                "items": {"type": "string"}
+            }
+        },
+        "required": ["decision", "improvements"]
+    }
     
     models_to_try = [
         'gemini-3.5-flash',
@@ -53,10 +65,12 @@ async def critique_resume(payload: CritiquePayload):
                 prompt,
                 generation_config=genai.GenerationConfig(
                     response_mime_type="application/json",
+                    response_schema=decision_schema, # Pass the schema here!
                     temperature=0.4 
                 )
             )
-            return {"improvements": json.loads(response.text)}
+            # This will now safely return {"decision": "APPROVE/REJECT", "improvements": [...]}
+            return json.loads(response.text) 
         except Exception as e:
             last_exception = e
 
