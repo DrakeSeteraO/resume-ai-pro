@@ -1,7 +1,11 @@
 import os
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import google.generativeai as genai
+
+# Load environment variables from the .env file FIRST
+load_dotenv()
 
 # Import all of your refactored routers
 from api.routes import tailor, latex, critique, revise, pdf
@@ -19,9 +23,13 @@ app.add_middleware(
 )
 
 # Global API Key Configuration
-GEMINI_API_KEY = os.environ.get("Gemini_API_Key")
+# Switched to ALL CAPS to match standard .env conventions
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+
 if GEMINI_API_KEY:
     genai.configure(api_key=GEMINI_API_KEY)
+else:
+    print("WARNING: GEMINI_API_KEY not found in environment variables.")
 
 # Plug in the modular routes
 app.include_router(tailor.router)

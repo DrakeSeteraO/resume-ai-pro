@@ -61,7 +61,7 @@ def fetch_github_profile(username: str) -> str:
 
 @router.post("/api/tailor")
 async def tailor_resume(payload: Dict[str, Any]):
-    if not os.environ.get("Gemini_API_Key"):
+    if not os.environ.get("GEMINI_API_KEY"):
         raise HTTPException(status_code=500, detail="Gemini API Key missing on server configuration.")
         
     user_data_string = json.dumps(payload, indent=2)

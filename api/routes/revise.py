@@ -46,7 +46,7 @@ def compile_latex(latex_string: str) -> dict:
 
 @router.post("/api/revise")
 async def revise_latex(payload: RevisePayload):
-    if not os.environ.get("Gemini_API_Key"):
+    if not os.environ.get("GEMINI_API_KEY"):
         raise HTTPException(status_code=500, detail="Gemini API Key missing on server.")
         
     try:

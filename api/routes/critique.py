@@ -8,7 +8,7 @@ router = APIRouter()
 
 @router.post("/api/critique")
 async def critique_resume(payload: CritiquePayload):
-    if not os.environ.get("Gemini_API_Key"):
+    if not os.environ.get("GEMINI_API_KEY"):
         raise HTTPException(status_code=500, detail="Gemini API Key missing on server.")
         
     user_data_string = json.dumps(payload.profile, indent=2)
