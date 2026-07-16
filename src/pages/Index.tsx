@@ -166,68 +166,34 @@ export default function Index() {
       console.log("✅ Stage 2 - Initial LaTeX Code:", latexData);
 
       // ------------------------------------------------
-      // Step 3 & 4: THE AUTONOMOUS AGENTIC LOOP
+      // Step 3 & 4: Single-Pass Critique & Revise
       // ------------------------------------------------
-      let isApproved = false;
-      let routingLoopCount = 0;
-      const MAX_ROUTING_LOOPS = 2; // Prevent 429 quota exhaustion
-      let currentLatex = latexData.latex;
-      let finalLatex = currentLatex;
+      
+      // Agent 3: The Auditor checks the draft (runs exactly once)
+      setStepIndex(2);
+      const critiqueData = await fetchJsonWithRetry("/api/critique", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          profile: tailoredData,
+          latex_string: latexData.latex,
+        }),
+      }, 1);
+      console.log(`✅ Stage 3 - Critique Completed`);
 
-      while (!isApproved && routingLoopCount < MAX_ROUTING_LOOPS) {
-        routingLoopCount++;
-        
-        // Agent 3: The Auditor checks the draft
-        setStepIndex(2);
-        const critiqueData = await fetchJsonWithRetry("/api/critique", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            profile: tailoredData,
-            latex_string: currentLatex,
-          }),
-        }, 1);
-        console.log(`✅ Stage 3 (Loop ${routingLoopCount}) - Critique Decision: ${critiqueData.decision}`);
-
-        // THE AGENTIC DECISION POINT
-        // The AI explicitly decides if the pipeline loops back or proceeds!
-        if (critiqueData.decision === "REJECT" && routingLoopCount < MAX_ROUTING_LOOPS) {
-          toast("ATS Auditor rejected the draft! Routing back for heavy revisions...", { icon: '🔄' });
-          
-          setStepIndex(3);
-          const revisionData = await fetchJsonWithRetry("/api/revise", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              profile: tailoredData,
-              latex_string: currentLatex,
-              improvements: critiqueData.improvements,
-            }),
-          }, 1);
-          
-          currentLatex = revisionData.latex; 
-          // The loop continues back to the top of the while block! (Agent 3 audits again)
-
-        } else {
-          // Agent Approved! 
-          isApproved = true;
-          
-          // Run one final polish to apply the "APPROVED" minor tweaks
-          setStepIndex(3);
-          const finalRevisionData = await fetchJsonWithRetry("/api/revise", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              profile: tailoredData,
-              latex_string: currentLatex,
-              improvements: critiqueData.improvements,
-            }),
-          }, 1);
-          
-          finalLatex = finalRevisionData.latex;
-        }
-      }
-
+      // Agent 2: Revisions applied (runs exactly once)
+      setStepIndex(3);
+      const finalRevisionData = await fetchJsonWithRetry("/api/revise", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          profile: tailoredData,
+          latex_string: latexData.latex,
+          improvements: critiqueData.improvements, // Applies improvements regardless of APPROVE/REJECT decision
+        }),
+      }, 1);
+      
+      const finalLatex = finalRevisionData.latex;
       setLatex(finalLatex);
       console.log("✅ Stage 4 - Final Validated LaTeX Ready");
 
