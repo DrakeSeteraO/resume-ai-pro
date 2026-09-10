@@ -15,8 +15,11 @@ def fetch_github_profile(username: str) -> str:
 
 @router.post("/api/tailor")
 async def tailor_resume(payload: Dict[str, Any]):
-    if not os.environ.get("GEMINI_API_KEY"):
+    # FIX 1: Catch both capitalization styles of the API key and configure the SDK
+    api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("Gemini_API_Key")
+    if not api_key:
         raise HTTPException(status_code=500, detail="Gemini API Key missing on server configuration.")
+    genai.configure(api_key=api_key)
         
     user_data_string = json.dumps(payload, indent=2)
     
@@ -27,9 +30,14 @@ async def tailor_resume(payload: Dict[str, Any]):
     if github_match:
         username = github_match.group(1)
         print(f"GitHub profile detected for '{username}'. Pre-fetching data...")
-        # Call the function directly in Python
-        fetched_data = fetch_github_profile(username)
-        github_context = f"\nAdditional GitHub Data (Use this to enhance projects/skills):\n{fetched_data}\n"
+        
+        # FIX 2: Wrap the external API call in a try/except block to prevent rate-limit crashes
+        try:
+            fetched_data = fetch_github_profile(username)
+            github_context = f"\nAdditional GitHub Data (Use this to enhance projects/skills):\n{fetched_data}\n"
+        except Exception as e:
+            print(f"GitHub fetch failed (Likely a 403 Rate Limit), proceeding without it: {e}")
+            github_context = ""
     
     # 2. Inject the pre-fetched data directly into the prompt
     prompt = f"""
