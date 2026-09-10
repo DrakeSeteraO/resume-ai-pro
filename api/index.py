@@ -1,11 +1,8 @@
 import os
-from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import google.generativeai as genai
 
-# Load environment variables from the .env file FIRST
-load_dotenv()
 
 # Import all of your refactored routers
 from api.routes import tailor, latex, critique, revise, pdf
